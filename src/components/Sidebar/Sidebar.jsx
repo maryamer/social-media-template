@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import {
   AiOutlineHome,
   AiOutlineSearch,
@@ -12,7 +11,7 @@ import { BsPerson } from "react-icons/bs";
 
 function Sidebar() {
   return (
-    <div className="sidebar w-full md:h-full md:w-1/6 dark:bg-black bg-white  dark:text-white text-black  md:relative fixed">
+    <div className="sidebar w-full md:h-full md:w-1/6 dark:bg-slate-950 bg-white  dark:text-white text-black  md:relative fixed">
       <Logo />
       <SidebarMenu />
     </div>
@@ -44,7 +43,7 @@ function SidebarMenu() {
     { title: "Profile", id: 7, direction: "/" },
   ];
   return (
-    <div className="sidebarMenu md:h-3/5  flex-col  ">
+    <div className="sidebarMenu md:h-3/5  flex-col cursor-pointer md:mx-2">
       <div className="sidebarList overflow-hidden h-14 md:h-full flex md:flex-col justify-around items-center md:items-start ">
         {menuItems.map((item) => (
           <SidebarMenuMenuItem
@@ -66,7 +65,7 @@ function SidebarMenu() {
 
 function SidebarMenuMenuItem({ title, direction = "" }) {
   return (
-    <div className="sidebarListItem flex md:p-5 font-bold">
+    <div className="sidebarListItem flex items md:p-3  font-bold r md: w-full rounded md:hover:bg-slate-900 transition duration-150 ease-in-out">
       {title == "Home" ? (
         <AiOutlineHome className="w-8 h-8 " />
       ) : title === "Search" ? (
@@ -83,7 +82,7 @@ function SidebarMenuMenuItem({ title, direction = "" }) {
         <BsPerson className="w-8 h-8 " />
       )}
 
-      <span className="sidebarListItemText items-center hidden md:flex font-bold ">
+      <span className="sidebarListItemText  items-center hidden md:flex font-bold ">
         &nbsp;&nbsp;{title}
       </span>
     </div>

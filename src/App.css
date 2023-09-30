@@ -1,18 +1,1 @@
-.app {
-  /* display: flex;
-  height: 100vh; */
-}
-.sidebar {
-  background-color: blue;
-  width: 15%;
-}
-.rightbar {
-  background-color: purple;
-  height: 100%;
-  width: 25%;
-}
-.posts {
-  background-color: green;
-  height: 100%;
-  width: 60%;
-}
+
