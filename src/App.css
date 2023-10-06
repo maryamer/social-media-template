@@ -1,1 +1,16 @@
+.nearbyLocation h2 {
+  margin-bottom: 1rem;
+}
+.locationList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
 
+.locationItem img {
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
+  object-position: center;
+  /* border-radius: 0.5rem; */
+}

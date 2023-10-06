@@ -4,6 +4,11 @@ export default {
   theme: {
     extend: {
       scrollbar: ["rounded", "dark"],
+      width: {
+        "1/7": "16%",
+        "95%": "95%",
+        200: "890px",
+      },
     },
   },
   variants: {},

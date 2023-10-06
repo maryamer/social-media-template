@@ -4,8 +4,8 @@ import Share from "../Share/Share";
 
 function Feed() {
   return (
-    <div className="posts dark:bg-slate-900 w-full flex items-center justify-center  ">
-      <div className="feedWrapper flex flex-col items-center h-screen w-full md:w-4/5 overflow-y-scroll md:scrollbar">
+    <div className="posts  dark:bg-slate-950 w-full flex items-center justify-center  ">
+      <div className="feedWrapper flex flex-col gap-0 items-center h-screen w-full  overflow-y-scroll xl:scrollbar">
         <Share />
         {Posts.map((p) => (
           <Post key={p.id} post={p} />
