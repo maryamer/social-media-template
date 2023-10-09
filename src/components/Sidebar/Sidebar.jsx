@@ -8,39 +8,45 @@ import {
 } from "react-icons/ai";
 import { MdOutlineExplore } from "react-icons/md";
 import { BsPerson } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useRef, useState } from "react";
 import useOutsideClick from "../../hooks/useOutsideClick";
 
 function Sidebar() {
+  const { pathname } = useLocation();
+
   const [isOpenSubMenu, setIsOpenSubMenu] = useState(false);
   const subMenuRef = useRef();
   useOutsideClick(subMenuRef, () => setIsOpenSubMenu(false));
   return (
-    <div
-      className={`sidebar z-50  transition-all duration-150 w-full ease-in-out md:rounded-r-3xl  md:h-full lg:w-1/6 lg:max-w-none md:max-w-fit dark:bg-slate-900 bg-white  dark:text-white text-black  md:relative fixed`}
-    >
-      <Logo />
-      <SidebarMenu>
+    <>
+      {!pathname.includes("messages") && (
         <div
-          onClick={() => setIsOpenSubMenu(true)}
-          className="sidebarListItem hidden md:flex justify-center md:justify-normal md:p-3  font-bold  lg:w-1/7 rounded-2xl  dark:md:hover:bg-slate-800 transition duration-150 ease-in-out fixed left-2  bottom-2"
+          className={`sidebar z-50  transition-all duration-150 w-full ease-in-out md:rounded-r-3xl  md:h-full lg:w-1/6 lg:max-w-none md:max-w-fit dark:bg-slate-900 bg-white  dark:text-white text-black  md:relative absoolute`}
         >
-          <AiOutlineMenu className="lg:w-9 lg:h-9 w-7 h-7 " />
-          <span className="sidebarListItemText text-lg items-center hidden lg:flex font-bold ">
-            &nbsp;&nbsp;&nbsp;&nbsp;More
-          </span>
+          <Logo />
+          <SidebarMenu>
+            <div
+              onClick={() => setIsOpenSubMenu(true)}
+              className="sidebarListItem hidden md:flex justify-center md:justify-normal md:p-3  font-bold  lg:w-1/7 rounded-2xl  dark:md:hover:bg-slate-800 transition duration-150 ease-in-out fixed left-2  bottom-2"
+            >
+              <AiOutlineMenu className="lg:w-9 lg:h-9 w-7 h-7 " />
+              <span className="sidebarListItemText text-lg items-center hidden lg:flex font-bold ">
+                &nbsp;&nbsp;&nbsp;&nbsp;More
+              </span>
+            </div>
+            {isOpenSubMenu && (
+              <div
+                ref={subMenuRef}
+                className="subMenuContainer bg-slate-900 rounded-xl hidden lg:flex items-center  flex-col p-3 h-1/2 w-[95%] absolute bottom-1"
+              >
+                <Submenu />
+              </div>
+            )}
+          </SidebarMenu>
         </div>
-        {isOpenSubMenu && (
-          <div
-            ref={subMenuRef}
-            className="subMenuContainer bg-slate-900 rounded-xl hidden lg:flex items-center  flex-col p-3 h-1/2 w-[95%] absolute bottom-1"
-          >
-            <Submenu />
-          </div>
-        )}
-      </SidebarMenu>
-    </div>
+      )}
+    </>
   );
 }
 
@@ -57,7 +63,7 @@ function SidebarMenu({ children }) {
     { title: "Profile", id: 7, direction: "/profile" },
   ];
   return (
-    <div className="sidebarMenu md:h-3/5 flex-col cursor-pointer md:mx-2">
+    <div className="sidebarMenu h-14 md:h-3/5 flex-col cursor-pointer md:mx-2">
       <div className="sidebarList overflow-hidden h-14 md:h-full flex md:flex-col justify-around items-center md:items-start ">
         {menuItems.map((item) => (
           <SidebarMenuMenuItem

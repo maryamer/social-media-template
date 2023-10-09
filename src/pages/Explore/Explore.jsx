@@ -5,7 +5,7 @@ import Rightbar from "../../components/Rightbar/Rightbar";
 
 function Explore() {
   return (
-    <div className="md:w-5/6">
+    <div className="w-full">
       <ExplorePosts />
     </div>
   );
