@@ -11,6 +11,7 @@ import Explore from "./pages/Explore/Explore";
 import Home from "./pages/home/Home";
 import Messages from "./pages/Messsages/Messages";
 import Profile from "./pages/Profile/Profile";
+import { BsFillChatDotsFill } from "react-icons/bs";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
@@ -31,7 +32,15 @@ function App() {
             />
           }
         >
-          <Route index element={<div>inner Message</div>} />
+          <Route
+            index
+            element={
+              <div className="flex flex-col w-full items-center justify-center font-bold">
+                <BsFillChatDotsFill className="w-16 h-16 p-3" />
+                Your Messages
+              </div>
+            }
+          />
           <Route
             path=":id"
             element={<InnerMessage setIsSettingOpen={setIsSettingOpen} />}

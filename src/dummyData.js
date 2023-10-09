@@ -1,68 +1,78 @@
 export const Users = [
   {
     id: 1,
-    profilePicture: "assets/person/1.jpeg",
+    profilePicture:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
     username: "Safak Kocaoglu",
     status: "boring boring boring..",
   },
   {
     id: 2,
-    profilePicture: "assets/person/2.jpeg",
+    profilePicture:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
     username: "Janell Shrum",
     status: "how's the wheater out there?",
   },
   {
     id: 3,
-    profilePicture: "assets/person/3.jpeg",
+    profilePicture:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
     username: "Alex Durden",
 
     status: "boring boring boring..",
   },
   {
     id: 4,
-    profilePicture: "assets/person/4.jpeg",
+    profilePicture:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
     username: "Dora Hawks",
 
     status: "boring boring boring..",
   },
   {
     id: 5,
-    profilePicture: "assets/person/5.jpeg",
+    profilePicture:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
     username: "Thomas Holden",
 
     status: "boring boring boring..",
   },
   {
     id: 6,
-    profilePicture: "assets/person/6.jpeg",
+    profilePicture:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
     username: "Shirley Beauchamp",
 
     status: "boring boring boring..",
   },
   {
     id: 7,
-    profilePicture: "assets/person/7.jpeg",
+    profilePicture:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
     username: "Travis Bennett",
 
     status: "boring boring boring..",
   },
   {
     id: 8,
-    profilePicture: "assets/person/8.jpeg",
+    profilePicture:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
     username: "Kristen Thomas",
 
     status: "boring boring boring..",
   },
   {
     id: 9,
-    profilePicture: "assets/person/9.jpeg",
+    profilePicture:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
     username: "Gary Duty",
 
     status: "boring boring boring..",
   },
   {
     id: 10,
-    profilePicture: "assets/person/10.jpeg",
+    profilePicture:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
     username: "Safak Kocaoglu",
 
     status: "boring boring boring..",

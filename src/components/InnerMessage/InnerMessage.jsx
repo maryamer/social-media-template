@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 export default function InnerMessage({ setIsSettingOpen }) {
   const [item, setItem] = useState({
     id: 2,
-    profilePicture: "./assets/person/2.jpeg",
+    profilePicture:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
     username: "Janell Shrum",
     status: "how's the wheater out there?",
   });
@@ -22,7 +23,7 @@ export default function InnerMessage({ setIsSettingOpen }) {
 }
 function CharaterName({ item }) {
   return (
-    <h3 className="name whitespace-nowrap font-bold md:text-lg   cursor-pointer min-w-fit ">
+    <h3 className="name whitespace-nowrap font-bold lg:text-lg   cursor-pointer min-w-fit ">
       <div>{item.username}</div>
     </h3>
   );
@@ -31,16 +32,16 @@ function InnerMessageHeader({ item, setIsSettingOpen }) {
   return (
     <div
       className="messageHeader border-b border-b-slate-500 flex   justify-between items-center h-[10%]
-      p-3"
+      py-3"
     >
-      <div className="flex items-center hover:text-slate-400">
+      <div className="flex items-center justify-start hover:text-slate-400">
         <Link
           to="/messages"
           onClick={() => setIsSettingOpen(false)}
-          className="flex w-full xl:mx-2 "
+          className="flex mx-1 xl:mx-2 "
         >
           <IoIosArrowRoundBack
-            className="hover:text-slate-600 cursor-pointers w-12 h-12
+            className="hover:text-slate-600 cursor-pointers w-10 h-10 lg:w-12 lg:h-12
            text-slate-400"
           />
         </Link>
@@ -49,7 +50,7 @@ function InnerMessageHeader({ item, setIsSettingOpen }) {
           alt={item.username}
           className="shareProfileImg group  cursor-pointer object-cover flex items-center shrink-0 grow-0 md:w-14 md:h-14  w-12 h-12 rounded-full"
         />
-        &nbsp; &nbsp;&nbsp; &nbsp;
+        &nbsp; &nbsp;
         <CharaterName item={item} />
       </div>
       <IoMdSettings
@@ -73,7 +74,7 @@ function InnerMessages() {
               </div>
             </div>
             <img
-              // src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="My profile"
               className="w-6 h-6 rounded-full order-1"
             />
@@ -90,7 +91,7 @@ function InnerMessages() {
               </div>
             </div>
             <img
-              // src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="My profile"
               className="w-6 h-6 rounded-full order-2"
             />
@@ -122,7 +123,7 @@ function InnerMessages() {
               </div>
             </div>
             <img
-              // src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="My profile"
               className="w-6 h-6 rounded-full order-1"
             />
@@ -139,7 +140,7 @@ function InnerMessages() {
               </div>
             </div>
             <img
-              // src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="My profile"
               className="w-6 h-6 rounded-full order-2"
             />
@@ -156,7 +157,7 @@ function InnerMessages() {
               </div>
             </div>
             <img
-              // src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="My profile"
               className="w-6 h-6 rounded-full order-1"
             />
@@ -179,7 +180,7 @@ function InnerMessages() {
               </div>
             </div>
             <img
-              // src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="My profile"
               className="w-6 h-6 rounded-full order-2"
             />
@@ -202,7 +203,7 @@ function InnerMessages() {
               </div>
             </div>
             <img
-              // src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="My profile"
               className="w-6 h-6 rounded-full order-1"
             />
@@ -219,7 +220,7 @@ function InnerMessages() {
               </div>
             </div>
             <img
-              // src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="My profile"
               className="w-6 h-6 rounded-full order-2"
             />
@@ -246,7 +247,7 @@ function InnerMessages() {
               </div>
             </div>
             <img
-              // src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="My profile"
               className="w-6 h-6 rounded-full order-1"
             />
@@ -259,7 +260,7 @@ function InnerMessages() {
 function MessageInput() {
   return (
     <div className="flex items-center justify-center w-full h-[10%] ">
-      <div className="bg-gray-50 w-[95%] lg:w-[97%] border  border-gray-300 text-gray-900 text-sm rounded-3xl  flex items-center justify-around  p-0  lg:p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ">
+      <div className="bg-gray-50 w-[95%] lg:w-[97%] border  border-gray-300 text-gray-900 text-sm rounded-3xl  flex items-center justify-center  p-0  lg:p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ">
         <div className="w-[5%] shrink-0">
           <CiFaceSmile className="hover:text-slate-600 cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-8 xl:h-8 lg:w-7 lg:h-7 w-7 h-7   text-slate-400" />
         </div>

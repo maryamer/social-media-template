@@ -67,7 +67,7 @@ export function Character({ item, children }) {
 
 function CharaterName({ item }) {
   return (
-    <h3 className="name whitespace-nowrap font-thin xl:text-lg xl:font-medium cursor-pointer min-w-fit dark:text-slate-300">
+    <h3 className="name whitespace-nowrap font-medium xl:text-lg xl:font-medium cursor-pointer min-w-fit dark:text-slate-300">
       <div>{item.username}</div>
     </h3>
   );
@@ -95,9 +95,9 @@ function SearchComponent() {
         >
           <path
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
           />
         </svg>
