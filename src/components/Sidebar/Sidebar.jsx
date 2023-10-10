@@ -55,7 +55,7 @@ export default Sidebar;
 function SidebarMenu({ children }) {
   const menuItems = [
     { title: "Home", id: 1, direction: "/" },
-    { title: "Search", id: 2, direction: "/" },
+    { title: "Search", id: 2, direction: "/search" },
     { title: "Explore", id: 3, direction: "/explore" },
     { title: "Messages", id: 4, direction: "/messages" },
     { title: "Notifications", id: 5, direction: "/notifications" },

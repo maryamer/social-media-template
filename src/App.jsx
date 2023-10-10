@@ -12,6 +12,7 @@ import Home from "./pages/home/Home";
 import Messages from "./pages/Messsages/Messages";
 import Profile from "./pages/Profile/Profile";
 import { BsFillChatDotsFill } from "react-icons/bs";
+import Search from "./pages/Search/Search";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
@@ -46,8 +47,8 @@ function App() {
             element={<InnerMessage setIsSettingOpen={setIsSettingOpen} />}
           />
         </Route>
-        {/* <Feed />
-        <Rightbar /> */}
+        <Route path="/search" element={<Search />} />
+        <Route path="/notification" element={<Search />} />
       </Routes>
     </div>
   );

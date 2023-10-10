@@ -1,9 +1,10 @@
 import React from "react";
+import { BsBellSlash } from "react-icons/bs";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { Outlet, useParams } from "react-router-dom";
 import InnerMessage from "../../components/InnerMessage/InnerMessage";
-import MessageList from "../../components/MessageList/MessageList";
 import MessageSetting from "../../components/MessageSetting/MessageSetting";
+import UsersList from "../../components/UsersList/UsersList";
 
 export default function Messages({ isSettingOpen, setIsSettingOpen }) {
   const { id } = useParams();
@@ -20,7 +21,13 @@ export default function Messages({ isSettingOpen, setIsSettingOpen }) {
             : "hidden lg:flex"
         }  lg:w-1/4 lg:max-w-fit  mb-px border-r border-r-gray-500`}
       >
-        <MessageList setIsSettingOpen={setIsSettingOpen} />
+        <UsersList setIsSettingOpen={setIsSettingOpen} title="Messages">
+          <div className="flex items-center mr-2">
+            <BsBellSlash className="hover:text-slate-600 cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-5 xl:h-5 lg:w-4 lg:h-4   text-slate-400" />
+            &nbsp;
+            <span className="bg-blue-500 rounded-full w-3 h-3"></span>
+          </div>
+        </UsersList>
       </div>
       <div
         className={`${

@@ -4,9 +4,9 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Users } from "../../dummyData";
 
-export default function MessageList({ setIsSettingOpen }) {
+export default function UsersList({ setIsSettingOpen, children, title = "" }) {
   return (
-    <div className="messageList w-full dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
+    <div className="UsersList w-full dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
       <Link
         to="/"
         onClick={() => setIsSettingOpen(false)}
@@ -17,19 +17,25 @@ export default function MessageList({ setIsSettingOpen }) {
            text-slate-400"
         />
       </Link>
-      <SearchComponent />
+      <SearchComponent title={title} />
       <div className="characters-list flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll scrollbar-none ">
-        <div className="  w-full relative top-0 h-20 hidden lg:flex ">
-          <h2 className="font-bold pl-2 flex items-center text-gray-400  ">
-            Messages:
-          </h2>
-        </div>
+        {title && (
+          <div className="  w-full relative top-0 h-20 hidden lg:flex ">
+            <h2 className="font-bold pl-2 flex items-center text-gray-400  ">
+              {title}
+            </h2>
+          </div>
+        )}
         <div className="w-full h-full lg:h-[95%] ">
           {Users.map((item) => (
-            <Character key={item.id} item={item} />
+            <Character key={item.id} item={item}>
+              {children}
+            </Character>
           ))}
           {Users.map((item) => (
-            <Character key={item.id} item={item}></Character>
+            <Character key={item.id} item={item}>
+              {children}
+            </Character>
           ))}
         </div>
       </div>
@@ -53,14 +59,9 @@ export function Character({ item, children }) {
         <div className="">
           <CharaterName item={item} />
           <CharacterInfo item={item} />
-          {children}
         </div>
       </div>
-      <div className="flex items-center mr-2">
-        <BsBellSlash className="hover:text-slate-600 cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-5 xl:h-5 lg:w-4 lg:h-4   text-slate-400" />
-        &nbsp;
-        <span className="bg-blue-500 rounded-full w-3 h-3"></span>
-      </div>
+      {children}
     </Link>
   );
 }
@@ -82,9 +83,9 @@ function CharacterInfo({ item }) {
     </div>
   );
 }
-function SearchComponent() {
+function SearchComponent({ title }) {
   return (
-    <div className="searchComponent hidden lg:flex relative w-full">
+    <div className={`searchComponent h-14 relative w-full`}>
       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
         <svg
           className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -105,15 +106,9 @@ function SearchComponent() {
       <input
         type="search"
         id="default-search"
-        className="block w-full outline-none p-3 pl-10 text-sm text-gray-900  border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-950 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="block w-full outline-none p-3 pl-10 text-sm text-gray-900  border-gray-300 rounded-lg bg-gray-50 focus:ring-slate-300 focus:border-slate-300 dark:bg-slate-950 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-300 dark:focus:border-slate-300"
         placeholder="Search Mockups, Logos..."
       />
-      {/* <button
-        type="submit"
-        className="text-white absolute right-2.5 bottom-1 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        Search
-      </button> */}
     </div>
   );
 }
