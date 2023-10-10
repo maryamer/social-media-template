@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-// import ChatPage from "./components/ChatPage/ChatPage";
-import Feed from "./components/Feed/Feed";
 import InnerMessage from "./components/InnerMessage/InnerMessage";
-import Navbar from "./components/Navbar/Navbar";
-import Rightbar from "./components/Rightbar/Rightbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Explore from "./pages/Explore/Explore";
 import Home from "./pages/home/Home";
@@ -13,6 +9,8 @@ import Messages from "./pages/Messsages/Messages";
 import Profile from "./pages/Profile/Profile";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import Search from "./pages/Search/Search";
+import Notifications from "./pages/Notifications/Notifications";
+import UsersList from "./components/UsersList/UsersList";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
@@ -23,7 +21,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile />}></Route>
+        <Route
+          path="/profile/followers"
+          element={<UsersList locationParameter="/profile" />}
+        />
+        <Route
+          path="/profile/followings"
+          element={<UsersList locationParameter="/profile" />}
+        />
         <Route
           path="/messages"
           element={
@@ -48,7 +54,7 @@ function App() {
           />
         </Route>
         <Route path="/search" element={<Search />} />
-        <Route path="/notification" element={<Search />} />
+        <Route path="/notifications" element={<Notifications />} />
       </Routes>
     </div>
   );

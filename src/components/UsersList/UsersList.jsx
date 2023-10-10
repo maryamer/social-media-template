@@ -1,22 +1,28 @@
-import { AiOutlineEye } from "react-icons/ai";
-import { BsBellSlash } from "react-icons/bs";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Users } from "../../dummyData";
 
-export default function UsersList({ setIsSettingOpen, children, title = "" }) {
+export default function UsersList({
+  setIsSettingOpen,
+  children,
+  title = "",
+  locationParameter,
+}) {
+  const navigate = useNavigate();
   return (
     <div className="UsersList w-full dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
-      <Link
-        to="/"
-        onClick={() => setIsSettingOpen(false)}
-        className="flex w-full xl:ml-2.5 "
+      <button
+        onClick={() => {
+          setIsSettingOpen(false);
+          navigate("/");
+        }}
+        className="flex w-full xl:ml-2.5"
       >
         <IoIosArrowRoundBack
           className="hover:text-slate-600 cursor-pointers w-12 h-12
            text-slate-400"
         />
-      </Link>
+      </button>
       <SearchComponent title={title} />
       <div className="characters-list flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll scrollbar-none ">
         {title && (
@@ -28,12 +34,20 @@ export default function UsersList({ setIsSettingOpen, children, title = "" }) {
         )}
         <div className="w-full h-full lg:h-[95%] ">
           {Users.map((item) => (
-            <Character key={item.id} item={item}>
+            <Character
+              key={item.id}
+              item={item}
+              locationParameter={locationParameter}
+            >
               {children}
             </Character>
           ))}
           {Users.map((item) => (
-            <Character key={item.id} item={item}>
+            <Character
+              key={item.id}
+              item={item}
+              locationParameter={locationParameter}
+            >
               {children}
             </Character>
           ))}
@@ -43,10 +57,10 @@ export default function UsersList({ setIsSettingOpen, children, title = "" }) {
   );
 }
 
-export function Character({ item, children }) {
+export function Character({ item, children, locationParameter }) {
   return (
     <Link
-      to="1"
+      to={locationParameter}
       className="flex  justify-between items-center  lg:grid-cols-3 dark:bg-slate-950 my-2 hover:bg-slate-800  cursor-pointer  w-full h-16 lg:h-24"
     >
       <div className="flex items-center  lg:justify-start justify-center pl-2 ">

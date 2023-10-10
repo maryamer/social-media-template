@@ -1,6 +1,5 @@
 import React from "react";
 import { BsBellSlash } from "react-icons/bs";
-import { IoIosArrowRoundBack } from "react-icons/io";
 import { Outlet, useParams } from "react-router-dom";
 import InnerMessage from "../../components/InnerMessage/InnerMessage";
 import MessageSetting from "../../components/MessageSetting/MessageSetting";
@@ -21,7 +20,11 @@ export default function Messages({ isSettingOpen, setIsSettingOpen }) {
             : "hidden lg:flex"
         }  lg:w-1/4 lg:max-w-fit  mb-px border-r border-r-gray-500`}
       >
-        <UsersList setIsSettingOpen={setIsSettingOpen} title="Messages">
+        <UsersList
+          setIsSettingOpen={setIsSettingOpen}
+          title="Messages"
+          locationParameter="1"
+        >
           <div className="flex items-center mr-2">
             <BsBellSlash className="hover:text-slate-600 cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-5 xl:h-5 lg:w-4 lg:h-4   text-slate-400" />
             &nbsp;

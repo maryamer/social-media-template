@@ -17,7 +17,7 @@ export default function Share() {
             className="shareInput w-9/12 sm:w-[90%] text-xs h-8 md:text-base  mr-3 md:w-11/12 focus:outline-none rounded-md lg:rounded-lg lg:p-2 p-1 cursor-pointer dark:bg-gray-700 dark:text-white "
           />
           <div className="shareBottom dark:text-white flex items-center justify-between ">
-            <button class="bg-gray-800 hover:bg-gray-700 transition duration-150 ease-in-out dark:text-slate-300 text-sm lg:font-bold p-2 lg:py-2.5 lg:px-4 rounded-lg">
+            <button className="bg-gray-800 hover:bg-gray-700 transition duration-150 ease-in-out dark:text-slate-300 text-sm lg:font-bold p-2 lg:py-2.5 lg:px-4 rounded-lg">
               Share
             </button>
           </div>
