@@ -5,12 +5,15 @@ import {
   AiOutlineHeart,
   AiOutlinePlusCircle,
   AiOutlineMenu,
+  AiOutlineUserSwitch,
 } from "react-icons/ai";
 import { MdOutlineExplore } from "react-icons/md";
 import { BsPerson } from "react-icons/bs";
 import { NavLink, useLocation } from "react-router-dom";
 import { useRef, useState } from "react";
 import useOutsideClick from "../../hooks/useOutsideClick";
+import { IoMdSettings } from "react-icons/io";
+import { CiLogout } from "react-icons/ci";
 
 function Sidebar() {
   const { pathname } = useLocation();
@@ -38,7 +41,7 @@ function Sidebar() {
             {isOpenSubMenu && (
               <div
                 ref={subMenuRef}
-                className="subMenuContainer bg-slate-900 rounded-xl hidden lg:flex items-center  flex-col p-3 h-1/2 w-[95%] absolute bottom-1"
+                className="subMenuContainer bg-slate-900 rounded-xl hidden lg:flex items-center  flex-col p-3 max-h-fit w-[95%] absolute bottom-1"
               >
                 <Submenu />
               </div>
@@ -78,26 +81,6 @@ function SidebarMenu({ children }) {
     </div>
   );
 }
-function Logo() {
-  return (
-    <div className="userInfo hidden  lg:flex cursor-pointer hover:opacity-70 hover:text-gray-400 transition duration-150 ease-in-out">
-      <span className="sidebarListItem flex md:py-5 md:pl-5 xl:pr-1 font-bold ">
-        {/* <BsPerson className="w-8 h-8" /> */}
-        <div className="flex items-center xl:justify-around lg:justify-start">
-          <img
-            className="shareProfileImg cursor-pointer object-cover w-10 h-10 rounded-full shadow-2xl shadow-white "
-            src="/assets/person/1.jpeg"
-            alt=""
-          />
-          &nbsp;&nbsp;
-        </div>
-      </span>
-      <span className="sidebarListItemText  whitespace-nowrap items-center hidden lg:flex md:font-medium lg:font-normal text-sm xl:text-lg  xl:font-bold">
-        Maryam Ebrahimi
-      </span>
-    </div>
-  );
-}
 function SidebarMenuMenuItem({ title, direction = "" }) {
   return (
     <NavLink
@@ -126,39 +109,52 @@ function SidebarMenuMenuItem({ title, direction = "" }) {
     </NavLink>
   );
 }
+function Logo() {
+  return (
+    <div className="userInfo hidden  lg:flex cursor-pointer hover:opacity-70 hover:text-gray-400 transition duration-150 ease-in-out">
+      <span className="sidebarListItem flex md:py-5 md:pl-5 xl:pr-1 font-bold ">
+        {/* <BsPerson className="w-8 h-8" /> */}
+        <div className="flex items-center xl:justify-around lg:justify-start">
+          <img
+            className="shareProfileImg cursor-pointer object-cover w-10 h-10 rounded-full shadow-2xl shadow-white "
+            src="/assets/person/1.jpeg"
+            alt=""
+          />
+          &nbsp;&nbsp;
+        </div>
+      </span>
+      <span className="sidebarListItemText  whitespace-nowrap items-center hidden lg:flex md:font-medium lg:font-normal text-sm xl:text-lg  xl:font-bold">
+        Maryam Ebrahimi
+      </span>
+    </div>
+  );
+}
+
 function Submenu() {
   const menuItems = [
-    { title: "Home", id: 1, direction: "/" },
-    { title: "Search", id: 2, direction: "/" },
-    { title: "Explore", id: 3, direction: "/explore" },
-    { title: "Messages", id: 4, direction: "/messages" },
-    { title: "Notifications", id: 5, direction: "/notifications" },
-    { title: "Create", id: 6, direction: "/create" },
-    { title: "Profile", id: 7, direction: "/profile" },
+    { title: "Settings", id: 1, direction: "/settings" },
+    { title: "Swith Account", id: 6, direction: "/create" },
+    { title: "Log Out", id: 7, direction: "/profile" },
   ];
   return (
     <>
       {menuItems.map((item) => (
-        <div className="flex hover:bg-slate-600 w-full items-center h-16 p-3 m-px rounded-xl transition duration-150 ease-in-out">
+        <div className="flex hover:bg-slate-600 w-full items-center max-h-fit p-3 m-px rounded-xl transition duration-150 ease-in-out">
           <span>
-            {item.title == "Home" ? (
-              <AiOutlineHome className="w-7 h-7 " />
-            ) : item.title === "Search" ? (
-              <AiOutlineSearch className="w-7 h-7 " />
-            ) : item.title === "Explore" ? (
-              <MdOutlineExplore className="w-7 h-7 " />
-            ) : item.title === "Messages" ? (
-              <AiOutlineMessage className="w-7 h-7 " />
-            ) : item.title === "Notifications" ? (
-              <AiOutlineHeart className="w-7 h-7 " />
-            ) : item.title === "Create" ? (
-              <AiOutlinePlusCircle className="w-7 h-7 " />
+            {item.title == "Settings" ? (
+              <IoMdSettings className="w-7 h-7 " />
+            ) : item.title === "Log Out" ? (
+              <CiLogout className="w-7 h-7 " />
+            ) : item.title === "Swith Account" ? (
+              <AiOutlineUserSwitch className="w-7 h-7 " />
             ) : (
               <BsPerson className="w-7 h-7  " />
             )}
           </span>
           &nbsp; &nbsp;
-          <NavLink className="">{item.title}</NavLink>
+          <NavLink to={item.direction} className="">
+            {item.title}
+          </NavLink>
         </div>
       ))}
     </>

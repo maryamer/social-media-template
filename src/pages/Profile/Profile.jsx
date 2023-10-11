@@ -1,9 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { BsChatFill, BsHeartFill } from "react-icons/bs";
-import { IoIosArrowRoundBack, IoMdSettings } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
-import CharaterName from "../../components/common/CharaterName";
+import InnerHeader from "../../components/common/InnerHeader";
 
 function Profile() {
   const navigate = useNavigate();
@@ -18,7 +16,7 @@ function Profile() {
   return (
     <div className="max-w-2xl mx-auto bg-slate-900 text-white h-screen overflow-y-scroll scrollbar-none">
       <div className="px-3 py-2">
-        <InnerMessageHeader setIsSettingOpen={setIsSettingOpen} item={item} />
+        <InnerHeader setIsSettingOpen={setIsSettingOpen} item={item} />
         <div className="flex flex-col gap-1 text-center mt-4">
           <Link
             className="block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 rounded-full border border-gray-400 shadow-lg"
@@ -178,35 +176,3 @@ function Profile() {
 }
 
 export default Profile;
-
-function InnerMessageHeader({ item, setIsSettingOpen }) {
-  const navigate = useNavigate();
-  return (
-    <div
-      className="messageHeader border-b border-b-slate-500 flex   justify-between items-center h-[10%]
-      py-3"
-    >
-      <div className="flex items-center justify-start hover:text-slate-400">
-        <button
-          to="/messages"
-          onClick={() => {
-            setIsSettingOpen(false);
-            navigate(-1);
-          }}
-          className="flex mx-1 xl:mx-2 "
-        >
-          <IoIosArrowRoundBack
-            className="hover:text-slate-600 cursor-pointers w-10 h-10 lg:w-12 lg:h-12
-           text-slate-400"
-          />
-        </button>
-        &nbsp; &nbsp;
-        <CharaterName item={item} />
-      </div>
-      <IoMdSettings
-        onClick={() => setIsSettingOpen((prev) => !prev)}
-        className="hover:text-slate-600 hover:cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-10 xl:h-10 w-8 h-8   text-slate-400"
-      />
-    </div>
-  );
-}

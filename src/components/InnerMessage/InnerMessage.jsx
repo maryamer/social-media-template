@@ -3,6 +3,7 @@ import { IoIosArrowRoundBack, IoMdSettings } from "react-icons/io";
 import { CiFaceSmile } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import CharaterName from "../common/CharaterName";
+import InnerHeader from "../common/InnerHeader";
 
 export default function InnerMessage({ setIsSettingOpen }) {
   const [item, setItem] = useState({
@@ -15,7 +16,7 @@ export default function InnerMessage({ setIsSettingOpen }) {
   return (
     <>
       <div className="flex flex-col gap-2 w-full  h-screen md:h-full justify-end">
-        <InnerMessageHeader item={item} setIsSettingOpen={setIsSettingOpen} />
+        <InnerHeader item={item} setIsSettingOpen={setIsSettingOpen} />
         <InnerMessages />
         <MessageInput />
       </div>
@@ -23,38 +24,6 @@ export default function InnerMessage({ setIsSettingOpen }) {
   );
 }
 
-function InnerMessageHeader({ item, setIsSettingOpen }) {
-  return (
-    <div
-      className="messageHeader border-b border-b-slate-500 flex   justify-between items-center h-[10%]
-      py-3"
-    >
-      <div className="flex items-center justify-start hover:text-slate-400">
-        <Link
-          to="/messages"
-          onClick={() => setIsSettingOpen(false)}
-          className="flex mx-1 xl:mx-2 "
-        >
-          <IoIosArrowRoundBack
-            className="hover:text-slate-600 cursor-pointers w-10 h-10 lg:w-12 lg:h-12
-           text-slate-400"
-          />
-        </Link>
-        <img
-          src={item.profilePicture}
-          alt={item.username}
-          className="shareProfileImg group  cursor-pointer object-cover flex items-center shrink-0 grow-0 md:w-14 md:h-14  w-12 h-12 rounded-full"
-        />
-        &nbsp; &nbsp;
-        <CharaterName item={item} />
-      </div>
-      <IoMdSettings
-        onClick={() => setIsSettingOpen((prev) => !prev)}
-        className="hover:text-slate-600 hover:cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-10 xl:h-10 w-8 h-8   text-slate-400"
-      />
-    </div>
-  );
-}
 function InnerMessages() {
   return (
     <div className=" h-[80%] overflow-y-scroll md:scrollbar-thin">

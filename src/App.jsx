@@ -11,6 +11,7 @@ import { BsFillChatDotsFill } from "react-icons/bs";
 import Search from "./pages/Search/Search";
 import Notifications from "./pages/Notifications/Notifications";
 import UsersList from "./components/common/UsersList";
+import Settings from "./pages/Settings/Settings";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
@@ -55,6 +56,7 @@ function App() {
         </Route>
         <Route path="/search" element={<Search />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </div>
   );

@@ -1,5 +1,4 @@
 import React from "react";
-import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 import UsersList from "../../components/common/UsersList";
 
 export default function Search() {
