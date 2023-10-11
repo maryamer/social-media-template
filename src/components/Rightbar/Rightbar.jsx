@@ -1,8 +1,7 @@
 import React from "react";
 import { Users } from "../../dummyData";
 import { AiOutlineEye } from "react-icons/ai";
-import CharaterName from "../common/CharaterName";
-import { Character } from "../common/Character";
+import Character from "../common/Character";
 
 function Rightbar() {
   return (

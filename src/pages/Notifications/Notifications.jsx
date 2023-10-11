@@ -79,13 +79,13 @@ export default function Notifications() {
                     &nbsp; commented on your post : {""}
                   </span>
                   <span className=" inline-flex items-center justify-center rounded-full bg-red-500  border-red-500 border-4"></span>
-                  <p className="text-white">
-                    beautiful mind beautiful life{" "}
+                  <span className="text-white">
+                    beautiful mind beautiful life
                     <span className="text-slate-500 font-bold hover:text-slate-600">
                       {" "}
                       &nbsp; reply{" "}
                     </span>
-                  </p>
+                  </span>
                 </p>
                 <p className="text-[#939dae]">1m ago</p>
               </div>

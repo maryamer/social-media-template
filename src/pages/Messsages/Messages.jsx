@@ -1,9 +1,9 @@
 import React from "react";
 import { BsBellSlash } from "react-icons/bs";
 import { Outlet, useParams } from "react-router-dom";
+import UsersList from "../../components/common/UsersList";
 import InnerMessage from "../../components/InnerMessage/InnerMessage";
 import MessageSetting from "../../components/MessageSetting/MessageSetting";
-import UsersList from "../../components/UsersList/UsersList";
 
 export default function Messages({ isSettingOpen, setIsSettingOpen }) {
   const { id } = useParams();

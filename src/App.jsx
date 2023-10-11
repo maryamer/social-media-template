@@ -10,7 +10,7 @@ import Profile from "./pages/Profile/Profile";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import Search from "./pages/Search/Search";
 import Notifications from "./pages/Notifications/Notifications";
-import UsersList from "./components/UsersList/UsersList";
+import UsersList from "./components/common/UsersList";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);

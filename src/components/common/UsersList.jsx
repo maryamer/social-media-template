@@ -2,7 +2,6 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { Users } from "../../dummyData";
 import Character from "./Character";
-import CharaterName from "./CharaterName";
 
 export default function UsersList({
   setIsSettingOpen,
