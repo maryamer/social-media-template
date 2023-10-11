@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BsChatFill, BsHeartFill } from "react-icons/bs";
 import { IoIosArrowRoundBack, IoMdSettings } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
+import CharaterName from "../../components/common/CharaterName";
 
 function Profile() {
   const navigate = useNavigate();
@@ -207,13 +208,5 @@ function InnerMessageHeader({ item, setIsSettingOpen }) {
         className="hover:text-slate-600 hover:cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-10 xl:h-10 w-8 h-8   text-slate-400"
       />
     </div>
-  );
-}
-
-function CharaterName({ item }) {
-  return (
-    <h3 className="name whitespace-nowrap font-bold lg:text-lg   cursor-pointer min-w-fit ">
-      <div>{item.username}</div>
-    </h3>
   );
 }

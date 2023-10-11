@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IoIosArrowRoundBack, IoMdSettings } from "react-icons/io";
 import { CiFaceSmile } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import CharaterName from "../common/CharaterName";
 
 export default function InnerMessage({ setIsSettingOpen }) {
   const [item, setItem] = useState({
@@ -21,13 +22,7 @@ export default function InnerMessage({ setIsSettingOpen }) {
     </>
   );
 }
-function CharaterName({ item }) {
-  return (
-    <h3 className="name whitespace-nowrap font-bold lg:text-lg   cursor-pointer min-w-fit ">
-      <div>{item.username}</div>
-    </h3>
-  );
-}
+
 function InnerMessageHeader({ item, setIsSettingOpen }) {
   return (
     <div

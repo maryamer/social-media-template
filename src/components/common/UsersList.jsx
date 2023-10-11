@@ -1,6 +1,8 @@
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { Users } from "../../dummyData";
+import Character from "./Character";
+import CharaterName from "./CharaterName";
 
 export default function UsersList({
   setIsSettingOpen,
@@ -57,46 +59,6 @@ export default function UsersList({
   );
 }
 
-export function Character({ item, children, locationParameter }) {
-  return (
-    <Link
-      to={locationParameter}
-      className="flex  justify-between items-center  lg:grid-cols-3 dark:bg-slate-950 my-2 hover:bg-slate-800  cursor-pointer  w-full h-16 lg:h-24"
-    >
-      <div className="flex items-center  lg:justify-start justify-center pl-2 ">
-        <img
-          src={item.profilePicture}
-          alt={item.username}
-          className="shareProfileImg cursor-pointer object-cover flex items-center ml-1.5 shrink-0 grow-0 xl:w-20 xl:h-20  w-14 h-14 rounded-full"
-        />
-        &nbsp; &nbsp;
-        <div className="">
-          <CharaterName item={item} />
-          <CharacterInfo item={item} />
-        </div>
-      </div>
-      {children}
-    </Link>
-  );
-}
-
-function CharaterName({ item }) {
-  return (
-    <h3 className="name whitespace-nowrap font-medium xl:text-lg xl:font-medium cursor-pointer min-w-fit dark:text-slate-300">
-      <div>{item.username}</div>
-    </h3>
-  );
-}
-
-function CharacterInfo({ item }) {
-  const status = item.status && item?.status.slice(0, 14);
-  return (
-    <div className="list-item__info info hidden font-thin 2xl:block dark:text-slate-400 cursor-pointer">
-      <span className={`status ${item.id === "Dead" ? "red" : ""}`}></span>
-      <span> {status && status.padEnd(17, "..")} </span>
-    </div>
-  );
-}
 function SearchComponent({ title }) {
   return (
     <div className={`searchComponent h-14 relative w-full`}>
