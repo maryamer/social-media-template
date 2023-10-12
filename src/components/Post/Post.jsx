@@ -1,5 +1,3 @@
-import "./post.css";
-// import { MoreVert } from "@mui/icons-material";
 import { Users } from "../../dummyData";
 import { useState } from "react";
 import { BsHeart, BsSend } from "react-icons/bs";
@@ -18,24 +16,20 @@ export default function Post({ post }) {
       <div className="postCenter py-1 ">
         <div className="overflow-hidden  cursor-pointer lg:rounded-xl relative group w-full">
           <div className="lg:rounded-xl z-40   opacity-100 group-hover:opacity-100 transition duration-300 ease-in-out cursor-pointer absolute from-black/80 to-transparent bg-gradient-to-b inset-x-0 -top-1 pt-30 text-white flex items-start">
-            <div>
-              <div className="  p-4 space-y-3 text-xl group-hover:opacity-100 group-hover:translate-y-0 translate-y-0 pb-10 transform transition duration-300 ease-in-out">
-                {/* <div className="font-bold">Jessie Watsica</div> */}
-
-                <div className="opacity-100 text-sm  ">
-                  <div className="postTopLeft flex items-center hover:opacity-60">
-                    <img
-                      className="postProfileImg w-8 h-8 rounded-full object-cover"
-                      src={
-                        Users.filter((u) => u.id === post.userId)[0]
-                          .profilePicture
-                      }
-                    />
-                    <span className="postUsername text-sm font-medium mx-2.5 ">
-                      {Users.filter((u) => u.id === post.userId)[0].username}
-                    </span>
-                    <span className="postDate text-xs">{post.date}</span>
-                  </div>
+            <div className="  p-4 space-y-3 text-xl group-hover:opacity-100 group-hover:translate-y-0 translate-y-0 pb-10 transform transition duration-300 ease-in-out">
+              <div className="opacity-100 text-sm  ">
+                <div className="postTopLeft flex items-center hover:opacity-60">
+                  <img
+                    className="postProfileImg w-8 h-8 rounded-full object-cover"
+                    src={
+                      Users.filter((u) => u.id === post.userId)[0]
+                        .profilePicture
+                    }
+                  />
+                  <span className="postUsername text-sm font-medium mx-2.5 ">
+                    {Users.filter((u) => u.id === post.userId)[0].username}
+                  </span>
+                  <span className="postDate text-xs">{post.date}</span>
                 </div>
               </div>
             </div>

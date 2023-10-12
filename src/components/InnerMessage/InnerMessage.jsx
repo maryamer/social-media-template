@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { IoIosArrowRoundBack, IoMdSettings } from "react-icons/io";
+import { IoMdSettings } from "react-icons/io";
 import { CiFaceSmile } from "react-icons/ci";
-import { Link } from "react-router-dom";
-import CharaterName from "../common/CharaterName";
 import InnerHeader from "../common/InnerHeader";
 
 export default function InnerMessage({ setIsSettingOpen }) {
@@ -16,7 +14,12 @@ export default function InnerMessage({ setIsSettingOpen }) {
   return (
     <>
       <div className="flex flex-col gap-2 w-full  h-screen md:h-full justify-end">
-        <InnerHeader item={item} setIsSettingOpen={setIsSettingOpen} />
+        <InnerHeader item={item} setIsSettingOpen={setIsSettingOpen}>
+          <IoMdSettings
+            onClick={() => setIsSettingOpen((prev) => !prev)}
+            className="hover:text-slate-600 hover:cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-10 xl:h-10 w-8 h-8   text-slate-400"
+          />
+        </InnerHeader>
         <InnerMessages />
         <MessageInput />
       </div>

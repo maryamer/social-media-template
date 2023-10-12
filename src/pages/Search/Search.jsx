@@ -3,7 +3,7 @@ import UsersList from "../../components/common/UsersList";
 
 export default function Search() {
   return (
-    <div className="share bg-slate-950 lg:py-3   justify-center w-full ">
+    <div className="share bg-slate-950 lg:py-3   justify-center w-full md:w-5/6">
       <UsersList locationParameter="/profile" />
     </div>
   );

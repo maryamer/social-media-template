@@ -1,9 +1,9 @@
 import React from "react";
-import { IoIosArrowRoundBack, IoMdSettings } from "react-icons/io";
+import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import CharaterName from "./CharaterName";
 
-export default function InnerHeader({ item, setIsSettingOpen }) {
+export default function InnerHeader({ item, setIsSettingOpen, children }) {
   const navigate = useNavigate();
   return (
     <div
@@ -27,10 +27,7 @@ export default function InnerHeader({ item, setIsSettingOpen }) {
         &nbsp; &nbsp;
         <CharaterName item={item} />
       </div>
-      <IoMdSettings
-        onClick={() => setIsSettingOpen((prev) => !prev)}
-        className="hover:text-slate-600 hover:cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-10 xl:h-10 w-8 h-8   text-slate-400"
-      />
+      {children}
     </div>
   );
 }

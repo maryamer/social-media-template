@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import InnerMessage from "./components/InnerMessage/InnerMessage";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -11,13 +11,14 @@ import { BsFillChatDotsFill } from "react-icons/bs";
 import Search from "./pages/Search/Search";
 import Notifications from "./pages/Notifications/Notifications";
 import UsersList from "./components/common/UsersList";
+import ProfileSettings from "./components/ProfileSettings/ProfileSettings";
 import Settings from "./pages/Settings/Settings";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
 
   return (
-    <div className="app flex flex-col-reverse md:flex-row h-screen  dark:bg-slate-950 w-full">
+    <div className="app flex justify-center flex-col-reverse md:flex-row h-screen  dark:bg-slate-950 w-full">
       <Sidebar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -56,7 +57,12 @@ function App() {
         </Route>
         <Route path="/search" element={<Search />} />
         <Route path="/notifications" element={<Notifications />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/settings" element={<Settings />}>
+          <Route index element={<Navigate to="profile" />} />
+          <Route path="profile" element={<ProfileSettings />} />
+          <Route path="notifications" element={<ProfileSettings />} />
+          <Route path="privacy" element={<ProfileSettings />} />
+        </Route>
       </Routes>
     </div>
   );

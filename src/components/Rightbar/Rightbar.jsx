@@ -2,24 +2,23 @@ import React from "react";
 import { Users } from "../../dummyData";
 import { AiOutlineEye } from "react-icons/ai";
 import Character from "../common/Character";
+import HeaderTitle from "../common/HeaderTitle";
 
 function Rightbar() {
   return (
     <div className="rightbar dark:bg-slate-900 dark:text-white md:w-2/6 hidden lg:flex flex-col h-screen justify-center items-center min-w-fit">
       <div className="characters-list flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll ">
         <div className=" flex  w-[80%] relative top-0 h-20">
-          <h2 className="font-bold pl-2 flex items-center text-gray-400  ">
-            Suggesting:
-          </h2>
+          <HeaderTitle title="Suggesting" />
         </div>
         <div className="w-[80%] h-[95%] ">
           {Users.map((item) => (
-            <Character key={item.id} item={item}>
+            <Character isInRightbar={true} key={item.id} item={item}>
               <AiOutlineEye className="hover:text-slate-600 cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-6 xl:h-6 lg:w-5 lg:h-5 transition duration-150 ease-in-out  text-slate-300" />
             </Character>
           ))}
           {Users.map((item) => (
-            <Character key={item.id} item={item}>
+            <Character isInRightbar={true} key={item.id} item={item}>
               <AiOutlineEye className="hover:text-slate-600 cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-6 xl:h-6 lg:w-5 lg:h-5 transition duration-150 ease-in-out  text-slate-300" />
             </Character>
           ))}

@@ -2,11 +2,18 @@ import { Link } from "react-router-dom";
 import CharacterInfo from "./CharacterInfo";
 import CharaterName from "./CharaterName";
 
-export default function Character({ item, children, locationParameter }) {
+export default function Character({
+  item,
+  children,
+  locationParameter,
+  isInRightbar = false,
+}) {
   return (
     <Link
       to={locationParameter}
-      className="flex  justify-between items-center  lg:grid-cols-3 dark:bg-slate-950 my-2 hover:bg-slate-800  cursor-pointer  w-full h-16 lg:h-24"
+      className={`${
+        isInRightbar ? "rounded-2xl" : ""
+      }  flex  justify-between items-center  lg:grid-cols-3 dark:bg-slate-950 my-2 hover:bg-slate-800  cursor-pointer  w-full h-16 lg:h-24`}
     >
       <div className="flex items-center  lg:justify-start justify-center pl-2 ">
         <img

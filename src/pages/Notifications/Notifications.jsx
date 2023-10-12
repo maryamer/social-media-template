@@ -1,8 +1,6 @@
-import React from "react";
-
 export default function Notifications() {
   return (
-    <div className="w-full h-screen text-white">
+    <div className="w-4/6 h-screen text-white">
       <div className="sm:mx-auto h-full  w-full  sm:p-10 text-sm ">
         <div className="header w-full text-white">
           <div className="container flex items-center justify-between p-3">
