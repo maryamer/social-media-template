@@ -18,7 +18,7 @@ function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
 
   return (
-    <div className="app flex justify-center flex-col-reverse md:flex-row h-screen  dark:bg-slate-950 w-full">
+    <div className="app flex justify-start flex-col-reverse md:flex-row h-screen  dark:bg-slate-950 w-full">
       <Sidebar />
       <Routes>
         <Route path="/" element={<Home />} />
