@@ -2,10 +2,16 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import IconsHandler from "./IconsHandler";
 
-export default function MenuItem({ title, direction, isSidebar }) {
+export default function MenuItem({
+  title,
+  direction,
+  isSidebar,
+  themeHandler,
+}) {
   return (
     <NavLink
       to={direction}
+      onClick={themeHandler && themeHandler}
       className={`${
         isSidebar
           ? `flex justify-center font-bold  md:justify-normal md:p-3  md:w-full rounded-2xl lg:hover:bg-slate-800 transition duration-150 ease-in-out`

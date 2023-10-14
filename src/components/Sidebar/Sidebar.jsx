@@ -5,7 +5,7 @@ import useOutsideClick from "../../hooks/useOutsideClick";
 import MenuItem from "../common/MenuItem";
 import Menu from "../common/Menu";
 
-function Sidebar() {
+function Sidebar({ themeHandler }) {
   const { pathname } = useLocation();
   const [isOpenSubMenu, setIsOpenSubMenu] = useState(false);
   const subMenuRef = useRef();
@@ -18,6 +18,7 @@ function Sidebar() {
     { title: "Notifications", id: 5, direction: "/notifications" },
     { title: "Create", id: 6, direction: "/create" },
     { title: "Profile", id: 7, direction: "/profile" },
+    { title: "Dark/Light", id: 8, direction: null },
   ];
   const subMenuItems = [
     { title: "Settings", id: 1, direction: "/profile/settings" },
@@ -31,7 +32,7 @@ function Sidebar() {
           className={`sidebar z-50  transition-all duration-150 w-full ease-in-out md:rounded-r-3xl  md:h-full lg:w-1/6 lg:max-w-none md:max-w-fit dark:bg-slate-900 bg-white  dark:text-white text-black  md:relative absoolute`}
         >
           <SideBarHeader />
-          <Menu menuItems={menuItems}>
+          <Menu menuItems={menuItems} themeHandler={themeHandler}>
             <LastMenuItem setIsOpenSubMenu={setIsOpenSubMenu} />
             {isOpenSubMenu && (
               <div

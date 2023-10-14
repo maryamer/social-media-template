@@ -11,6 +11,7 @@ import { CiLogout } from "react-icons/ci";
 import { IoMdSettings } from "react-icons/io";
 import { MdOutlineExplore } from "react-icons/md";
 import { PiBell } from "react-icons/pi";
+import { CgDarkMode } from "react-icons/cg";
 
 export default function IconsHandler({ title }) {
   return (
@@ -37,7 +38,9 @@ export default function IconsHandler({ title }) {
         <IoMdSettings className="xl:w-9 xl:h-9 lg:w-8 lg:h-8 w-7 h-7   " />
       ) : title === "Swith Account" ? (
         <AiOutlineUserSwitch className="xl:w-9 xl:h-9 lg:w-8 lg:h-8 w-7 h-7   " />
-      ) : null}
+      ) : (
+        <CgDarkMode className="xl:w-9 xl:h-9 lg:w-8 lg:h-8 w-7 h-7   " />
+      )}
     </>
   );
 }

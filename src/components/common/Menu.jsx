@@ -1,7 +1,12 @@
 import React from "react";
 import MenuItem from "./MenuItem";
 
-export default function Menu({ children, menuItems, isSidebar = true }) {
+export default function Menu({
+  children,
+  menuItems,
+  isSidebar = true,
+  themeHandler,
+}) {
   return (
     <div
       className={`${
@@ -20,6 +25,7 @@ export default function Menu({ children, menuItems, isSidebar = true }) {
               direction={item.direction}
               key={item.id}
               isSidebar={isSidebar}
+              themeHandler={item.title === "Dark/Light" && themeHandler}
             />
           ))}
       </div>

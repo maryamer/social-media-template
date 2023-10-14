@@ -19,55 +19,63 @@ import Login from "./pages/Login/Login";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
+  const [theme, setTheme] = useState("dark");
+  const themeHandler = () => {
+    setTheme((prev) => (prev === "dark" ? "" : "dark"));
+  };
 
   return (
-    <div className="app flex justify-start flex-col-reverse md:flex-row h-screen  dark:bg-slate-950 w-full">
-      <Sidebar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/profile" element={<Profile />}></Route>
-        <Route
-          path="/profile/followers"
-          element={<UsersList locationParameter="/profile" />}
-        />
-        <Route
-          path="/profile/followings"
-          element={<UsersList locationParameter="/profile" />}
-        />
-        <Route
-          path="/messages"
-          element={
-            <Messages
-              isSettingOpen={isSettingOpen}
-              setIsSettingOpen={setIsSettingOpen}
-            />
-          }
-        >
+    <div className={`${theme}  h-screen w-screen`}>
+      <div
+        className={`  flex justify-start flex-col-reverse md:flex-row h-screen  dark:bg-slate-950 w-screen`}
+      >
+        <Sidebar themeHandler={themeHandler} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/profile" element={<Profile />}></Route>
           <Route
-            index
+            path="/profile/followers"
+            element={<UsersList locationParameter="/profile" />}
+          />
+          <Route
+            path="/profile/followings"
+            element={<UsersList locationParameter="/profile" />}
+          />
+          <Route
+            path="/messages"
             element={
-              <div className="flex flex-col w-full items-center justify-center font-bold">
-                <BsFillChatDotsFill className="w-16 h-16 p-3" />
-                Your Messages
-              </div>
+              <Messages
+                isSettingOpen={isSettingOpen}
+                setIsSettingOpen={setIsSettingOpen}
+              />
             }
-          />
-          <Route
-            path=":id"
-            element={<InnerMessage setIsSettingOpen={setIsSettingOpen} />}
-          />
-        </Route>
-        <Route path="/search" element={<Search />} />
-        <Route path="/notifications" element={<Notifications />} />
-        <Route path="profile/settings" element={<Settings />}>
-          <Route index element={<Navigate to="profile" />} />
-          <Route path="profile" element={<ProfileSettings />} />
-          <Route path="notifications" element={<NotificationsSetting />} />
-          <Route path="privacy" element={<PrivacySettings />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-      </Routes>
+          >
+            <Route
+              index
+              element={
+                <div className="flex flex-col w-full items-center justify-center font-bold">
+                  <BsFillChatDotsFill className="w-16 h-16 p-3" />
+                  Your Messages
+                </div>
+              }
+            />
+            <Route
+              path=":id"
+              element={<InnerMessage setIsSettingOpen={setIsSettingOpen} />}
+            />
+          </Route>
+          <Route path="/search" element={<Search />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="profile/settings" element={<Settings />}>
+            <Route index element={<Navigate to="profile" />} />
+            <Route path="profile" element={<ProfileSettings />} />
+            <Route path="notifications" element={<NotificationsSetting />} />
+            <Route path="privacy" element={<PrivacySettings />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
     </div>
   );
 }
