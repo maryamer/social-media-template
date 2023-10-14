@@ -29,7 +29,7 @@ function Sidebar({ themeHandler }) {
     <>
       {!pathname.includes("messages") && (
         <div
-          className={`sidebar z-50  transition-all duration-150 w-full ease-in-out md:rounded-r-3xl  md:h-full lg:w-1/6 lg:max-w-none md:max-w-fit dark:bg-slate-900 bg-white  dark:text-white text-black  md:relative absoolute`}
+          className={`sidebar z-50   transition-all duration-150 w-full ease-in-out md:rounded-r-3xl  md:h-full lg:w-1/6 lg:max-w-none md:max-w-fit dark:bg-slate-900 bg-slate-300  dark:text-white text-gray-800  md:relative absoolute`}
         >
           <SideBarHeader />
           <Menu menuItems={menuItems} themeHandler={themeHandler}>
@@ -37,7 +37,7 @@ function Sidebar({ themeHandler }) {
             {isOpenSubMenu && (
               <div
                 ref={subMenuRef}
-                className="subMenuContainer bg-slate-900 rounded-xl hidden lg:flex items-center  flex-col p-3 max-h-fit w-[95%] absolute bottom-1"
+                className="subMenuContainer bg-slate-400 dark:bg-slate-900  rounded-xl hidden lg:flex items-center  flex-col p-3 max-h-fit w-[95%] absolute bottom-1"
               >
                 <Submenu menuItems={subMenuItems} />
               </div>
@@ -55,7 +55,7 @@ function LastMenuItem({ setIsOpenSubMenu }) {
   return (
     <div
       onClick={() => setIsOpenSubMenu(true)}
-      className="sidebarListItem hidden md:flex justify-center md:justify-normal md:p-3  font-bold  lg:w-1/7 rounded-2xl  dark:md:hover:bg-slate-800 transition duration-150 ease-in-out fixed left-2  bottom-2"
+      className="sidebarListItem hidden md:flex justify-center md:justify-normal md:p-3  font-bold  lg:w-1/7 rounded-2xl hover:bg-gray-400 hover:text-gray-200  dark:md:hover:bg-slate-800 transition duration-150 ease-in-out fixed left-2  bottom-2"
     >
       <AiOutlineMenu className="lg:w-9 lg:h-9 w-7 h-7 " />
       <span className="sidebarListItemText text-lg items-center hidden lg:flex font-bold ">
