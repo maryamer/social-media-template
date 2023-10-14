@@ -15,7 +15,7 @@ function Profile() {
     status: "how's the wheater out there?",
   });
   return (
-    <div className=" w-full md:w-4/6 mx-auto bg-slate-900 text-white h-screen overflow-y-scroll scrollbar-none">
+    <div className=" w-full md:w-4/6 mx-auto bg-slate-300 dark:bg-slate-900 dark:text-white overflow-y-scroll md:scrollbar-none h-screen">
       <div className="px-3 py-2">
         <InnerHeader setIsSettingOpen={setIsSettingOpen} item={item} direction>
           <Link to="/profile/settings">
@@ -41,13 +41,13 @@ function ProfileBody() {
     <>
       <div className="flex flex-col gap-1 text-center md:p-5 mt-4">
         <Link
-          className="block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 rounded-full border border-gray-400 shadow-lg"
+          className="block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full border border-gray-400 shadow-lg"
           href=""
         >
           <img
             src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
             alt=""
-            className="rounded-full"
+            className="rounded-full object-cover "
           />
         </Link>
         <h2 className="font-bold">Marina Davinchi</h2>
@@ -59,23 +59,23 @@ function ProfileBody() {
         </span>
       </div>
 
-      <div className="flex justify-center w-full items-center md:p-1 gap-2 my-3">
-        <div className="font-semibold text-center mx-4">
-          <p className="text-white">102</p>
+      <div className="flex justify-center w-full items-center md:p-1 gap-2 my-3text-gray-700">
+        <div className="font-semibold text-center mx-4 ">
+          <p className="dark:text-white">102</p>
           <span className="text-gray-400">Posts</span>
         </div>
         <Link
           to="followers"
           className="font-semibold text-center mx-4 cursor-pointer"
         >
-          <p className="text-white">102</p>
+          <p className="dark:text-white">102</p>
           <span className="text-gray-400">Followers</span>
         </Link>
         <Link
           to="followings"
           className="font-semibold text-center mx-4 cursor-pointer"
         >
-          <p className="text-white">102</p>
+          <p className="dark:text-white">102</p>
           <span className="text-gray-400">Folowing</span>
         </Link>
       </div>
@@ -86,7 +86,7 @@ function ProfileBody() {
         </button>
         <button
           onClick={() => navigate("/messages/1")}
-          className="bg-slate-800 hover:bg-slate-900 border w-3/6  border-gray-500 px-10 py-2 rounded-2xl shadow-lg"
+          className="bg-slate-800 hover:bg-slate-900 border w-3/6  border-gray-500 px-10 py-2 text-white rounded-2xl shadow-lg"
         >
           Message
         </button>

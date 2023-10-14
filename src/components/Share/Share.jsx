@@ -1,6 +1,6 @@
 export default function Share() {
   return (
-    <div className=" m-2 flex items-center justify-around  bg-slate-950 lg:py-3 xl:max-w-[75%] w-full lg:w-4/5">
+    <div className=" m-2 flex items-center justify-around bg-white  dark:bg-slate-950 lg:py-3 xl:max-w-[75%] w-full lg:w-4/5">
       <ShareNoteImg />
       &nbsp;
       <ShareNoteInput />
@@ -12,7 +12,7 @@ export default function Share() {
 function ShareNoteBtn() {
   return (
     <div className="shareBottom dark:text-white flex items-center justify-between ">
-      <button className="bg-gray-800 hover:bg-gray-700 transition duration-150 ease-in-out dark:text-slate-300 text-sm lg:font-bold p-2 lg:py-2.5 lg:px-4 rounded-lg">
+      <button className="dark:bg-gray-800 bg-slate-600 text-gray-200 hover:bg-slate-500 hover:text-slate-200 transition duration-150 ease-in-out dark:text-slate-300 text-sm lg:font-bold p-2 lg:py-2.5 lg:px-4 rounded-lg">
         Share
       </button>
     </div>
@@ -22,7 +22,7 @@ function ShareNoteInput() {
   return (
     <input
       placeholder="What's in your mind maryam?"
-      className="shareInput w-9/12 sm:w-[90%] text-xs h-8 md:text-base  mr-3 md:w-11/12 focus:outline-none rounded-md lg:rounded-lg lg:p-2 p-1 cursor-pointer dark:bg-gray-700 dark:text-white "
+      className="shareInput w-9/12 sm:w-[90%] text-xs h-8 md:text-base  mr-3 md:w-11/12 focus:outline-none rounded-md lg:rounded-lg lg:p-2 p-1 cursor-pointer bg-slate-300 dark:bg-gray-700 dark:text-white "
     />
   );
 }

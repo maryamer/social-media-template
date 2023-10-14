@@ -24,7 +24,7 @@ export default function ProfileSettings() {
     <div className="w-full mx-auto ">
       <div className="px-1 py-2 flex flex-col items-center justify-center">
         <EditAvatar />
-        <div className="bg-slate-900 overflow-hidden shadow w-full md:w-5/6 rounded-lg ">
+        <div className="dark:bg-slate-900 bg-white overflow-hidden shadow w-full md:w-5/6 rounded-lg ">
           <div className="px-4 py-5 flex items-center justify-center md:justify-start ">
             <h2 className="text-xl leading-6  font-bold text-slate-400">
               User Profile
@@ -34,7 +34,7 @@ export default function ProfileSettings() {
             </p> */}
           </div>
           <div className=" px-4 py-5 sm:p-0">
-            <div className="divide-y divide-gray-800 ">
+            <div className="divide-y dark:divide-gray-800 divide-slate-400 ">
               <SettingItem
                 title={"name"}
                 value={userDetails.name}
@@ -63,7 +63,7 @@ export default function ProfileSettings() {
                   </span>
                 </div>
 
-                <span className="mt-1 text-sm flex items-center text-gray-200 sm:mt-0 sm:col-span-2">
+                <span className="mt-1 text-sm flex items-center text-gray-500 dark:text-gray-200 sm:mt-0 sm:col-span-2">
                   <div className="formControl flex">
                     {radioOptions.map((item) => (
                       <div key={item.value}>
@@ -129,7 +129,7 @@ function SettingItem({ title, value, onChangeHandler }) {
           />{" "}
           <span className="text-xs text-blue-800 cursor-pointer">Done</span>
         </div>
-        <span className="mt-1 text-sm flex items-center text-gray-200 sm:mt-0 sm:col-span-2">
+        <span className="mt-1 text-sm flex items-center text-gray-500 dark:text-gray-200 sm:mt-0 sm:col-span-2">
           &nbsp;{value}
         </span>
       </div>

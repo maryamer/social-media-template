@@ -13,7 +13,7 @@ export default function InnerMessage({ setIsSettingOpen }) {
   });
   return (
     <>
-      <div className="flex flex-col gap-2 w-full  h-screen md:h-full justify-end">
+      <div className="flex flex-col  w-full  h-screen md:h-full justify-end">
         <InnerHeader item={item} setIsSettingOpen={setIsSettingOpen}>
           <IoMdSettings
             onClick={() => setIsSettingOpen((prev) => !prev)}
@@ -29,7 +29,7 @@ export default function InnerMessage({ setIsSettingOpen }) {
 
 function InnerMessages() {
   return (
-    <div className=" h-[80%] overflow-y-scroll md:scrollbar-thin">
+    <div className=" h-[80%] overflow-y-scroll md:scrollbar-thin bg-slate-400">
       <div id="messages" className="flex flex-col  space-y-4 p-3 ">
         <div className="chat-message">
           <div className="flex items-end">
@@ -226,7 +226,7 @@ function InnerMessages() {
 }
 function MessageInput() {
   return (
-    <div className="flex items-center justify-center w-full h-[10%] ">
+    <div className="flex bg-slate-400 items-center justify-center w-full h-[10%] ">
       <div className="bg-gray-50 w-[95%] lg:w-[97%] border  border-gray-300 text-gray-900 text-sm rounded-3xl  flex items-center justify-center  p-0  lg:p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ">
         <div className="w-[5%] shrink-0">
           <CiFaceSmile className="hover:text-slate-600 cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-8 xl:h-8 lg:w-7 lg:h-7 w-7 h-7   text-slate-400" />

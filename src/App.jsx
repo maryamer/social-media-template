@@ -16,14 +16,23 @@ import Settings from "./pages/Settings/Settings";
 import NotificationsSetting from "./components/NotificationsSetting/NotificationsSetting";
 import PrivacySettings from "./components/PrivacySettings/PrivacySettings";
 import Login from "./pages/Login/Login";
+import { useEffect } from "react";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
   const [theme, setTheme] = useState("dark");
   const themeHandler = () => {
     setTheme((prev) => (prev === "dark" ? "" : "dark"));
+    localStorage.setItem("theme", JSON.stringify(theme));
   };
 
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("theme") === "dark")) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  }, []);
   return (
     <div className={`${theme}  h-screen w-screen`}>
       <div
@@ -54,8 +63,8 @@ function App() {
             <Route
               index
               element={
-                <div className="flex flex-col w-full items-center justify-center font-bold">
-                  <BsFillChatDotsFill className="w-16 h-16 p-3" />
+                <div className="flex flex-col w-full items-center dark:text-white text-slate-500 justify-center font-bold">
+                  <BsFillChatDotsFill className="w-16 h-16 p-3 " />
                   Your Messages
                 </div>
               }

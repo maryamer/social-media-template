@@ -7,8 +7,8 @@ export default function InnerHeader({ item, setIsSettingOpen, children }) {
   const navigate = useNavigate();
   return (
     <div
-      className="messageHeader border-b border-b-slate-500 flex   justify-between items-center h-[10%]
-        py-3"
+      className="messageHeader dark:border-b border-b-slate-500 flex   justify-between items-center h-[10%]
+       "
     >
       <div className="flex items-center justify-start hover:text-slate-400">
         <button

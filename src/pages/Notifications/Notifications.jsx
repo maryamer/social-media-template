@@ -1,8 +1,8 @@
 export default function Notifications() {
   return (
-    <div className="w-full md:w-4/6 h-screen text-white">
+    <div className="w-full md:w-4/6 h-screen dark:text-white text-gray-700">
       <div className="sm:mx-auto h-full  w-full  sm:p-10 text-sm ">
-        <div className="header w-full text-white">
+        <div className="header w-full ">
           <div className="container flex items-center justify-between p-3">
             <p className="text-xl sm:text-2xl font-bold sm:font-extrabold">
               Notifications :
@@ -10,7 +10,7 @@ export default function Notifications() {
           </div>
         </div>
         <div className="messages m-2">
-          <div className="profile_pic rounded-xl flex justify-start items-center  gap-4 m-2 p-1 md:p-4 bg-slate-900">
+          <div className="profile_pic rounded-xl flex justify-start items-center  gap-4 m-2 p-1 md:p-4 bg-slate-400 dark:bg-slate-900">
             <img
               src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="Mark-Webber"
@@ -29,7 +29,7 @@ export default function Notifications() {
                     My first tournament today! &nbsp;
                   </span>{" "}
                 </p>
-                <p className="text-[#939dae]">
+                <p className="text-gray-800 font-semibold dark:text-[#939dae]">
                   1m ago &nbsp;
                   <span className=" inline-flex items-center justify-center rounded-full bg-red-500  border-red-500 border-4"></span>
                 </p>
@@ -38,7 +38,7 @@ export default function Notifications() {
           </div>
         </div>
         <div className="messages m-2">
-          <div className="profile_pic rounded-xl flex justify-start items-center  gap-4 m-2 p-1 md:p-4 bg-slate-900">
+          <div className="profile_pic rounded-xl flex justify-start items-center  gap-4 m-2 p-1 md:p-4 bg-slate-400 dark:bg-slate-900">
             <img
               src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="Mark-Webber"
@@ -57,7 +57,7 @@ export default function Notifications() {
                     My first tournament today! &nbsp;
                   </span>{" "}
                 </p>
-                <p className="text-[#939dae]">
+                <p className="text-gray-800 font-semibold dark:text-[#939dae]">
                   1m ago &nbsp;
                   <span className=" inline-flex items-center justify-center rounded-full bg-red-500  border-red-500 border-4"></span>
                 </p>
@@ -66,7 +66,7 @@ export default function Notifications() {
           </div>
         </div>
         <div className="messages m-2">
-          <div className="profile_pic rounded-xl flex justify-start items-center  gap-4 m-2 p-1 md:p-4 bg-slate-900">
+          <div className="profile_pic rounded-xl flex justify-start items-center  gap-4 m-2 p-1 md:p-4 bg-slate-400 dark:bg-slate-900">
             <img
               src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="Mark-Webber"
@@ -88,7 +88,7 @@ export default function Notifications() {
                     </span>
                   </span>
                 </p>
-                <p className="text-[#939dae]">
+                <p className="text-gray-800 font-semibold dark:text-[#939dae]">
                   1m ago &nbsp;
                   <span className=" inline-flex items-center justify-center rounded-full bg-red-500  border-red-500 border-4"></span>
                 </p>

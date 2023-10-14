@@ -22,7 +22,7 @@ export default function Settings() {
   ];
 
   return (
-    <div className=" mx-auto w-full bg-slate-900 text-white md:w-4/6 h-screen overflow-y-scroll scrollbar-none">
+    <div className=" mx-auto w-full bg-slate-300 dark:bg-slate-900 dark:text-white md:w-4/6 h-screen overflow-y-scroll scrollbar-none">
       <div className="px-3 py-2 ">
         <InnerHeader
           setIsSettingOpen={setIsSettingOpen}

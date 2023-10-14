@@ -15,7 +15,7 @@ export default function MenuItem({
       className={`${
         isSidebar
           ? `flex justify-center font-bold  md:justify-normal md:p-3  md:w-full rounded-2xl dark:lg:hover:bg-slate-800 hover:bg-gray-400 hover:text-gray-200 transition duration-150 ease-in-out`
-          : "flex justify-center font-bold   border-b-0  md:p-3   md:w-full  lg:hover:border-b-2 hover:border-b-gray-400 transition duration-250 ease-in-out"
+          : "flex justify-center font-bold   border-b-0  md:p-3 text-gray-800  dark:text-gray-200   md:w-full  lg:hover:border-b-2 hover:border-b-gray-400 transition duration-250 ease-in-out"
       }`}
     >
       <IconsHandler title={title} />

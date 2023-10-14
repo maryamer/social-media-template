@@ -7,7 +7,7 @@ import MessageSetting from "../../components/MessageSetting/MessageSetting";
 export default function Messages({ isSettingOpen, setIsSettingOpen }) {
   const { id } = useParams();
   return (
-    <div className="text-white w-full h-full flex dark:bg-slate-950">
+    <div className="dark:text-white w-full h-full flex dark:bg-slate-950">
       <div
         className={`${
           isSettingOpen && id
@@ -17,7 +17,7 @@ export default function Messages({ isSettingOpen, setIsSettingOpen }) {
             : !isSettingOpen && id
             ? "hidden lg:flex"
             : "hidden lg:flex"
-        }  lg:w-1/4 lg:max-w-fit  mb-px border-r border-r-gray-500`}
+        }  lg:w-1/4 lg:max-w-fit  mb-px border-r border-r-slate-400 dark:border-r-gray-500`}
       >
         <UsersList
           setIsSettingOpen={setIsSettingOpen}
@@ -38,7 +38,7 @@ export default function Messages({ isSettingOpen, setIsSettingOpen }) {
             : !isSettingOpen && id
             ? "flex w-screen"
             : "hidden lg:flex"
-        }  lg:w-full  h-full min-w-fit  border-r border-r-gray-500 `}
+        }  lg:w-full  h-full min-w-fit  border-r border-r-slate-400 dark:border-r-gray-500 `}
       >
         <Outlet />
       </div>

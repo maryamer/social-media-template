@@ -13,7 +13,7 @@ export default function UsersList({
 }) {
   const navigate = useNavigate();
   return (
-    <div className="UsersList md:w-4/6 w-full dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
+    <div className="UsersList  w-full  dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
       <button
         onClick={() => {
           setIsSettingOpen(false);

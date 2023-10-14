@@ -7,8 +7,10 @@ function Explore() {
   return (
     <div
       className={`${
-        pathname.includes("explore") ? " md:w-5/6 " : ""
-      }w-full dark:bg-slate-800  overflow-y-scroll xl:scrollbar-none h-screen flex  gap-0 justify-center flex-wrap  `}
+        pathname.includes("explore")
+          ? " md:w-5/6 overflow-y-scroll xl:scrollbar-none "
+          : ""
+      }w-full dark:bg-slate-800   h-screen flex  gap-0 justify-center flex-wrap  `}
     >
       {Posts && Posts.map((post) => <SinglePost key={post.id} post={post} />)}
       {Posts && Posts.map((post) => <SinglePost key={post.id} post={post} />)}
@@ -20,7 +22,7 @@ export default Explore;
 
 export function SinglePost({ post }) {
   return (
-    <div className="post lg:max-w-[24%] md:max-w-[33%] sm:min-w-[130px] w-1/2 aspect-square  dark:bg-slate-950 dark:text-white border border-slate-800  xl:m-1 rounded-xl  ">
+    <div className="post lg:max-w-[24%] md:max-w-[33%] sm:min-w-[130px] w-1/2 aspect-square  dark:bg-slate-950 dark:text-white dark:border border-slate-800  xl:m-1 rounded-xl  ">
       <div className="postCenter w-full ">
         <div className="overflow-hidden  cursor-pointer lg:rounded-xl relative group w-full">
           <div className="lg:rounded-xl z-40  hidden lg opacity-100 group-hover:opacity-100 transition duration-300 ease-in-out cursor-pointer absolute from-black/80 to-transparent bg-gradient-to-b inset-x-0 -top-1 pt-30 text-white lg:flex items-start w-full">

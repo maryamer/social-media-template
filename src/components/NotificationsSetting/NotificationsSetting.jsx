@@ -23,10 +23,10 @@ export default function NotificationsSetting() {
   return (
     <div className="w-full mx-auto ">
       <div className="px-1 py-2 flex flex-col items-center justify-center">
-        <div className="bg-slate-900 overflow-hidden shadow w-full md:w-5/6 rounded-lg ">
+        <div className="dark:bg-slate-900 bg-white overflow-hidden shadow w-full md:w-5/6 rounded-lg ">
           <div className="px-4 py-5 flex items-center justify-center md:justify-start "></div>
           <div className=" px-4 py-5 sm:p-0">
-            <div className="divide-y divide-gray-800 ">
+            <div className="divide-y dark:divide-gray-800 divide-slate-400 ">
               <SettingItem
                 title={"Messages"}
                 value={userDetails.name}
