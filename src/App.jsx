@@ -13,6 +13,9 @@ import Notifications from "./pages/Notifications/Notifications";
 import UsersList from "./components/common/UsersList";
 import ProfileSettings from "./components/ProfileSettings/ProfileSettings";
 import Settings from "./pages/Settings/Settings";
+import NotificationsSetting from "./components/NotificationsSetting/NotificationsSetting";
+import PrivacySettings from "./components/PrivacySettings/PrivacySettings";
+import Login from "./pages/Login/Login";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
@@ -57,12 +60,13 @@ function App() {
         </Route>
         <Route path="/search" element={<Search />} />
         <Route path="/notifications" element={<Notifications />} />
-        <Route path="/settings" element={<Settings />}>
+        <Route path="profile/settings" element={<Settings />}>
           <Route index element={<Navigate to="profile" />} />
           <Route path="profile" element={<ProfileSettings />} />
-          <Route path="notifications" element={<ProfileSettings />} />
-          <Route path="privacy" element={<ProfileSettings />} />
+          <Route path="notifications" element={<NotificationsSetting />} />
+          <Route path="privacy" element={<PrivacySettings />} />
         </Route>
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );

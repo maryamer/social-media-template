@@ -18,13 +18,17 @@ export default function Settings() {
     { title: "Profile", id: 1, direction: "profile" },
     { title: "Notifications", id: 2, direction: "notifications" },
     { title: "Privacy", id: 3, direction: "privacy" },
-    { title: "Log Out", id: 4, direction: "logout" },
+    { title: "Log Out", id: 4, direction: "/login" },
   ];
 
   return (
-    <div className=" mx-auto w-full bg-slate-950 text-white md:w-5/6 h-screen overflow-y-scroll scrollbar-none">
+    <div className=" mx-auto w-full bg-slate-900 text-white md:w-4/6 h-screen overflow-y-scroll scrollbar-none">
       <div className="px-3 py-2 ">
-        <InnerHeader setIsSettingOpen={setIsSettingOpen} item={item} />
+        <InnerHeader
+          setIsSettingOpen={setIsSettingOpen}
+          item={item}
+          direction="settings"
+        />
         <SearchComponent />
         <Menu menuItems={settingsMenuItems} isSidebar={false} />
       </div>

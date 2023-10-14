@@ -1,63 +1,95 @@
 import React from "react";
 import { useState } from "react";
-import { IoMdSettings } from "react-icons/io";
 import { MdOutlineModeEdit } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
-import InnerHeader from "../../components/common/InnerHeader";
 
 export default function ProfileSettings() {
-  const [isSettingOpen, setIsSettingOpen] = useState(false);
-  const [item, setItem] = useState({
-    id: 2,
-    profilePicture:
-      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-    username: "Janell Shrum",
-    status: "how's the wheater out there?",
+  const [userDetails, setUserDetails] = useState({
+    name: "maryam",
+    username: "maryam_er",
+    email: "maryam@gmail.com",
+    phone: "09954444443",
+    country: "Iran",
+    gender: "female",
   });
+  const radioOptions = [
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+  ];
+  const onChangeHandler = (e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
+    setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
+  };
   return (
-    <div className=" w-full  mx-auto text-black h-screen overflow-y-scroll scrollbar-none">
-      <div className="px-3 py-2 flex flex-col items-center justify-center">
+    <div className="w-full mx-auto ">
+      <div className="px-1 py-2 flex flex-col items-center justify-center">
         <EditAvatar />
-        <div className="bg-slate-900 overflow-hidden shadow w-4/6 rounded-lg border">
-          <div className="px-4 py-5 sm:px-6">
-            <h3 className="text-lg leading-6 font-medium text-slate-400">
+        <div className="bg-slate-900 overflow-hidden shadow w-full md:w-5/6 rounded-lg ">
+          <div className="px-4 py-5 flex items-center justify-center md:justify-start ">
+            <h2 className="text-xl leading-6  font-bold text-slate-400">
               User Profile
-            </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            </h2>
+            {/* <p className="mt-1 max-w-2xl text-sm text-gray-500">
               This is some information about the user.
-            </p>
+            </p> */}
           </div>
-          <div className="border-t border-gray-800 px-4 py-5 sm:p-0">
-            <dl className="sm:divide-y sm:divide-gray-200">
-              <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">Full name</dt>
-                <dd className="mt-1 text-sm text-gray-200 sm:mt-0 sm:col-span-2">
-                  John Doe
-                </dd>
+          <div className=" px-4 py-5 sm:p-0">
+            <div className="divide-y divide-gray-800 ">
+              <SettingItem
+                title={"name"}
+                value={userDetails.name}
+                onChangeHandler={onChangeHandler}
+              />
+              <SettingItem
+                title={"email"}
+                value={userDetails.email}
+                onChangeHandler={onChangeHandler}
+              />
+              <SettingItem
+                title={"phone"}
+                value={userDetails.phone}
+                onChangeHandler={onChangeHandler}
+              />
+              <SettingItem
+                title={"country"}
+                value={userDetails.country}
+                onChangeHandler={onChangeHandler}
+              />
+              <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                <div className="text-sm flex font-medium  text-gray-500 ">
+                  <span className="w-[80%] ml-1">Gender</span>
+                  <span className="text-xs text-blue-800 cursor-pointer">
+                    Done
+                  </span>
+                </div>
+
+                <span className="mt-1 text-sm flex items-center text-gray-200 sm:mt-0 sm:col-span-2">
+                  <div className="formControl flex">
+                    {radioOptions.map((item) => (
+                      <div key={item.value}>
+                        {" "}
+                        <input
+                          type="radio"
+                          id={item.value}
+                          name="gender"
+                          value={item.value}
+                          onChange={() =>
+                            setUserDetails({
+                              ...userDetails,
+                              gender: item.value,
+                            })
+                          }
+                          checked={userDetails.gender === item.value}
+                        />
+                        &nbsp;
+                        <label htmlFor={item.value}>{item.label}</label>
+                        &nbsp;
+                      </div>
+                    ))}
+                  </div>
+                </span>
               </div>
-              <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">
-                  Email address
-                </dt>
-                <dd className="mt-1 text-sm text-gray-200 sm:mt-0 sm:col-span-2">
-                  johndoe@example.com
-                </dd>
-              </div>
-              <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">
-                  Phone number
-                </dt>
-                <dd className="mt-1 text-sm text-gray-200 sm:mt-0 sm:col-span-2">
-                  (123) 456-7890
-                </dd>
-              </div>
-              <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">Address</dt>
-                <dd className="mt-1 text-sm text-gray-200 sm:mt-0 sm:col-span-2">
-                  123 Main St Anytown, USA 12345
-                </dd>
-              </div>
-            </dl>
+            </div>
           </div>
         </div>
       </div>
@@ -66,20 +98,42 @@ export default function ProfileSettings() {
 }
 function EditAvatar() {
   return (
-    <div className="flex w-5/6 items-center justify-center flex-col gap-1 text-center md:p-5 mt-4">
-      <div className="flex  bg-center bg-no-repeat bg-cover w-36 h-36 rounded-full border border-gray-400 shadow-lg">
+    <div className="flex w-5/6 items-center md:items-start justify-center flex-col gap-1 text-center md:py-5 mt-4">
+      <div className="flex  bg-center bg-no-repeat bg-cover w-36 h-36 rounded-full  shadow-lg">
         <div className="relative">
           <img
             className=" rounded-full"
             src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
             alt=""
           />
-          <span className="bottom-0 right-5 flex items-center cursor-pointer justify-center absolute  w-8 h-8 bg-blue-400 border-2 hover:bg-slate-400 dark:border-gray-800 rounded-full">
+          <span className="bottom-0 right-5 flex items-center cursor-pointer justify-center absolute  w-8 h-8 bg-blue-400  hover:bg-slate-400 rounded-full">
             <MdOutlineModeEdit />
           </span>
         </div>
       </div>
     </div>
+  );
+}
+
+function SettingItem({ title, value, onChangeHandler }) {
+  return (
+    <>
+      <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+        <div className="text-sm flex font-medium items-center  text-gray-500">
+          <input
+            id={title}
+            name={title}
+            className=" dark:bg-slate-900 outline-none p-1 rounded-lg w-[80%]"
+            onChange={onChangeHandler}
+            value={value}
+          />{" "}
+          <span className="text-xs text-blue-800 cursor-pointer">Done</span>
+        </div>
+        <span className="mt-1 text-sm flex items-center text-gray-200 sm:mt-0 sm:col-span-2">
+          &nbsp;{value}
+        </span>
+      </div>
+    </>
   );
 }
 

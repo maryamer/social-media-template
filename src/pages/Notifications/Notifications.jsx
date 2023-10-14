@@ -1,6 +1,6 @@
 export default function Notifications() {
   return (
-    <div className="w-4/6 h-screen text-white">
+    <div className="w-full md:w-4/6 h-screen text-white">
       <div className="sm:mx-auto h-full  w-full  sm:p-10 text-sm ">
         <div className="header w-full text-white">
           <div className="container flex items-center justify-between p-3">
@@ -10,11 +10,11 @@ export default function Notifications() {
           </div>
         </div>
         <div className="messages m-2">
-          <div className="profile_pic rounded-xl flex justify-start items-center  gap-4 m-2 p-4 bg-slate-900">
+          <div className="profile_pic rounded-xl flex justify-start items-center  gap-4 m-2 p-1 md:p-4 bg-slate-900">
             <img
               src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="Mark-Webber"
-              className=" w-[13%] sm:w-[8%] rounded-full"
+              className=" w-14 h-14 rounded-full"
             />
             <div className="notification-msg">
               <div className="msg-1">
@@ -28,19 +28,21 @@ export default function Notifications() {
                     {" "}
                     My first tournament today! &nbsp;
                   </span>{" "}
+                </p>
+                <p className="text-[#939dae]">
+                  1m ago &nbsp;
                   <span className=" inline-flex items-center justify-center rounded-full bg-red-500  border-red-500 border-4"></span>
                 </p>
-                <p className="text-[#939dae]">1m ago</p>
               </div>
             </div>
           </div>
         </div>
         <div className="messages m-2">
-          <div className="profile_pic rounded-xl flex justify-start items-center  gap-4 m-2 p-4 bg-slate-900">
+          <div className="profile_pic rounded-xl flex justify-start items-center  gap-4 m-2 p-1 md:p-4 bg-slate-900">
             <img
               src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="Mark-Webber"
-              className=" w-[13%] sm:w-[8%] rounded-full"
+              className=" w-14 h-14 rounded-full"
             />
             <div className="notification-msg">
               <div className="msg-1">
@@ -54,19 +56,21 @@ export default function Notifications() {
                     {" "}
                     My first tournament today! &nbsp;
                   </span>{" "}
+                </p>
+                <p className="text-[#939dae]">
+                  1m ago &nbsp;
                   <span className=" inline-flex items-center justify-center rounded-full bg-red-500  border-red-500 border-4"></span>
                 </p>
-                <p className="text-[#939dae]">1m ago</p>
               </div>
             </div>
           </div>
         </div>
         <div className="messages m-2">
-          <div className="profile_pic rounded-xl flex justify-start items-center  gap-4 m-2 p-4 bg-slate-900">
+          <div className="profile_pic rounded-xl flex justify-start items-center  gap-4 m-2 p-1 md:p-4 bg-slate-900">
             <img
               src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
               alt="Mark-Webber"
-              className=" w-[13%] sm:w-[8%] rounded-full"
+              className=" w-14 h-14 rounded-full"
             />
             <div className="notification-msg ">
               <div className="msg-1">
@@ -76,7 +80,6 @@ export default function Notifications() {
                     {" "}
                     &nbsp; commented on your post : {""}
                   </span>
-                  <span className=" inline-flex items-center justify-center rounded-full bg-red-500  border-red-500 border-4"></span>
                   <span className="text-white">
                     beautiful mind beautiful life
                     <span className="text-slate-500 font-bold hover:text-slate-600">
@@ -85,7 +88,10 @@ export default function Notifications() {
                     </span>
                   </span>
                 </p>
-                <p className="text-[#939dae]">1m ago</p>
+                <p className="text-[#939dae]">
+                  1m ago &nbsp;
+                  <span className=" inline-flex items-center justify-center rounded-full bg-red-500  border-red-500 border-4"></span>
+                </p>
               </div>
             </div>
           </div>

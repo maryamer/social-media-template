@@ -17,11 +17,13 @@ function Profile() {
   return (
     <div className=" w-full md:w-4/6 mx-auto bg-slate-900 text-white h-screen overflow-y-scroll scrollbar-none">
       <div className="px-3 py-2">
-        <InnerHeader setIsSettingOpen={setIsSettingOpen} item={item}>
-          <IoMdSettings
-            onClick={() => setIsSettingOpen((prev) => !prev)}
-            className="hover:text-slate-600 hover:cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-10 xl:h-10 w-8 h-8   text-slate-400"
-          />
+        <InnerHeader setIsSettingOpen={setIsSettingOpen} item={item} direction>
+          <Link to="/profile/settings">
+            <IoMdSettings
+              onClick={() => setIsSettingOpen((prev) => !prev)}
+              className="hover:text-slate-600 hover:cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-10 xl:h-10 w-8 h-8   text-slate-400"
+            />
+          </Link>
         </InnerHeader>
         <ProfileBody />
       </div>
@@ -48,7 +50,7 @@ function ProfileBody() {
             className="rounded-full"
           />
         </Link>
-        <p className="font-serif font-semibold">Marina Davinchi</p>
+        <h2 className="font-bold">Marina Davinchi</h2>
         <span className="text-sm text-gray-400">
           New York, NY - Los Angeles, CA
         </span>
@@ -79,12 +81,12 @@ function ProfileBody() {
       </div>
 
       <div className="flex justify-around gap-2 w-full my-5 md:p-5">
-        <button className="bg-slate-500 w-3/6 px-10 py-2 rounded-2xl text-white shadow-lg">
+        <button className="bg-slate-500 hover:bg-slate-600 w-3/6 px-10 py-2 rounded-2xl text-white shadow-lg">
           Follow
         </button>
         <button
           onClick={() => navigate("/messages/1")}
-          className="bg-slate-800 border w-3/6  border-gray-500 px-10 py-2 rounded-2xl shadow-lg"
+          className="bg-slate-800 hover:bg-slate-900 border w-3/6  border-gray-500 px-10 py-2 rounded-2xl shadow-lg"
         >
           Message
         </button>

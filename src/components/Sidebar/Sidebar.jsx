@@ -1,5 +1,5 @@
 import { AiOutlineMenu } from "react-icons/ai";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useRef, useState } from "react";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import MenuItem from "../common/MenuItem";
@@ -20,9 +20,9 @@ function Sidebar() {
     { title: "Profile", id: 7, direction: "/profile" },
   ];
   const subMenuItems = [
-    { title: "Settings", id: 1, direction: "/settings" },
+    { title: "Settings", id: 1, direction: "/profile/settings" },
     { title: "Swith Account", id: 6, direction: "/create" },
-    { title: "Log Out", id: 7, direction: "/" },
+    { title: "Log Out", id: 7, direction: "/login" },
   ];
   return (
     <>
@@ -65,7 +65,10 @@ function LastMenuItem({ setIsOpenSubMenu }) {
 }
 function SideBarHeader() {
   return (
-    <div className="userInfo hidden  lg:flex cursor-pointer hover:opacity-70 hover:text-gray-400 transition duration-150 ease-in-out">
+    <Link
+      to="/profile"
+      className="userInfo hidden  lg:flex cursor-pointer hover:opacity-70 hover:text-gray-400 transition duration-150 ease-in-out"
+    >
       <span className="sidebarListItem flex md:py-5 md:pl-5 xl:pr-1 font-bold ">
         <div className="flex items-center xl:justify-around lg:justify-start">
           <img
@@ -79,7 +82,7 @@ function SideBarHeader() {
       <span className="sidebarListItemText  whitespace-nowrap items-center hidden lg:flex md:font-medium lg:font-normal text-sm xl:text-lg  xl:font-bold">
         Maryam Ebrahimi
       </span>
-    </div>
+    </Link>
   );
 }
 function Submenu({ menuItems }) {
