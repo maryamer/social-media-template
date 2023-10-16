@@ -66,19 +66,20 @@ function LastMenuItem({ setIsOpenSubMenu }) {
   );
 }
 function SideBarHeader() {
+  // http://localhost:5000/accountUser
   const { isLoading, data: user } = useFetch(
     "http://localhost:5000/accountUser"
   );
   return (
     <Link
-      to={user?.profileImage}
+      to="/profile"
       className="userInfo hidden  lg:flex cursor-pointer hover:opacity-70 hover:text-gray-400 transition duration-150 ease-in-out"
     >
       <span className="sidebarListItem flex md:py-5 md:pl-5 xl:pr-1 font-bold ">
         <div className="flex items-center xl:justify-around lg:justify-start">
           <img
             className="shareProfileImg cursor-pointer object-cover w-10 h-10 rounded-full shadow-2xl shadow-white "
-            src="/assets/person/1.jpeg"
+            src={user.profileImage}
             alt=""
           />
           &nbsp;&nbsp;

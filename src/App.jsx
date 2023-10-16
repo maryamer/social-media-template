@@ -22,8 +22,11 @@ function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
   const [theme, setTheme] = useState("dark");
   const themeHandler = () => {
-    setTheme((prev) => (prev === "dark" ? "" : "dark"));
-    localStorage.setItem("theme", JSON.stringify(theme));
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    localStorage.setItem(
+      "theme",
+      JSON.stringify(theme === "dark" ? "light" : "dark")
+    );
   };
 
   useEffect(() => {

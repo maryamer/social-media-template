@@ -1,8 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { MdOutlineModeEdit } from "react-icons/md";
+import useFetch from "../../hooks/useFetch";
 
 export default function ProfileSettings() {
+  const { isLoading, data: user } = useFetch(
+    "http://localhost:5000/accountUser"
+  );
   const [userDetails, setUserDetails] = useState({
     name: "maryam",
     username: "maryam_er",
@@ -23,7 +27,7 @@ export default function ProfileSettings() {
   return (
     <div className="w-full mx-auto ">
       <div className="px-1 py-2 flex flex-col items-center justify-center">
-        <EditAvatar />
+        <EditAvatar user={user} />
         <div className="dark:bg-slate-900 bg-white overflow-hidden shadow w-full md:w-5/6 rounded-lg ">
           <div className="px-4 py-5 flex items-center justify-center md:justify-start ">
             <h2 className="text-xl leading-6  font-bold text-slate-400">
@@ -37,22 +41,22 @@ export default function ProfileSettings() {
             <div className="divide-y dark:divide-gray-800 divide-slate-400 ">
               <SettingItem
                 title={"name"}
-                value={userDetails.name}
+                value={user.name}
                 onChangeHandler={onChangeHandler}
               />
               <SettingItem
                 title={"email"}
-                value={userDetails.email}
+                value={user.email}
                 onChangeHandler={onChangeHandler}
               />
               <SettingItem
                 title={"phone"}
-                value={userDetails.phone}
+                value={user.phone}
                 onChangeHandler={onChangeHandler}
               />
               <SettingItem
                 title={"country"}
-                value={userDetails.country}
+                value={user.location}
                 onChangeHandler={onChangeHandler}
               />
               <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
@@ -96,16 +100,12 @@ export default function ProfileSettings() {
     </div>
   );
 }
-function EditAvatar() {
+function EditAvatar({ user }) {
   return (
     <div className="flex w-5/6 items-center md:items-start justify-center flex-col gap-1 text-center md:py-5 mt-4">
       <div className="flex  bg-center bg-no-repeat bg-cover w-36 h-36 rounded-full  shadow-lg">
         <div className="relative">
-          <img
-            className=" rounded-full"
-            src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-            alt=""
-          />
+          <img className=" rounded-full" src={user.profileImage} alt="" />
           <span className="bottom-0 right-5 flex items-center cursor-pointer justify-center absolute  w-8 h-8 bg-blue-400  hover:bg-slate-400 rounded-full">
             <MdOutlineModeEdit />
           </span>

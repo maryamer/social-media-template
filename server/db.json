@@ -1536,11 +1536,14 @@
     "name": "Maryam",
   "lastName": "Ebrahimi",
   "username": "maryam._eb_",
+  "email":"maryam@gmail.com",
   "password": "some dummy password",
-  "profileImage":"/profile",
+  "profileImage":"https://www.befunky.com/images/wp/wp-2021-01-linkedin-profile-picture-consider-format.jpg?auto=avif,webp&format=jpg&width=950",
   "location":"New York, NY - Los Angeles, CA",
   "link":"https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  "bio":"This is the way  i live"
+  "bio":"This is the way  i live",
+  "phone":"09938887767",
+  "gender":"female"
 
   }
 }
