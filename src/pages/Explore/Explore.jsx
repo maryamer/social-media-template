@@ -1,8 +1,9 @@
 import { BsChatFill, BsHeartFill } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
-import { Posts } from "../../dummyData";
+import useFetch from "../../hooks/useFetch";
 
 function Explore() {
+  const { isLoading, data: posts } = useFetch("http://localhost:5000/posts");
   const { pathname } = useLocation();
   return (
     <div
@@ -12,8 +13,8 @@ function Explore() {
           : ""
       }w-full dark:bg-slate-800   h-screen flex  gap-0 justify-center flex-wrap  `}
     >
-      {Posts && Posts.map((post) => <SinglePost key={post.id} post={post} />)}
-      {Posts && Posts.map((post) => <SinglePost key={post.id} post={post} />)}
+      {posts && posts.map((post) => <SinglePost key={post.id} post={post} />)}
+      {posts && posts.map((post) => <SinglePost key={post.id} post={post} />)}
     </div>
   );
 }
