@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { MdOutlineModeEdit } from "react-icons/md";
 
 export default function NotificationsSetting() {
   const [userDetails, setUserDetails] = useState({

@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import MenuItem from "../common/MenuItem";
 import Menu from "../common/Menu";
+import useFetch from "../../hooks/useFetch";
 
 function Sidebar({ themeHandler }) {
   const { pathname } = useLocation();
@@ -65,9 +66,12 @@ function LastMenuItem({ setIsOpenSubMenu }) {
   );
 }
 function SideBarHeader() {
+  const { isLoading, data: user } = useFetch(
+    "http://localhost:5000/accountUser"
+  );
   return (
     <Link
-      to="/profile"
+      to={user?.profileImage}
       className="userInfo hidden  lg:flex cursor-pointer hover:opacity-70 hover:text-gray-400 transition duration-150 ease-in-out"
     >
       <span className="sidebarListItem flex md:py-5 md:pl-5 xl:pr-1 font-bold ">
@@ -81,7 +85,7 @@ function SideBarHeader() {
         </div>
       </span>
       <span className="sidebarListItemText  whitespace-nowrap items-center hidden lg:flex md:font-medium lg:font-normal text-sm xl:text-lg  xl:font-bold">
-        Maryam Ebrahimi
+        {user && user.username}
       </span>
     </Link>
   );

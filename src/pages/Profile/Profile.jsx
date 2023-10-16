@@ -3,9 +3,13 @@ import { useState } from "react";
 import { IoMdSettings } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import InnerHeader from "../../components/common/InnerHeader";
+import useFetch from "../../hooks/useFetch";
 import Explore from "../Explore/Explore";
 
 function Profile() {
+  const { isLoading, data: user } = useFetch(
+    "http://localhost:5000/accountUser"
+  );
   const [isSettingOpen, setIsSettingOpen] = useState(false);
   const [item, setItem] = useState({
     id: 2,
@@ -17,7 +21,12 @@ function Profile() {
   return (
     <div className=" w-full md:w-4/6 mx-auto bg-slate-300 dark:bg-slate-900 dark:text-white overflow-y-scroll md:scrollbar-none h-screen">
       <div className="px-3 py-2">
-        <InnerHeader setIsSettingOpen={setIsSettingOpen} item={item} direction>
+        <InnerHeader
+          user={user}
+          setIsSettingOpen={setIsSettingOpen}
+          item={item}
+          direction
+        >
           <Link to="/profile/settings">
             <IoMdSettings
               onClick={() => setIsSettingOpen((prev) => !prev)}
@@ -25,7 +34,7 @@ function Profile() {
             />
           </Link>
         </InnerHeader>
-        <ProfileBody />
+        <ProfileBody user={user} />
       </div>
       <Explore />
     </div>
@@ -34,7 +43,7 @@ function Profile() {
 
 export default Profile;
 
-function ProfileBody() {
+function ProfileBody({ user }) {
   const navigate = useNavigate();
 
   return (
@@ -45,18 +54,20 @@ function ProfileBody() {
           href=""
         >
           <img
-            src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+            src={user.profileImage}
             alt=""
             className="rounded-full object-cover "
           />
         </Link>
-        <h2 className="font-bold">Marina Davinchi</h2>
-        <span className="text-sm text-gray-400">
-          New York, NY - Los Angeles, CA
-        </span>
-        <span className="text-sm text-gray-400">
-          https://www.youtube.com/watch?v=dQw4w9WgXcQ
-        </span>
+        <h2 className="font-bold">
+          {user?.name}&nbsp;
+          {user?.lastName}
+        </h2>
+        <span className="text-sm text-gray-600">{user.bio}</span>
+        <span className="text-sm text-gray-400">{user.location}</span>
+        <Link to={user.link} className="text-sm text-gray-400">
+          {user.link}
+        </Link>
       </div>
 
       <div className="flex justify-center w-full items-center md:p-1 gap-2 my-3text-gray-700">

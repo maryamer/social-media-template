@@ -3,7 +3,12 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import CharaterName from "./CharaterName";
 
-export default function InnerHeader({ item, setIsSettingOpen, children }) {
+export default function InnerHeader({
+  item,
+  setIsSettingOpen,
+  children,
+  user = "",
+}) {
   const navigate = useNavigate();
   return (
     <div
@@ -25,7 +30,7 @@ export default function InnerHeader({ item, setIsSettingOpen, children }) {
           />
         </button>
         &nbsp; &nbsp;
-        <CharaterName item={item} />
+        <CharaterName item={user} />
       </div>
       {children}
     </div>

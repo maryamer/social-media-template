@@ -1,6 +1,6 @@
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { Users } from "../../dummyData";
+import useFetch from "../../hooks/useFetch";
 import Character from "./Character";
 import HeaderTitle from "./HeaderTitle";
 import SearchComponent from "./SearchComponent";
@@ -11,6 +11,7 @@ export default function UsersList({
   title = "",
   locationParameter,
 }) {
+  const { isLoading, data: users } = useFetch("http://localhost:5000/users");
   const navigate = useNavigate();
   return (
     <div className="UsersList  w-full  dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
@@ -30,7 +31,7 @@ export default function UsersList({
       <div className="characters-list flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll scrollbar-none ">
         {title && <HeaderTitle title={title} />}
         <div className="w-full h-full lg:h-[95%] ">
-          {Users.map((item) => (
+          {users.map((item) => (
             <Character
               key={item.id}
               item={item}
@@ -39,7 +40,7 @@ export default function UsersList({
               {children}
             </Character>
           ))}
-          {Users.map((item) => (
+          {users.map((item) => (
             <Character
               key={item.id}
               item={item}

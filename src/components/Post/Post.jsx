@@ -1,10 +1,12 @@
-import { Users } from "../../dummyData";
 import { useState } from "react";
 import { BsHeart, BsSend } from "react-icons/bs";
 import { BsChat } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 
 export default function Post({ post }) {
+  const { isLoading, data: users } = useFetch("http://localhost:5000/users");
+
   const [like, setLike] = useState(post.like);
   const [islLike, setIsLike] = useState(false);
 
@@ -26,12 +28,14 @@ export default function Post({ post }) {
                   <img
                     className="postProfileImg w-8 h-8 rounded-full object-cover"
                     src={
-                      Users.filter((u) => u.id === post.userId)[0]
-                        .profilePicture
+                      users &&
+                      users.filter((u) => u.id === post.userId)[0]
+                        ?.profilePicture
                     }
                   />
                   <span className="postUsername text-sm font-medium mx-2.5 ">
-                    {Users.filter((u) => u.id === post.userId)[0].username}
+                    {users &&
+                      users.filter((u) => u.id === post.userId)[0]?.username}
                   </span>
                   <span className="postDate text-xs">{post.date}</span>
                 </Link>
