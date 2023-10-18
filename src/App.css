@@ -13,3 +13,19 @@
   object-fit: cover;
   object-position: center;
 } */
+
+@keyframes loadingAnimation {
+  0% {
+    background-color: rgb(30 41 59);
+  }
+  50% {
+    background-color: rgb(32, 42, 69);
+  }
+  100% {
+    background-color: rgb(31, 42, 62);
+  }
+}
+
+.loading-page {
+  animation: loadingAnimation 1s infinite;
+}

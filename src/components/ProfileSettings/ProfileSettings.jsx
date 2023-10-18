@@ -1,29 +1,75 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { MdOutlineModeEdit } from "react-icons/md";
 import useFetch from "../../hooks/useFetch";
+import * as Yup from "yup";
+
+import { useFormik } from "formik";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 export default function ProfileSettings() {
   const { isLoading, data: user } = useFetch(
     "http://localhost:5000/accountUser"
   );
-  const [userDetails, setUserDetails] = useState({
-    name: "maryam",
-    username: "maryam_er",
-    email: "maryam@gmail.com",
-    phone: "09954444443",
-    country: "Iran",
-    gender: "female",
+
+  const [formValues, setFormValues] = useState(null);
+  const validationSchema = Yup.object({
+    name: Yup.string("name should be string ")
+      .required("name is required")
+      .min(6, "name at least 6 characters"),
+    email: Yup.string()
+      .required("email is required")
+      .email("invalid email format"),
+    phone: Yup.string()
+      .required()
+      .matches(/^[0-9]{11}$/, "Invalid phone number")
+      .nullable(),
+    password: Yup.string()
+      .required("password is required")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      ),
+    passwordConfirm: Yup.string()
+      .required()
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
+    gender: Yup.string().required("gender is required"),
+    nationality: Yup.string().required("select nationality"),
+    interests: Yup.array().min(1, "at least select one experties").required(),
+    terms: Yup.bool().oneOf([true], "You must accept the terms and conditions"),
   });
+  const onEdit = async (values) => {
+    try {
+      const { data } = axios.post("http://localhost:5000/accountUser", {
+        ...values,
+      });
+      setFormValues(data);
+      toast.success(`user data successfully edited`);
+    } catch (error) {}
+  };
+  const formik = useFormik({
+    initialValues: formValues || user,
+    onSubmit: onEdit,
+    enableReinitialize: true,
+  });
+  useEffect(() => {
+    async function getUserData() {
+      try {
+        const { data } = await axios.get("http://localhost:5000/accountUser");
+        setFormValues(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getUserData();
+  }, []);
+
   const radioOptions = [
     { label: "Male", value: "male" },
     { label: "Female", value: "female" },
   ];
-  const onChangeHandler = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
-    setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
-  };
+
   return (
     <div className="w-full mx-auto ">
       <div className="px-1 py-2 flex flex-col items-center justify-center">
@@ -33,67 +79,30 @@ export default function ProfileSettings() {
             <h2 className="text-xl leading-6  font-bold text-slate-400">
               User Profile
             </h2>
-            {/* <p className="mt-1 max-w-2xl text-sm text-gray-500">
-              This is some information about the user.
-            </p> */}
           </div>
           <div className=" px-4 py-5 sm:p-0">
-            <div className="divide-y dark:divide-gray-800 divide-slate-400 ">
+            <form
+              onSubmit={formik.handleSubmit}
+              className="divide-y dark:divide-gray-800 divide-slate-400 "
+            >
               <SettingItem
-                title={"name"}
-                value={user.name}
-                onChangeHandler={onChangeHandler}
+                label="Name"
+                name="name"
+                formik={formik}
+                onEdit={onEdit}
+                user={user}
               />
-              <SettingItem
-                title={"email"}
-                value={user.email}
-                onChangeHandler={onChangeHandler}
-              />
-              <SettingItem
-                title={"phone"}
-                value={user.phone}
-                onChangeHandler={onChangeHandler}
-              />
-              <SettingItem
-                title={"country"}
-                value={user.location}
-                onChangeHandler={onChangeHandler}
-              />
-              <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-                <div className="text-sm flex font-medium  text-gray-500 ">
-                  <span className="w-[80%] ml-1">Gender</span>
-                  <span className="text-xs text-blue-800 cursor-pointer">
-                    Done
-                  </span>
-                </div>
 
-                <span className="mt-1 text-sm flex items-center text-gray-500 dark:text-gray-200 sm:mt-0 sm:col-span-2">
-                  <div className="formControl flex">
-                    {radioOptions.map((item) => (
-                      <div key={item.value}>
-                        {" "}
-                        <input
-                          type="radio"
-                          id={item.value}
-                          name="gender"
-                          value={item.value}
-                          onChange={() =>
-                            setUserDetails({
-                              ...userDetails,
-                              gender: item.value,
-                            })
-                          }
-                          checked={userDetails.gender === item.value}
-                        />
-                        &nbsp;
-                        <label htmlFor={item.value}>{item.label}</label>
-                        &nbsp;
-                      </div>
-                    ))}
-                  </div>
-                </span>
-              </div>
-            </div>
+              <RadioInput
+                radioOptions={radioOptions}
+                formik={formik}
+                name="gender"
+                user={user}
+              />
+              <button className="text-xs text-blue-800 cursor-pointer">
+                Done
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -115,25 +124,80 @@ function EditAvatar({ user }) {
   );
 }
 
-function SettingItem({ title, value, onChangeHandler }) {
+function SettingItem({ name, formik, type = "text", onEdit, user }) {
   return (
     <>
-      <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-        <div className="text-sm flex font-medium items-center  text-gray-500">
-          <input
-            id={title}
-            name={title}
-            className=" dark:bg-slate-900 outline-none p-1 rounded-lg w-[80%]"
-            onChange={onChangeHandler}
-            value={value}
-          />{" "}
-          <span className="text-xs text-blue-800 cursor-pointer">Done</span>
+      <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3 text-gray-500">
+        <div className="flex">
+          <label htmlFor="">{name}</label>
         </div>
-        <span className="mt-1 text-sm flex items-center text-gray-500 dark:text-gray-200 sm:mt-0 sm:col-span-2">
-          &nbsp;{value}
-        </span>
+        <div className="text-sm flex font-medium items-center  ">
+          <input
+            id={name}
+            type={type}
+            name={name}
+            className=" dark:bg-slate-950 bg-slate-300 dark:text-white text-gray-800 outline-none p-1 rounded-lg w-[80%]"
+            {...formik.getFieldProps({ name })}
+          />{" "}
+        </div>
+        <div className=" text-sm flex items-center dark:text-gray-200 sm:mt-0 ">
+          <button className="text-xs text-blue-800 hover:text-blue-500 cursor-pointer">
+            Done
+          </button>
+          {/* &nbsp;{user.name} */}
+        </div>
       </div>
     </>
+  );
+}
+
+function RadioInput({ radioOptions, formik, name, user }) {
+  return (
+    <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+      <div className="text-sm flex font-medium  text-gray-500 ">
+        <span className="w-[80%] ml-1">Gender</span>
+      </div>
+      <span className="mt-1 text-sm flex items-center text-gray-500 dark:text-gray-200 sm:mt-0 ">
+        <div className="formControl flex">
+          {radioOptions.map((item) => (
+            <div key={item.value}>
+              {" "}
+              <input
+                type="radio"
+                id={item.value}
+                name={name}
+                value={item.value}
+                onChange={formik.handleChange}
+                // {...formik.getFieldProps({ name })}
+                checked={formik.values[name] === item.value}
+              />
+              &nbsp;
+              <label htmlFor={item.value}>{item.label}</label>
+              &nbsp;&nbsp;&nbsp;
+            </div>
+          ))}
+        </div>
+      </span>
+      <span>
+        <button className="text-xs text-blue-800 cursor-pointer">Done</button>
+      </span>
+    </div>
+  );
+}
+function Input({ label, name, formik, type = "text" }) {
+  return (
+    <div className="formControl">
+      <label>{label}</label>
+      <input
+        id={name}
+        type={type}
+        name={name}
+        {...formik.getFieldProps({ name })}
+      />
+      {formik.errors[name] && formik.touched[name] && (
+        <div className="validationError">{formik.errors[name]}</div>
+      )}
+    </div>
   );
 }
 

@@ -17,10 +17,13 @@ import NotificationsSetting from "./components/NotificationsSetting/Notification
 import PrivacySettings from "./components/PrivacySettings/PrivacySettings";
 import Login from "./pages/Login/Login";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState(
+    JSON.parse(localStorage.getItem("theme")) || "dark"
+  );
   const themeHandler = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
     localStorage.setItem(
@@ -29,18 +32,12 @@ function App() {
     );
   };
 
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("theme") === "dark")) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  }, []);
   return (
     <div className={`${theme}  h-screen w-screen`}>
       <div
         className={`  flex justify-start flex-col-reverse md:flex-row h-screen  dark:bg-slate-950 w-screen`}
       >
+        <Toaster />
         <Sidebar themeHandler={themeHandler} />
         <Routes>
           <Route path="/" element={<Home />} />

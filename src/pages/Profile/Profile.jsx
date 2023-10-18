@@ -34,7 +34,7 @@ function Profile() {
             />
           </Link>
         </InnerHeader>
-        <ProfileBody user={user} />
+        <ProfileBody user={user} isLoading={isLoading} />
       </div>
       <Explore />
     </div>
@@ -43,99 +43,113 @@ function Profile() {
 
 export default Profile;
 
-function ProfileBody({ user }) {
+function ProfileBody({ user, isLoading }) {
   const navigate = useNavigate();
 
   return (
     <>
       <div className="flex flex-col gap-1 text-center md:p-5 mt-4">
-        <Link
-          className="block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full border border-gray-400 shadow-lg"
-          href=""
-        >
-          <img
-            src={user.profileImage}
-            alt=""
-            className="rounded-full object-cover "
-          />
-        </Link>
-        <h2 className="font-bold">
-          {user?.name}&nbsp;
-          {user?.lastName}
-        </h2>
-        <span className="text-sm text-gray-600">{user.bio}</span>
-        <span className="text-sm text-gray-400">{user.location}</span>
-        <Link to={user.link} className="text-sm text-gray-400">
-          {user.link}
-        </Link>
-      </div>
-
-      <div className="flex justify-center w-full items-center md:p-1 gap-2 my-3text-gray-700">
-        <div className="font-semibold text-center mx-4 ">
-          <p className="dark:text-white">102</p>
-          <span className="text-gray-400">Posts</span>
-        </div>
-        <Link
-          to="followers"
-          className="font-semibold text-center mx-4 cursor-pointer"
-        >
-          <p className="dark:text-white">102</p>
-          <span className="text-gray-400">Followers</span>
-        </Link>
-        <Link
-          to="followings"
-          className="font-semibold text-center mx-4 cursor-pointer"
-        >
-          <p className="dark:text-white">102</p>
-          <span className="text-gray-400">Folowing</span>
-        </Link>
-      </div>
-
-      <div className="flex justify-around gap-2 w-full my-5 md:p-5">
-        <button className="bg-slate-500 hover:bg-slate-600 w-3/6 px-10 py-2 rounded-2xl text-white shadow-lg">
-          Follow
-        </button>
-        <button
-          onClick={() => navigate("/messages/1")}
-          className="bg-slate-800 hover:bg-slate-900 border w-3/6  border-gray-500 px-10 py-2 text-white rounded-2xl shadow-lg"
-        >
-          Message
-        </button>
-      </div>
-
-      <div className="flex justify-between md:p-5 items-center">
-        <button className="w-full py-2 border-b-2 border-blue-400">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="mx-auto h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-            />
-          </svg>
-        </button>
-        <button className="w-full py-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="mx-auto h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-            />
-          </svg>
-        </button>
+        {isLoading ? (
+          <>
+            <Link
+              className=" loading-page block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full bg-slate-800 shadow-lg"
+              href=""
+            ></Link>
+            <h2 className="loading-page  self-center rounded-lg w-36 h-6"></h2>
+            <span className="loading-page self-center rounded-lg w-28 h-6"></span>
+            <span className="loading-page self-center rounded-lg w-48 h-6"></span>
+            <span className="loading-page self-center rounded-lg w-72 h-6"></span>
+            <span className="loading-page self-center rounded-lg  h-16 flex justify-center w-1/2 items-center md:p-1 gap-2 my-3"></span>
+            <span className="loading-page self-center rounded-lg w-full  h-16 flex justify-around gap-2  my-5 md:p-5"></span>
+          </>
+        ) : (
+          <>
+            <Link
+              className="block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full border border-gray-400 shadow-lg"
+              href=""
+            >
+              <img
+                src={user.profileImage}
+                alt=""
+                className="rounded-full object-cover "
+              />
+            </Link>
+            <h2 className="font-bold">
+              {user?.name}&nbsp;
+              {user?.lastName}
+            </h2>
+            <span className="text-sm text-gray-600">{user.bio}</span>
+            <span className="text-sm text-gray-400">{user.location}</span>
+            <Link to={user.link} className="text-sm text-gray-400">
+              {user.link}
+            </Link>
+            <div className="flex justify-center w-full items-center md:p-1 gap-2 my-3 text-gray-700">
+              <div className="font-semibold text-center mx-4 ">
+                <p className="dark:text-white">102</p>
+                <span className="text-gray-400">Posts</span>
+              </div>
+              <Link
+                to="followers"
+                className="font-semibold text-center mx-4 cursor-pointer"
+              >
+                <p className="dark:text-white">102</p>
+                <span className="text-gray-400">Followers</span>
+              </Link>
+              <Link
+                to="followings"
+                className="font-semibold text-center mx-4 cursor-pointer"
+              >
+                <p className="dark:text-white">102</p>
+                <span className="text-gray-400">Folowing</span>
+              </Link>
+            </div>
+            <div className="flex justify-around gap-2 w-full my-5 md:p-5">
+              <button className="bg-slate-500 hover:bg-slate-600 w-3/6 px-10 py-2 rounded-2xl text-white shadow-lg">
+                Follow
+              </button>
+              <button
+                onClick={() => navigate("/messages/1")}
+                className="bg-slate-800 hover:bg-slate-900 border w-3/6  border-gray-500 px-10 py-2 text-white rounded-2xl shadow-lg"
+              >
+                Message
+              </button>
+            </div>
+            <div className="flex justify-between md:p-5 items-center">
+              <button className="w-full py-2 border-b-2 border-blue-400">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mx-auto h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                  />
+                </svg>
+              </button>
+              <button className="w-full py-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mx-auto h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </>
   );
