@@ -2,8 +2,8 @@ import { BsChatFill, BsHeartFill } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 
-function Explore() {
-  const { isLoading, data: posts } = useFetch("http://localhost:5000/posts");
+function Explore({ isLoading }) {
+  const { data: posts } = useFetch("http://localhost:5000/posts");
   const { pathname } = useLocation();
   return (
     <div
@@ -31,7 +31,7 @@ export function SinglePost({ post, isLoading }) {
   return (
     <>
       {isLoading ? (
-        <div className=" loading-page post lg:max-w-[24%]  md:max-w-[33%] sm:min-w-[130px] w-1/2 aspect-square  xl:m-1 rounded-xl  ">
+        <div className=" dark:bg-slate-700 bg-slate-200  animate-pulse post lg:max-w-[24%]  md:max-w-[33%] sm:min-w-[130px] w-1/2 aspect-square  xl:m-1 rounded-xl  ">
           {/* <div className="postCenter w-full loading-page"></div> */}
         </div>
       ) : (

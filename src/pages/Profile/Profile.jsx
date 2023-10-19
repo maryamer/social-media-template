@@ -36,7 +36,7 @@ function Profile() {
         </InnerHeader>
         <ProfileBody user={user} isLoading={isLoading} />
       </div>
-      <Explore />
+      <Explore isLoading={isLoading} />
     </div>
   );
 }
@@ -52,15 +52,15 @@ function ProfileBody({ user, isLoading }) {
         {isLoading ? (
           <>
             <Link
-              className=" loading-page block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full bg-slate-800 shadow-lg"
+              className=" dark:bg-slate-700 bg-slate-200  animate-pulse block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full bg-slate-800 "
               href=""
             ></Link>
-            <h2 className="loading-page  self-center rounded-lg w-36 h-6"></h2>
-            <span className="loading-page self-center rounded-lg w-28 h-6"></span>
-            <span className="loading-page self-center rounded-lg w-48 h-6"></span>
-            <span className="loading-page self-center rounded-lg w-72 h-6"></span>
-            <span className="loading-page self-center rounded-lg  h-16 flex justify-center w-1/2 items-center md:p-1 gap-2 my-3"></span>
-            <span className="loading-page self-center rounded-lg w-full  h-16 flex justify-around gap-2  my-5 md:p-5"></span>
+            <h2 className="dark:bg-slate-700   bg-slate-200 animate-pulse self-center rounded-lg w-36 h-4"></h2>
+            <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-28 h-4"></span>
+            <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-48 h-4"></span>
+            <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-72 h-4"></span>
+            <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg  h-10 flex justify-center w-1/2 items-center md:p-1 gap-2 my-3"></span>
+            <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-full  h-14 flex justify-around gap-2  my-5 md:p-5"></span>
           </>
         ) : (
           <>

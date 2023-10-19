@@ -92,6 +92,41 @@ export default function ProfileSettings() {
                 onEdit={onEdit}
                 user={user}
               />
+              <SettingItem
+                label="LastName"
+                name="lastName"
+                formik={formik}
+                onEdit={onEdit}
+                user={user}
+              />
+              <SettingItem
+                label="Email"
+                name="email"
+                formik={formik}
+                onEdit={onEdit}
+                user={user}
+              />
+              <SettingItem
+                label="Bio"
+                name="bio"
+                formik={formik}
+                onEdit={onEdit}
+                user={user}
+              />
+              <SettingItem
+                label="Link"
+                name="link"
+                formik={formik}
+                onEdit={onEdit}
+                user={user}
+              />
+              <SettingItem
+                label="Phone"
+                name="phone"
+                formik={formik}
+                onEdit={onEdit}
+                user={user}
+              />
 
               <RadioInput
                 radioOptions={radioOptions}
@@ -99,9 +134,6 @@ export default function ProfileSettings() {
                 name="gender"
                 user={user}
               />
-              <button className="text-xs text-blue-800 cursor-pointer">
-                Done
-              </button>
             </form>
           </div>
         </div>
@@ -124,12 +156,12 @@ function EditAvatar({ user }) {
   );
 }
 
-function SettingItem({ name, formik, type = "text", onEdit, user }) {
+function SettingItem({ label, name, formik, type = "text", onEdit, user }) {
   return (
     <>
       <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3 text-gray-500">
         <div className="flex">
-          <label htmlFor="">{name}</label>
+          <label htmlFor="">{label}</label>
         </div>
         <div className="text-sm flex font-medium items-center  ">
           <input
