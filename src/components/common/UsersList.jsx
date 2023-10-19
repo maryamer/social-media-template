@@ -11,7 +11,12 @@ export default function UsersList({
   title = "",
   locationParameter,
 }) {
-  const { isLoading, data: users } = useFetch("http://localhost:5000/users");
+  const {
+    isLoading,
+    data: { results: users },
+  } = useFetch("https://rickandmortyapi.com/api/character");
+  // ("http://localhost:5000/users");
+  console.log(users);
   const navigate = useNavigate();
   return (
     <div className="UsersList  w-full  dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
@@ -31,24 +36,20 @@ export default function UsersList({
       <div className="characters-list flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll scrollbar-none ">
         {title && <HeaderTitle title={title} />}
         <div className="w-full h-full lg:h-[95%] ">
-          {users.map((item) => (
-            <Character
-              key={item.id}
-              item={item}
-              locationParameter={locationParameter}
-            >
-              {children}
-            </Character>
-          ))}
-          {users.map((item) => (
-            <Character
-              key={item.id}
-              item={item}
-              locationParameter={locationParameter}
-            >
-              {children}
-            </Character>
-          ))}
+          {users ? (
+            users.map((item) => (
+              <Character
+                key={item.id}
+                item={item}
+                locationParameter={locationParameter}
+                isLoading={isLoading}
+              >
+                {children}
+              </Character>
+            ))
+          ) : (
+            <Character isLoading={false} />
+          )}
         </div>
       </div>
     </div>

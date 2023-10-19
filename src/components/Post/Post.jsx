@@ -29,7 +29,7 @@ export default function Post({ post }) {
                     className="postProfileImg w-8 h-8 rounded-full object-cover"
                     src={
                       users &&
-                      users.filter((u) => u.id === post.userId)[0]
+                      users.filter((u) => u.id == post.userId)[0]
                         ?.profilePicture
                     }
                   />

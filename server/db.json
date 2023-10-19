@@ -3,7 +3,7 @@
     {
       "id": 1,
       "profilePicture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-      "username": "Safak Kocaoglu",
+      "name": "Safak Kocaoglu",
       "status": "boring boring boring.."
     },
     {
@@ -1434,7 +1434,7 @@
   ],
   "posts": [
     {
-      " id": 1,
+      "id": 1,
       " desc": "Love For All, Hatred For None.",
       "photo": "assets/post/1.jpeg",
       "date": "5 mins ago",
@@ -1443,7 +1443,7 @@
       "comment": 9
     },
     {
-      " id": 2,
+      "id": 2,
       "photo": "assets/post/2.jpeg",
       "date": "15 mins ago",
       "userId": 2,
@@ -1451,7 +1451,7 @@
       "comment": 1
     },
     {
-      " id": 3,
+      "id": 3,
       " desc": "Every moment is a fresh beginning.",
       "photo": "assets/post/3.jpeg",
       "date": "1 hour ago",
@@ -1460,7 +1460,7 @@
       "comment": 2
     },
     {
-      " id": 4,
+      "id": 4,
       "photo": "assets/post/4.jpeg",
       "date": "4 hours ago",
       "userId": 4,
@@ -1468,7 +1468,7 @@
       "comment": 3
     },
     {
-      " id": 5,
+      "id": 5,
       "photo": "assets/post/5.jpeg",
       "date": "5 hours ago",
       "userId": 5,
@@ -1476,7 +1476,7 @@
       "comment": 5
     },
     {
-      " id": 6,
+      "id": 6,
       "photo": "assets/post/6.jpeg",
       "date": "1 day ago",
       "userId": 6,
@@ -1484,7 +1484,7 @@
       "comment": 6
     },
     {
-      " id": 7,
+      "id": 7,
       " desc": "Never regret anything that made you smile.",
       "photo": "assets/post/7.jpeg",
       "date": "2 days ago",
@@ -1493,7 +1493,7 @@
       "comment": 3
     },
     {
-      " id": 8,
+      "id": 8,
       "photo": "assets/post/8.jpeg",
       "date": "3 days ago",
       "userId": 8,
@@ -1501,7 +1501,7 @@
       "comment": 1
     },
     {
-      " id": 9,
+      "id": 9,
       " desc": "Change the world by being yourself.",
       "photo": "assets/post/9.jpeg",
       "date": "5 days ago",
@@ -1519,11 +1519,12 @@
     }
   ],
   "accountUser": {
-    "name": "Maryam",
+    "name": "Marya",
     "lastName": "Ebrahimi",
+    "newPassword": "",
     "username": "maryam._eb_",
     "email": "maryam@gmail.com",
-    "password": "some dummy password",
+    "password": "@Maryam12",
     "profileImage": "https://www.befunky.com/images/wp/wp-2021-01-linkedin-profile-picture-consider-format.jpg?auto=avif,webp&format=jpg&width=950",
     "location": "New York, NY - Los Angeles, CA",
     "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",

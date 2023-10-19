@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { MdOutlineModeEdit } from "react-icons/md";
 import useFetch from "../../hooks/useFetch";
 import * as Yup from "yup";
-
 import { useFormik } from "formik";
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -12,7 +10,6 @@ export default function ProfileSettings() {
   const { isLoading, data: user } = useFetch(
     "http://localhost:5000/accountUser"
   );
-
   const [formValues, setFormValues] = useState(null);
   const validationSchema = Yup.object({
     name: Yup.string("name should be string ")
@@ -53,17 +50,6 @@ export default function ProfileSettings() {
     onSubmit: onEdit,
     enableReinitialize: true,
   });
-  useEffect(() => {
-    async function getUserData() {
-      try {
-        const { data } = await axios.get("http://localhost:5000/accountUser");
-        setFormValues(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getUserData();
-  }, []);
 
   const radioOptions = [
     { label: "Male", value: "male" },
