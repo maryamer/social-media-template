@@ -152,11 +152,11 @@ function SettingItem({ label, name, formik, type = "text", user }) {
             id={name}
             type={type}
             name={name}
-            className=" w-full md:w-auto dark:bg-slate-950 bg-slate-300 dark:text-white text-gray-800 outline-none p-2 rounded-lg w-[80%]"
+            className=" w-full  dark:bg-slate-950 bg-slate-300 dark:text-white text-gray-800 outline-none p-2 rounded-lg w-[80%]"
             {...formik.getFieldProps({ name })}
           />{" "}
           {formik.errors[name] && formik.touched[name] && (
-            <div className="validationError ml-1 self-start md:self-center text-sm text-red-500">
+            <div className="validationError ml-1 self-start text-sm text-red-500">
               {formik.errors[name]}
             </div>
           )}
