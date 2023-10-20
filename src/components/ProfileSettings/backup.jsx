@@ -6,33 +6,42 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useEffect } from "react";
-import { useRef } from "react";
 
 export default function ProfileSettings() {
   const { isLoading, data: user } = useFetch(
     "http://localhost:5000/accountUser"
   );
-  const [formValues, setFormValues] = useState(null);
-  const [prevValues, setPrevValues] = useState(null);
+
+  const [formValues, setFormValues] = useState({});
+  useEffect(() => {
+    setFormValues(user);
+  }, []);
   const validationSchema = Yup.object({
     name: Yup.string("name should be string ")
       .required("name is required")
       .min(6, "name at least 6 characters"),
+    lastName: Yup.string("name should be string ")
+      .required("name is required")
+      .min(6, "name at least 6 characters"),
+    bio: Yup.string("name should be string "),
+    link: Yup.string("name should be string "),
+
     email: Yup.string()
       .required("email is required")
       .email("invalid email format"),
-    phone: Yup.string()
-      .required()
-      .matches(/^[0-9]{11}$/, "Invalid phone number")
-      .nullable(),
-    gender: Yup.string().required("gender is required"),
-    location: Yup.string().required("select nationality"),
   });
-  useEffect(() => {
-    setPrevValues(user);
-  }, [user]);
 
   const onEdit = async (values) => {
+    if (
+      user.name === values.name &&
+      user.gender === values.gender &&
+      user.link === values.link &&
+      user.bio === values.bio &&
+      user.lastName === values.lastName &&
+      user.email === values.email
+    )
+      return console.log("fuck u");
+
     try {
       const { data } = axios.post("http://localhost:5000/accountUser", {
         ...values,
@@ -42,10 +51,10 @@ export default function ProfileSettings() {
     } catch (error) {}
   };
   const formik = useFormik({
-    initialValues: formValues || user,
+    initialValues: formValues,
     onSubmit: onEdit,
     validationSchema,
-    validateOnMount: true,
+    validateOnMount: false,
     enableReinitialize: true,
   });
 
@@ -130,7 +139,7 @@ function EditAvatar({ user }) {
     <div className="flex w-5/6 items-center md:items-start justify-center flex-col gap-1 text-center md:py-5 mt-4">
       <div className="flex  bg-center bg-no-repeat bg-cover w-36 h-36 rounded-full  shadow-lg">
         <div className="relative">
-          <img className=" rounded-full" src={user.image} alt="" />
+          <img className=" rounded-full" src={user.profileImage} alt="" />
           <span className="bottom-0 right-5 flex items-center cursor-pointer justify-center absolute  w-8 h-8 bg-blue-400  hover:bg-slate-400 rounded-full">
             <MdOutlineModeEdit />
           </span>
@@ -140,8 +149,7 @@ function EditAvatar({ user }) {
   );
 }
 
-function SettingItem({ label, name, formik, type = "text", user }) {
-  const inputRef = useRef(null);
+function SettingItem({ label, name, formik, type = "text", onEdit, user }) {
   return (
     <>
       <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3 text-gray-500">
@@ -150,28 +158,21 @@ function SettingItem({ label, name, formik, type = "text", user }) {
         </div>
         <div className="text-sm flex font-medium items-center  ">
           <input
-            ref={inputRef}
             id={name}
             type={type}
             name={name}
+            placeholder={user[name]}
             className=" dark:bg-slate-950 bg-slate-300 dark:text-white text-gray-800 outline-none p-1 rounded-lg w-[80%]"
             {...formik.getFieldProps({ name })}
           />{" "}
-          {formik.errors[name] && formik.touched[name] && (
-            <div className="validationError text-red-500">
-              {formik.errors[name]}
-            </div>
-          )}
         </div>
         <div className=" text-sm flex items-center dark:text-gray-200 sm:mt-0 ">
           <button
-            // onMouseDown={() => console.log(inputRef)}
-            disabled={formik.values[name] === user[name]}
+            type="submit"
             className="text-xs text-blue-800 hover:text-blue-500 cursor-pointer"
           >
             Done
           </button>
-          {/* &nbsp;{user.name} */}
         </div>
       </div>
     </>
@@ -201,18 +202,99 @@ function RadioInput({ radioOptions, formik, name, user }) {
               &nbsp;
               <label htmlFor={item.value}>{item.label}</label>
               &nbsp;&nbsp;&nbsp;
-              {formik.errors[name] && formik.touched[name] && (
-                <div className="validationError text-red-500">
-                  {formik.errors[name]}
-                </div>
-              )}
             </div>
           ))}
         </div>
       </span>
       <span>
-        <button className="text-xs text-blue-800 cursor-pointer">Done</button>
+        <button type="submit" className="text-xs text-blue-800 cursor-pointer">
+          Done
+        </button>
       </span>
     </div>
   );
+}
+function Input({ label, name, formik, type = "text" }) {
+  return (
+    <div className="formControl">
+      <label>{label}</label>
+      <input
+        id={name}
+        type={type}
+        name={name}
+        {...formik.getFieldProps({ name })}
+      />
+      {formik.errors[name] && formik.touched[name] && (
+        <div className="validationError">{formik.errors[name]}</div>
+      )}
+    </div>
+  );
+}
+
+{
+  /* <div className="grid grid-cols-3 gap-2 my-3">
+          <div className="postCenter w-full ">
+            <img
+              alt=""
+              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+            />
+          </div>
+          <div className="postCenter w-full ">
+            <img
+              alt=""
+              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+            />
+          </div>
+          <div className="postCenter w-full ">
+            <img
+              alt=""
+              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+            />
+          </div>
+          <div className="postCenter w-full ">
+            <img
+              alt=""
+              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+            />
+          </div>
+          <div className="postCenter w-full ">
+            <img
+              alt=""
+              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+            />
+          </div>
+          <div className="postCenter w-full ">
+            <img
+              alt=""
+              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+            />
+          </div>
+          <div className="postCenter w-full ">
+            <img
+              alt=""
+              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+            />
+          </div>
+          <div className="postCenter w-full ">
+            <img
+              alt=""
+              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+            />
+          </div>
+          <div className="postCenter w-full ">
+            <img
+              alt=""
+              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+            />
+          </div>
+        </div> */
 }

@@ -1,5 +1,7 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { IoMdSettings } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import InnerHeader from "../../components/common/InnerHeader";
@@ -10,33 +12,47 @@ function Profile() {
   const { isLoading, data: user } = useFetch(
     "http://localhost:5000/accountUser"
   );
+
   const [isSettingOpen, setIsSettingOpen] = useState(false);
-  const [item, setItem] = useState({
-    id: 2,
-    profilePicture:
-      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-    username: "Janell Shrum",
-    status: "how's the wheater out there?",
-  });
+  const [item, setItem] = useState({});
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data } = await axios.get(`http://localhost:5000/accountUser`);
+        setItem(data);
+      } catch (err) {
+        setItem([]);
+        toast.error(err?.message);
+      } finally {
+      }
+    }
+
+    fetchData();
+  }, []);
   return (
     <div className=" w-full md:w-4/6 mx-auto bg-slate-300 dark:bg-slate-900 dark:text-white overflow-y-scroll md:scrollbar-none h-screen">
-      <div className="px-3 py-2">
-        <InnerHeader
-          user={user}
-          setIsSettingOpen={setIsSettingOpen}
-          item={item}
-          direction
-        >
-          <Link to="/profile/settings">
-            <IoMdSettings
-              onClick={() => setIsSettingOpen((prev) => !prev)}
-              className="hover:text-slate-600 hover:cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-10 xl:h-10 w-8 h-8   text-slate-400"
-            />
-          </Link>
-        </InnerHeader>
-        <ProfileBody user={user} isLoading={isLoading} />
-      </div>
-      <Explore isLoading={isLoading} />
+      {user ? (
+        <>
+          <div className="px-3 py-2">
+            <InnerHeader
+              user={user}
+              setIsSettingOpen={setIsSettingOpen}
+              direction
+            >
+              <Link to="/profile/settings">
+                <IoMdSettings
+                  onClick={() => setIsSettingOpen((prev) => !prev)}
+                  className="hover:text-slate-600 hover:cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-10 xl:h-10 w-8 h-8   text-slate-400"
+                />
+              </Link>
+            </InnerHeader>
+            <ProfileBody user={user && user} isLoading={isLoading} />
+          </div>
+          <Explore isLoading={isLoading} />
+        </>
+      ) : (
+        <div>loading</div>
+      )}
     </div>
   );
 }
@@ -69,7 +85,7 @@ function ProfileBody({ user, isLoading }) {
               href=""
             >
               <img
-                src={user.profileImage}
+                src={user.image}
                 alt=""
                 className="rounded-full object-cover "
               />

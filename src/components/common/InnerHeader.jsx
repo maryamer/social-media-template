@@ -3,12 +3,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import CharaterName from "./CharaterName";
 
-export default function InnerHeader({
-  item,
-  setIsSettingOpen,
-  children,
-  user = "",
-}) {
+export default function InnerHeader({ setIsSettingOpen, children, user = "" }) {
   const navigate = useNavigate();
   return (
     <div

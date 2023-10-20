@@ -12,7 +12,7 @@ function Rightbar() {
   ("http://localhost:5000/users");
   return (
     <div className="rightbar bg-slate-300 dark:bg-slate-900 dark:text-white md:w-2/6 hidden lg:flex flex-col h-screen justify-center items-center min-w-fit">
-      <div className="characters-list flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll ">
+      <div className="characters-list flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll scrollbar-none ">
         <div className=" flex  w-[80%] relative top-0 h-20">
           <HeaderTitle title="Suggesting" />
         </div>

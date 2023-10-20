@@ -21,8 +21,8 @@ export default function Character({
       >
         <div className="flex items-center  lg:justify-start justify-center pl-2 w-4/5 overflow-hidden ">
           <img
-            src={item.image}
-            alt={item.name}
+            src={item?.image}
+            alt={item?.name}
             className="shareProfileImg cursor-pointer object-cover flex items-center ml-1.5 shrink-0 grow-0 xl:w-20 xl:h-20  w-14 h-14 rounded-full"
           />
           &nbsp; &nbsp;
