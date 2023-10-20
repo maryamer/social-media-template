@@ -60,11 +60,9 @@ export default function ProfileSettings() {
         <EditAvatar user={user} />
         <div className="dark:bg-slate-900 bg-white overflow-hidden shadow w-full md:w-5/6 rounded-lg ">
           <div className="px-4 py-5 flex items-center justify-center md:justify-start ">
-            <h2 className="text-xl leading-6  font-bold text-slate-400">
-              User Profile
-            </h2>
+            <h2 className="text-xl  font-bold text-slate-400">User Profile</h2>
           </div>
-          <div className=" px-4 py-5 sm:p-0">
+          <div className=" px-4 md:py-5 sm:p-0">
             <form
               onSubmit={formik.handleSubmit}
               className="divide-y dark:divide-gray-800 divide-slate-400 "
@@ -127,7 +125,7 @@ export default function ProfileSettings() {
 }
 function EditAvatar({ user }) {
   return (
-    <div className="flex w-5/6 items-center md:items-start justify-center flex-col gap-1 text-center md:py-5 mt-4">
+    <div className="flex w-5/6 items-center md:items-start justify-center flex-col gap-1 text-center md:py-5 my-4">
       <div className="flex  bg-center bg-no-repeat bg-cover w-36 h-36 rounded-full  shadow-lg">
         <div className="relative">
           <img className=" rounded-full" src={user.image} alt="" />
@@ -144,34 +142,33 @@ function SettingItem({ label, name, formik, type = "text", user }) {
   const inputRef = useRef(null);
   return (
     <>
-      <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3 text-gray-500">
-        <div className="flex">
+      <div className="pb-1  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3 text-gray-500">
+        <div className="flex py-2">
           <label htmlFor="">{label}</label>
         </div>
-        <div className="text-sm flex font-medium items-center  ">
+        <div className="text-sm flex flex-col justify-start font-medium items-center  pb-1  ">
           <input
             ref={inputRef}
             id={name}
             type={type}
             name={name}
-            className=" dark:bg-slate-950 bg-slate-300 dark:text-white text-gray-800 outline-none p-1 rounded-lg w-[80%]"
+            className=" w-full md:w-auto dark:bg-slate-950 bg-slate-300 dark:text-white text-gray-800 outline-none p-2 rounded-lg w-[80%]"
             {...formik.getFieldProps({ name })}
           />{" "}
           {formik.errors[name] && formik.touched[name] && (
-            <div className="validationError text-red-500">
+            <div className="validationError ml-1 self-start md:self-center text-sm text-red-500">
               {formik.errors[name]}
             </div>
           )}
         </div>
-        <div className=" text-sm flex items-center dark:text-gray-200 sm:mt-0 ">
+        <div className=" p-1  flex  dark:text-gray-200 sm:mt-0 ">
           <button
             // onMouseDown={() => console.log(inputRef)}
             disabled={formik.values[name] === user[name]}
-            className="text-xs text-blue-800 hover:text-blue-500 cursor-pointer"
+            className="md:font-semibold flex font-medium text-blue-800 hover:text-blue-500 cursor-pointer lg:mr-12"
           >
             Done
           </button>
-          {/* &nbsp;{user.name} */}
         </div>
       </div>
     </>
@@ -181,10 +178,10 @@ function SettingItem({ label, name, formik, type = "text", user }) {
 function RadioInput({ radioOptions, formik, name, user }) {
   return (
     <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-      <div className="text-sm flex font-medium  text-gray-500 ">
+      <div className="text-sm flex font-medium  text-gray-500 pb-1 ">
         <span className="w-[80%] ml-1">Gender</span>
       </div>
-      <span className="mt-1 text-sm flex items-center text-gray-500 dark:text-gray-200 sm:mt-0 ">
+      <span className="mt-1 text-sm flex items-center text-gray-500 dark:text-gray-200 sm:mt-0 pb-1 ">
         <div className="formControl flex">
           {radioOptions.map((item) => (
             <div key={item.value}>
@@ -200,9 +197,9 @@ function RadioInput({ radioOptions, formik, name, user }) {
               />
               &nbsp;
               <label htmlFor={item.value}>{item.label}</label>
-              &nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
               {formik.errors[name] && formik.touched[name] && (
-                <div className="validationError text-red-500">
+                <div className="validationError ml-1 self-start md:self-center text-sm text-red-500">
                   {formik.errors[name]}
                 </div>
               )}
@@ -211,7 +208,10 @@ function RadioInput({ radioOptions, formik, name, user }) {
         </div>
       </span>
       <span>
-        <button className="text-xs text-blue-800 cursor-pointer">Done</button>
+        <button className="font-medium md:font-semibold text-blue-800 cursor-pointer p-1 lg:mr-12">
+          Done
+        </button>
+        &nbsp;
       </span>
     </div>
   );
