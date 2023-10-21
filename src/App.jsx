@@ -15,8 +15,8 @@ import Settings from "./pages/Settings/Settings";
 import NotificationsSetting from "./components/NotificationsSetting/NotificationsSetting";
 import PrivacySettings from "./components/PrivacySettings/PrivacySettings";
 import Login from "./pages/Login/Login";
-
-import AppLayout from "./pages/layout/AppLayout";
+import Register from "./pages/Register/Register";
+import AppLayout from "./layout/AppLayout";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
@@ -79,7 +79,7 @@ function App() {
           </Route>
         </Route>
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

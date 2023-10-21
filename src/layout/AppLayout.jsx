@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../../components/Sidebar/Sidebar";
+import Sidebar from "../components/Sidebar/Sidebar";
 
 export default function AppLayout({ themeHandler }) {
   //   const [isSettingOpen, setIsSettingOpen] = useState(false);

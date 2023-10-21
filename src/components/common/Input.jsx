@@ -8,7 +8,7 @@ export default function Input({
   placeholder,
 }) {
   return (
-    <div className="formControl">
+    <div className="formControl w-full">
       <label
         htmlFor={name}
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
