@@ -18,6 +18,7 @@ import PrivacySettings from "./components/PrivacySettings/PrivacySettings";
 import Login from "./pages/Login/Login";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
+import AppLayout from "./pages/layout/AppLayout";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
@@ -34,13 +35,9 @@ function App() {
 
   return (
     <div className={`${theme}  h-screen w-screen`}>
-      <div
-        className={`  flex justify-start flex-col-reverse md:flex-row h-screen  dark:bg-slate-950 w-screen`}
-      >
-        <Toaster />
-        <Sidebar themeHandler={themeHandler} />
-        <Routes>
-          <Route path="/" element={<Home />} />
+      <Routes>
+        <Route path="/" element={<AppLayout themeHandler={themeHandler} />}>
+          <Route index element={<Home />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />}></Route>
           <Route
@@ -82,9 +79,9 @@ function App() {
             <Route path="notifications" element={<NotificationsSetting />} />
             <Route path="privacy" element={<PrivacySettings />} />
           </Route>
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </div>
+        </Route>
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
   );
 }

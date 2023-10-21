@@ -2,12 +2,12 @@ import React from "react";
 
 export default function Login() {
   return (
-    <section class="bg-gray-50 dark:bg-gray-950 h-screen w-full md:w-5/6">
+    <section class="bg-gray-50 dark:bg-gray-950 bg-slate-400 h-screen w-full ">
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 w-full space-y-4 md:space-y-6 sm:p-8">
-            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Sign in to your account
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-700 md:text-2xl dark:text-white">
+              Log in to your account
             </h1>
             <form class="space-y-4 md:space-y-6" action="#">
               <div>
@@ -21,7 +21,7 @@ export default function Login() {
                   type="email"
                   name="email"
                   id="email"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  class="bg-gray-100 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
                   required=""
                 />
@@ -38,7 +38,7 @@ export default function Login() {
                   name="password"
                   id="password"
                   placeholder="••••••••"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  class="bg-gray-100 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""
                 />
               </div>
@@ -64,7 +64,7 @@ export default function Login() {
                 </div>
                 <a
                   href="#"
-                  class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  class="text-sm font-medium text-blue-900 hover:underline dark:text-primary-500"
                 >
                   Forgot password?
                 </a>
@@ -75,11 +75,11 @@ export default function Login() {
               >
                 Sign in
               </button>
-              <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+              <p class="text-sm font-light text-gray-700 dark:text-gray-400">
                 Don’t have an account yet?{" "}
                 <a
                   href="#"
-                  class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  class="font-medium text-blue-800 hover:underline dark:text-primary-500"
                 >
                   Sign up
                 </a>
