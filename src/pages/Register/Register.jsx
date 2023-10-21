@@ -13,7 +13,7 @@ export default function Register() {
     phone: "",
     password: "",
     passwordConfirm: "",
-    // gender: "",
+    gender: "",
     // nationality: "",
     // interests: [],
     // terms: false,
@@ -54,7 +54,7 @@ export default function Register() {
     passwordConfirm: Yup.string()
       .required()
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
-    // gender: Yup.string().required("gender is required"),
+    gender: Yup.string().required("gender is required"),
     // nationality: Yup.string().required("select nationality"),
     // interests: Yup.array().min(1, "at least select one experties").required(),
     // terms: Yup.bool().oneOf([true], "You must accept the terms and conditions"),
@@ -66,6 +66,11 @@ export default function Register() {
     validateOnMount: true,
     enableReinitialize: true,
   });
+
+  const radioOptions = [
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+  ];
   return (
     <section className="bg-gray-50 dark:bg-gray-950 bg-slate-400 h-screen w-full ">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -128,6 +133,11 @@ export default function Register() {
                   placeholder={"*********"}
                 />
               </div>
+              <RadioInput
+                radioOptions={radioOptions}
+                formik={formik}
+                name="gender"
+              />
 
               <div className="flex items-center justify-between">
                 <div className="flex items-start">
@@ -147,12 +157,6 @@ export default function Register() {
                     </label>
                   </div>
                 </div>
-                <Link
-                  href="#"
-                  className="text-sm font-medium text-blue-900 hover:underline dark:text-primary-500"
-                >
-                  Forgot password?
-                </Link>
               </div>
               <button
                 type="submit"
@@ -174,5 +178,40 @@ export default function Register() {
         </div>
       </div>
     </section>
+  );
+}
+
+export function RadioInput({ radioOptions, formik, name, user }) {
+  return (
+    <div className="py-3 ">
+      {/* <div className="text-sm flex font-medium  text-gray-500 pb-1 ">
+        <span className="w-[80%] ml-1">Gender</span>
+      </div> */}
+      <span className="mt-1 text-sm flex items-center text-gray-500 dark:text-gray-200 sm:mt-0 pb-1 ">
+        <div className="formControl flex">
+          {radioOptions.map((item) => (
+            <div key={item.value}>
+              {" "}
+              <input
+                type="radio"
+                id={item.value}
+                name={name}
+                value={item.value}
+                onChange={formik.handleChange}
+                checked={formik.values[name] === item.value}
+              />
+              &nbsp;
+              <label htmlFor={item.value}>{item.label}</label>
+              &nbsp;&nbsp;
+              {formik.errors[name] && formik.touched[name] && (
+                <div className="validationError ml-1 self-start md:self-center text-sm text-red-500">
+                  {formik.errors[name]}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </span>
+    </div>
   );
 }

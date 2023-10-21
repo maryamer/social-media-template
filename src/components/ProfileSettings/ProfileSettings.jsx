@@ -175,7 +175,7 @@ function SettingItem({ label, name, formik, type = "text", user }) {
   );
 }
 
-function RadioInput({ radioOptions, formik, name, user }) {
+export function RadioInput({ radioOptions, formik, name, user }) {
   return (
     <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
       <div className="text-sm flex font-medium  text-gray-500 pb-1 ">
