@@ -1,8 +1,7 @@
+import "./App.css";
 import { useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import "./App.css";
 import InnerMessage from "./components/InnerMessage/InnerMessage";
-import Sidebar from "./components/Sidebar/Sidebar";
 import Explore from "./pages/Explore/Explore";
 import Home from "./pages/home/Home";
 import Messages from "./pages/Messsages/Messages";
@@ -16,8 +15,7 @@ import Settings from "./pages/Settings/Settings";
 import NotificationsSetting from "./components/NotificationsSetting/NotificationsSetting";
 import PrivacySettings from "./components/PrivacySettings/PrivacySettings";
 import Login from "./pages/Login/Login";
-import { useEffect } from "react";
-import { Toaster } from "react-hot-toast";
+
 import AppLayout from "./pages/layout/AppLayout";
 
 function App() {
@@ -81,6 +79,7 @@ function App() {
           </Route>
         </Route>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Login />} />
       </Routes>
     </div>
   );
