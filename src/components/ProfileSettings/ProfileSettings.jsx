@@ -30,15 +30,25 @@ export default function ProfileSettings() {
     gender: Yup.string().required("gender is required"),
     location: Yup.string().required("select nationality"),
   });
+  const [imageUrl, setImageUrl] = useState("");
 
-  const onEdit = async (values, image = "") => {
+  const onEdit = async (values) => {
+    console.log(imageUrl);
     try {
-      const { data } = axios.post("http://localhost:5000/accountUser", {
-        ...values,
-        image: image,
-      });
-      setFormValues(data);
-      toast.success(`user data successfully edited`);
+      if (imageUrl) {
+        const { data } = axios.post("http://localhost:5000/accountUser", {
+          ...values,
+          image: imageUrl,
+        });
+        setFormValues(data);
+        toast.success(`user data successfully edited`);
+      } else {
+        const { data } = axios.post("http://localhost:5000/accountUser", {
+          ...values,
+        });
+        setFormValues(data);
+        toast.success(`user data successfully edited`);
+      }
     } catch (error) {}
   };
   const formik = useFormik({
@@ -57,7 +67,13 @@ export default function ProfileSettings() {
   return (
     <div className="w-full mx-auto ">
       <div className="px-1 py-2 flex flex-col items-center justify-center">
-        <EditAvatar name="name" formik={formik} onEdit={onEdit} />
+        <EditAvatar
+          imageUrl={imageUrl}
+          setImageUrl={setImageUrl}
+          name="name"
+          formik={formik}
+          onEdit={onEdit}
+        />
         <div className="dark:bg-slate-900 bg-white overflow-hidden shadow w-full md:w-5/6 rounded-lg ">
           <div className="px-4 py-5 flex items-center justify-center md:justify-start ">
             <h2 className="text-xl  font-bold text-slate-400">User Profile</h2>
@@ -112,17 +128,16 @@ export default function ProfileSettings() {
     </div>
   );
 }
-function EditAvatar({ formik, onEdit }) {
-  const [imageUrl, setImageUrl] = useState(""),
-    [cloudName] = useState(import.meta.env.VITE_CLOUDINARY_CLOUD_NAME),
+function EditAvatar({ formik, onEdit, imageUrl, setImageUrl }) {
+  const [cloudName] = useState(import.meta.env.VITE_CLOUDINARY_CLOUD_NAME),
     [uploadPreset] = useState(import.meta.env.VITE_CLOUDINARY_CLOUD_PRESET),
     [uwConfig] = useState({ cloudName, uploadPreset }),
     [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    if (imageUrl) {
-      onEdit(formik.values, imageUrl);
-    }
-  }, [imageUrl]);
+  // useEffect(() => {
+  //   if (imageUrl) {
+  //     onEdit(formik.values, imageUrl);
+  //   }
+  // }, [imageUrl]);
 
   return (
     <div className="flex w-5/6 items-center md:items-start justify-center flex-col gap-1 text-center md:py-5 my-4">
@@ -150,6 +165,16 @@ function EditAvatar({ formik, onEdit }) {
               </span>
             </button>
           </CloudinaryUploadWidget>
+          <div className=" p-1  flex  dark:text-gray-200 sm:mt-0 ">
+            <button
+              type="submit"
+              onClick={() => onEdit(formik.values, imageUrl)}
+              // disabled={formik.values.image === user.image}
+              className="md:font-semibold flex font-medium text-blue-800 hover:text-blue-500 cursor-pointer lg:mr-12"
+            >
+              Done
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -182,6 +207,7 @@ function SettingItem({ label, name, formik, type = "text", user }) {
         </div>
         <div className=" p-1  flex  dark:text-gray-200 sm:mt-0 ">
           <button
+            type="submit"
             disabled={formik.values[name] === user[name]}
             className="md:font-semibold flex font-medium text-blue-800 hover:text-blue-500 cursor-pointer lg:mr-12"
           >
