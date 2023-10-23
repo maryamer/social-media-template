@@ -79,7 +79,7 @@ function SideBarHeader() {
         <div className="flex items-center xl:justify-around lg:justify-start">
           <img
             className="shareProfileImg cursor-pointer object-cover w-10 h-10 rounded-full shadow-2xl shadow-white "
-            src={user.profileImage}
+            src={user.image}
             alt=""
           />
           &nbsp;&nbsp;

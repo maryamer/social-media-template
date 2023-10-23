@@ -16,7 +16,7 @@ export default function UsersList({
     data: { results: users },
   } = useFetch("https://rickandmortyapi.com/api/character");
   // ("http://localhost:5000/users");
-  console.log(users);
+  // console.log(users);
   const navigate = useNavigate();
   return (
     <div className="UsersList  w-full  dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">

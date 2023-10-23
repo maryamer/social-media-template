@@ -7,13 +7,15 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import { useRef } from "react";
+import CloudinaryUploadWidget, {
+  initializeCloudinaryWidget,
+} from "../common/CloudinaryUploadWidget/CloudinaryUploadWidget";
 
 export default function ProfileSettings() {
   const { isLoading, data: user } = useFetch(
     "http://localhost:5000/accountUser"
   );
   const [formValues, setFormValues] = useState(null);
-  const [prevValues, setPrevValues] = useState(null);
   const validationSchema = Yup.object({
     name: Yup.string("name should be string ")
       .required("name is required")
@@ -28,14 +30,12 @@ export default function ProfileSettings() {
     gender: Yup.string().required("gender is required"),
     location: Yup.string().required("select nationality"),
   });
-  useEffect(() => {
-    setPrevValues(user);
-  }, [user]);
 
-  const onEdit = async (values) => {
+  const onEdit = async (values, image = "") => {
     try {
       const { data } = axios.post("http://localhost:5000/accountUser", {
         ...values,
+        image: image,
       });
       setFormValues(data);
       toast.success(`user data successfully edited`);
@@ -57,7 +57,7 @@ export default function ProfileSettings() {
   return (
     <div className="w-full mx-auto ">
       <div className="px-1 py-2 flex flex-col items-center justify-center">
-        <EditAvatar user={user} />
+        <EditAvatar name="name" formik={formik} onEdit={onEdit} />
         <div className="dark:bg-slate-900 bg-white overflow-hidden shadow w-full md:w-5/6 rounded-lg ">
           <div className="px-4 py-5 flex items-center justify-center md:justify-start ">
             <h2 className="text-xl  font-bold text-slate-400">User Profile</h2>
@@ -71,42 +71,32 @@ export default function ProfileSettings() {
                 label="Name"
                 name="name"
                 formik={formik}
-                onEdit={onEdit}
                 user={user}
               />
               <SettingItem
                 label="LastName"
                 name="lastName"
                 formik={formik}
-                onEdit={onEdit}
                 user={user}
               />
+
               <SettingItem
                 label="Email"
                 name="email"
                 formik={formik}
-                onEdit={onEdit}
                 user={user}
               />
-              <SettingItem
-                label="Bio"
-                name="bio"
-                formik={formik}
-                onEdit={onEdit}
-                user={user}
-              />
+              <SettingItem label="Bio" name="bio" formik={formik} user={user} />
               <SettingItem
                 label="Link"
                 name="link"
                 formik={formik}
-                onEdit={onEdit}
                 user={user}
               />
               <SettingItem
                 label="Phone"
                 name="phone"
                 formik={formik}
-                onEdit={onEdit}
                 user={user}
               />
 
@@ -114,7 +104,6 @@ export default function ProfileSettings() {
                 radioOptions={radioOptions}
                 formik={formik}
                 name="gender"
-                user={user}
               />
             </form>
           </div>
@@ -123,15 +112,44 @@ export default function ProfileSettings() {
     </div>
   );
 }
-function EditAvatar({ user }) {
+function EditAvatar({ formik, onEdit }) {
+  const [imageUrl, setImageUrl] = useState(""),
+    [cloudName] = useState(import.meta.env.VITE_CLOUDINARY_CLOUD_NAME),
+    [uploadPreset] = useState(import.meta.env.VITE_CLOUDINARY_CLOUD_PRESET),
+    [uwConfig] = useState({ cloudName, uploadPreset }),
+    [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    if (imageUrl) {
+      onEdit(formik.values, imageUrl);
+    }
+  }, [imageUrl]);
+
   return (
     <div className="flex w-5/6 items-center md:items-start justify-center flex-col gap-1 text-center md:py-5 my-4">
       <div className="flex  bg-center bg-no-repeat bg-cover w-36 h-36 rounded-full  shadow-lg">
-        <div className="relative">
-          <img className=" rounded-full" src={user.image} alt="" />
-          <span className="bottom-0 right-5 flex items-center cursor-pointer justify-center absolute  w-8 h-8 bg-blue-400  hover:bg-slate-400 rounded-full">
-            <MdOutlineModeEdit />
-          </span>
+        <div className="relative cursor-pointer ">
+          <CloudinaryUploadWidget loaded={loaded} setLoaded={setLoaded}>
+            <button
+              id="upload_widget"
+              className=""
+              onClick={() =>
+                initializeCloudinaryWidget({
+                  loaded,
+                  uwConfig,
+                  setImageUrl,
+                })
+              }
+            >
+              <img
+                className=" rounded-full w-36 h-36 object-cover"
+                src={imageUrl || formik.values.image}
+                alt=""
+              />
+              <span className="bottom-0 right-5 flex items-center cursor-pointer justify-center absolute  w-8 h-8 bg-blue-400  hover:bg-slate-400 rounded-full">
+                <MdOutlineModeEdit />
+              </span>
+            </button>
+          </CloudinaryUploadWidget>
         </div>
       </div>
     </div>
@@ -152,6 +170,7 @@ function SettingItem({ label, name, formik, type = "text", user }) {
             id={name}
             type={type}
             name={name}
+            value={formik.value}
             className=" w-full  dark:bg-slate-950 bg-slate-300 dark:text-white text-gray-800 outline-none p-2 rounded-lg w-[80%]"
             {...formik.getFieldProps({ name })}
           />{" "}
@@ -163,7 +182,6 @@ function SettingItem({ label, name, formik, type = "text", user }) {
         </div>
         <div className=" p-1  flex  dark:text-gray-200 sm:mt-0 ">
           <button
-            // onMouseDown={() => console.log(inputRef)}
             disabled={formik.values[name] === user[name]}
             className="md:font-semibold flex font-medium text-blue-800 hover:text-blue-500 cursor-pointer lg:mr-12"
           >
@@ -175,7 +193,7 @@ function SettingItem({ label, name, formik, type = "text", user }) {
   );
 }
 
-export function RadioInput({ radioOptions, formik, name, user }) {
+export function RadioInput({ radioOptions, formik, name }) {
   return (
     <div className="py-3  sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
       <div className="text-sm flex font-medium  text-gray-500 pb-1 ">
