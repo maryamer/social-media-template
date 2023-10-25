@@ -17,6 +17,8 @@ import PrivacySettings from "./components/PrivacySettings/PrivacySettings";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import AppLayout from "./layout/AppLayout";
+import { Provider } from "react-redux";
+import { store } from "./features/store";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
@@ -32,56 +34,58 @@ function App() {
   };
 
   return (
-    <div className={`${theme}  h-screen w-screen`}>
-      <Routes>
-        <Route path="/" element={<AppLayout themeHandler={themeHandler} />}>
-          <Route index element={<Home />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/profile" element={<Profile />}></Route>
-          <Route
-            path="/profile/followers"
-            element={<UsersList locationParameter="/profile" />}
-          />
-          <Route
-            path="/profile/followings"
-            element={<UsersList locationParameter="/profile" />}
-          />
-          <Route
-            path="/messages"
-            element={
-              <Messages
-                isSettingOpen={isSettingOpen}
-                setIsSettingOpen={setIsSettingOpen}
-              />
-            }
-          >
+    <Provider store={store}>
+      <div className={`${theme}  h-screen w-screen`}>
+        <Routes>
+          <Route path="/" element={<AppLayout themeHandler={themeHandler} />}>
+            <Route index element={<Home />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/profile" element={<Profile />}></Route>
             <Route
-              index
+              path="/profile/followers"
+              element={<UsersList locationParameter="/profile" />}
+            />
+            <Route
+              path="/profile/followings"
+              element={<UsersList locationParameter="/profile" />}
+            />
+            <Route
+              path="/messages"
               element={
-                <div className="flex flex-col w-full items-center dark:text-white text-slate-500 justify-center font-bold">
-                  <BsFillChatDotsFill className="w-16 h-16 p-3 " />
-                  Your Messages
-                </div>
+                <Messages
+                  isSettingOpen={isSettingOpen}
+                  setIsSettingOpen={setIsSettingOpen}
+                />
               }
-            />
-            <Route
-              path=":id"
-              element={<InnerMessage setIsSettingOpen={setIsSettingOpen} />}
-            />
+            >
+              <Route
+                index
+                element={
+                  <div className="flex flex-col w-full items-center dark:text-white text-slate-500 justify-center font-bold">
+                    <BsFillChatDotsFill className="w-16 h-16 p-3 " />
+                    Your Messages
+                  </div>
+                }
+              />
+              <Route
+                path=":id"
+                element={<InnerMessage setIsSettingOpen={setIsSettingOpen} />}
+              />
+            </Route>
+            <Route path="/search" element={<Search />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="profile/settings" element={<Settings />}>
+              <Route index element={<Navigate to="profile" />} />
+              <Route path="profile" element={<ProfileSettings />} />
+              <Route path="notifications" element={<NotificationsSetting />} />
+              <Route path="privacy" element={<PrivacySettings />} />
+            </Route>
           </Route>
-          <Route path="/search" element={<Search />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="profile/settings" element={<Settings />}>
-            <Route index element={<Navigate to="profile" />} />
-            <Route path="profile" element={<ProfileSettings />} />
-            <Route path="notifications" element={<NotificationsSetting />} />
-            <Route path="privacy" element={<PrivacySettings />} />
-          </Route>
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </div>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+    </Provider>
   );
 }
 

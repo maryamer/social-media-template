@@ -1,9 +1,18 @@
+import { useEffect } from "react";
 import { BsChatFill, BsHeartFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
+import { getAsyncExplorePosts } from "../../features/explore/exploreSlice";
 import useFetch from "../../hooks/useFetch";
 
 function Explore({ isLoading }) {
-  const { data: posts } = useFetch("http://localhost:5000/posts");
+  const { posts, loading, error } = useSelector((state) => state.explorePosts);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAsyncExplorePosts());
+    console.log(posts);
+  }, []);
   const { pathname } = useLocation();
   return (
     <div
@@ -13,14 +22,14 @@ function Explore({ isLoading }) {
           : ""
       }w-full dark:bg-slate-800 overflow-y-scroll scrollbar-none  h-screen flex  gap-0 justify-center flex-wrap  `}
     >
-      {posts &&
+      {loading ? (
+        <Loader />
+      ) : (
+        posts &&
         posts.map((post) => (
           <SinglePost key={post.id} post={post} isLoading={isLoading} />
-        ))}
-      {posts &&
-        posts.map((post) => (
-          <SinglePost key={post.id} post={post} isLoading={isLoading} />
-        ))}
+        ))
+      )}
     </div>
   );
 }
