@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AiOutlineEye } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { getAsyncUsers } from "../../features/users/usersSlice";
 import useFetch from "../../hooks/useFetch";
 import Character from "../common/Character";
 import HeaderTitle from "../common/HeaderTitle";
 
 function Rightbar() {
   const {
-    isLoading,
-    data: { results: users },
-  } = useFetch("https://rickandmortyapi.com/api/character");
-  ("http://localhost:5000/users");
+    users,
+    loading: isLoading,
+    error,
+  } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAsyncUsers());
+  }, []);
   return (
     <div className="rightbar bg-slate-300 dark:bg-slate-900 dark:text-white md:w-2/6 hidden lg:flex flex-col h-screen justify-center items-center min-w-fit">
       <div className="characters-list flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll scrollbar-none ">

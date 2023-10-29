@@ -8,7 +8,7 @@ const api = axios.create({
 });
 
 export const getAsyncExplorePosts = createAsyncThunk(
-  "posts/getAsyncExplorePosts",
+  "explorePosts/getAsyncExplorePosts",
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.get("/posts");
@@ -19,17 +19,18 @@ export const getAsyncExplorePosts = createAsyncThunk(
     }
   }
 );
-// export const getAsyncExploreSinglePosts = createAsyncThunk(
-//   "posts/getAsyncExplorePosts",
-//   async (payload, { rejectWithValue }) => {
-//     try {
-//       const response = await api.get(`/posts/${payload.id}`);
-//       return response.data;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const getAsyncExploreSinglePost = createAsyncThunk(
+  "explorePosts/getAsyncExploreSinglePost",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/posts/${payload.id}`);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const exploreSlice = createSlice({
   name: "explorePosts",
@@ -37,39 +38,40 @@ const exploreSlice = createSlice({
     loading: false,
     posts: [],
     error: "",
+    post: {},
   },
-
-  extraReducers: {
-    [getAsyncExplorePosts.pending]: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(getAsyncExplorePosts.pending, (state, action) => {
       state.loading = true;
       state.posts = [];
       state.error = "";
-    },
-    [getAsyncExplorePosts.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.posts = action.payload;
-      state.error = "";
-    },
-    [getAsyncExplorePosts.rejected]: (state, action) => {
+    }),
+      builder.addCase(getAsyncExplorePosts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.posts = action.payload;
+        state.error = "";
+      });
+    builder.addCase(getAsyncExplorePosts.rejected, (state, action) => {
       state.loading = false;
       state.posts = [];
       state.error = action.payload;
-    },
-    // [getAsyncExploreSinglePosts.pending]: (state, action) => {
-    //   state.loading = true;
-    //   state.post = [];
-    //   state.error = "";
-    // },
-    // [getAsyncExploreSinglePosts.fulfilled]: (state, action) => {
-    //   state.loading = false;
-    //   state.post = action.payload;
-    //   state.error = "";
-    // },
-    // [getAsyncExploreSinglePosts.rejected]: (state, action) => {
-    //   state.loading = false;
-    //   state.post = [];
-    //   state.error = action.payload;
-    // },
+    });
+
+    builder.addCase(getAsyncExploreSinglePost.pending, (state, action) => {
+      state.loading = true;
+      state.post = {};
+      state.error = "";
+    });
+    builder.addCase(getAsyncExploreSinglePost.fulfilled, (state, action) => {
+      state.loading = true;
+      state.post = action.payload;
+      state.error = "";
+    });
+    builder.addCase(getAsyncExploreSinglePost.rejected, (state, action) => {
+      state.loading = false;
+      state.post = {};
+      state.error = action.payload;
+    });
   },
 });
 

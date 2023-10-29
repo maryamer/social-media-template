@@ -19,6 +19,7 @@ import Register from "./pages/Register/Register";
 import AppLayout from "./layout/AppLayout";
 import { Provider } from "react-redux";
 import { store } from "./features/store";
+import SinglePost from "./components/common/SinglePost";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
@@ -40,6 +41,7 @@ function App() {
           <Route path="/" element={<AppLayout themeHandler={themeHandler} />}>
             <Route index element={<Home />} />
             <Route path="/explore" element={<Explore />} />
+            <Route path="/explore/:id" element={<SinglePost />} />
             <Route path="/profile" element={<Profile />}></Route>
             <Route
               path="/profile/followers"

@@ -30,7 +30,7 @@ function Profile() {
     fetchData();
   }, []);
   return (
-    <div className=" w-full md:w-4/6 mx-auto bg-slate-300 dark:bg-slate-900 dark:text-white overflow-y-scroll md:scrollbar-none h-screen">
+    <div className=" w-full md:w-5/6 xl:w-4/6 mx-auto bg-slate-300 dark:bg-slate-900 dark:text-white overflow-y-scroll md:scrollbar-none h-screen">
       {user ? (
         <>
           <div className="px-3 py-2">

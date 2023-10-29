@@ -1,5 +1,8 @@
+import { useEffect } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getAsyncUsers } from "../../features/users/usersSlice";
 import useFetch from "../../hooks/useFetch";
 import Character from "./Character";
 import HeaderTitle from "./HeaderTitle";
@@ -12,14 +15,17 @@ export default function UsersList({
   locationParameter,
 }) {
   const {
-    isLoading,
-    data: { results: users },
-  } = useFetch("https://rickandmortyapi.com/api/character");
-  // ("http://localhost:5000/users");
-  // console.log(users);
+    users,
+    loading: isLoading,
+    error,
+  } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAsyncUsers());
+  }, []);
   const navigate = useNavigate();
   return (
-    <div className="UsersList  w-full  dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
+    <div className="UsersList  w-full md:w-4/6 h-screen  dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
       <button
         onClick={() => {
           setIsSettingOpen(false);
@@ -33,7 +39,7 @@ export default function UsersList({
         />
       </button>
       <SearchComponent title={title} />
-      <div className="characters-list flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll scrollbar-none ">
+      <div className="characters-list overflow-x-hidden flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll scrollbar-none ">
         {title && <HeaderTitle title={title} />}
         <div className="w-full h-full lg:h-[95%] ">
           {users ? (

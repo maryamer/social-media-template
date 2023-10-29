@@ -19,7 +19,7 @@ export default function Character({
             : " rounded-lg hover:bg-slate-300 m-1"
         }  flex  justify-between items-center min-w-fit  lg:grid-cols-3 bg-slate-100 hover:opacity-95 dark:bg-slate-950 my-2 dark:hover:bg-slate-800  cursor-pointer  w-full h-16 lg:h-24`}
       >
-        <div className="flex items-center  lg:justify-start justify-center pl-2 w-4/5 overflow-hidden ">
+        <div className="flex items-center  lg:justify-start  pl-2 w-4/5 overflow-hidden ">
           <img
             src={item?.image}
             alt={item?.name}
