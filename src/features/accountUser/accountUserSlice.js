@@ -12,7 +12,6 @@ export const getAsyncAccountUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.get("/accountUser");
-      console.log(response.data);
       return response.data;
     } catch (error) {
       toast.error(error.messagge);
@@ -23,7 +22,6 @@ export const getAsyncAccountUser = createAsyncThunk(
 export const editAsyncAccountUser = createAsyncThunk(
   "accountUser/editAsyncAccountUser",
   async (payload, { rejectWithValue }) => {
-    console.log(payload);
     try {
       const response = await api.post(`/accountUser`, {
         ...payload.values,

@@ -20,12 +20,11 @@ import AppLayout from "./layout/AppLayout";
 import { Provider } from "react-redux";
 import { store } from "./features/store";
 import SinglePost from "./components/common/SinglePost";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
-  const [theme, setTheme] = useState(
-    JSON.parse(localStorage.getItem("theme")) || "dark"
-  );
+  const [theme, setTheme] = useLocalStorage("theme", "dark");
   const themeHandler = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
     localStorage.setItem(
