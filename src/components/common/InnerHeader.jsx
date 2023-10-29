@@ -3,7 +3,12 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import CharaterName from "./CharaterName";
 
-export default function InnerHeader({ setIsSettingOpen, children, user = "" }) {
+export default function InnerHeader({
+  setIsSettingOpen,
+  children,
+  user = "",
+  direction,
+}) {
   const navigate = useNavigate();
   return (
     <div
@@ -15,7 +20,7 @@ export default function InnerHeader({ setIsSettingOpen, children, user = "" }) {
           to="/messages"
           onClick={() => {
             setIsSettingOpen(false);
-            navigate(-1);
+            navigate(direction || -1);
           }}
           className="flex mx-1 xl:mx-2 "
         >

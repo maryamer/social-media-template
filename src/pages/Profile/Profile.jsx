@@ -3,34 +3,28 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { IoMdSettings } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import InnerHeader from "../../components/common/InnerHeader";
+import { getAsyncAccountUser } from "../../features/accountUser/accountUserSlice";
 import useFetch from "../../hooks/useFetch";
 import Explore from "../Explore/Explore";
 
 function Profile() {
-  const { isLoading, data: user } = useFetch(
-    "http://localhost:5000/accountUser"
-  );
-
   const [isSettingOpen, setIsSettingOpen] = useState(false);
-  const [item, setItem] = useState({});
+  // const [item, setItem] = useState({});
+  const {
+    user,
+    loading: isLoading,
+    error,
+  } = useSelector((state) => state.accountUser);
+  const dispatch = useDispatch();
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const { data } = await axios.get(`http://localhost:5000/accountUser`);
-        setItem(data);
-      } catch (err) {
-        setItem([]);
-        toast.error(err?.message);
-      } finally {
-      }
-    }
-
-    fetchData();
+    dispatch(getAsyncAccountUser());
   }, []);
+
   return (
-    <div className=" w-full md:w-5/6 xl:w-4/6 mx-auto bg-slate-300 dark:bg-slate-900 dark:text-white overflow-y-scroll md:scrollbar-none h-screen">
+    <div className=" w-full md:w-5/6 lg:w-4/6 mx-auto bg-slate-300 dark:bg-slate-900 dark:text-white overflow-y-scroll md:scrollbar-none h-screen">
       {user ? (
         <>
           <div className="px-3 py-2">
@@ -46,7 +40,7 @@ function Profile() {
                 />
               </Link>
             </InnerHeader>
-            <ProfileBody user={user && user} isLoading={isLoading} />
+            <ProfileBody user={user} isLoading={isLoading} />
           </div>
           <Explore isLoading={isLoading} />
         </>
@@ -67,10 +61,7 @@ function ProfileBody({ user, isLoading }) {
       <div className="flex flex-col gap-1 text-center md:p-5 mt-4">
         {isLoading ? (
           <>
-            <Link
-              className=" dark:bg-slate-700 bg-slate-200  animate-pulse block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full bg-slate-800 "
-              href=""
-            ></Link>
+            <Link className=" dark:bg-slate-700 bg-slate-200  animate-pulse block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full bg-slate-800 "></Link>
             <h2 className="dark:bg-slate-700   bg-slate-200 animate-pulse self-center rounded-lg w-36 h-4"></h2>
             <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-28 h-4"></span>
             <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-48 h-4"></span>
@@ -80,12 +71,9 @@ function ProfileBody({ user, isLoading }) {
           </>
         ) : (
           <>
-            <Link
-              className="block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full border border-gray-400 shadow-lg"
-              href=""
-            >
+            <Link className="block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full border border-gray-400 shadow-lg">
               <img
-                src={user.image}
+                src={`${user?.image}`}
                 alt=""
                 className="rounded-full object-cover "
               />

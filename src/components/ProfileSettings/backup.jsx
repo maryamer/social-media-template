@@ -1,37 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MdOutlineModeEdit } from "react-icons/md";
 import useFetch from "../../hooks/useFetch";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useEffect } from "react";
 import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  editAsyncAccountUser,
-  getAsyncAccountUser,
-} from "../../features/accountUser/accountUserSlice";
-
 import CloudinaryUploadWidget, {
   initializeCloudinaryWidget,
 } from "../common/CloudinaryUploadWidget/CloudinaryUploadWidget";
 
 export default function ProfileSettings() {
+  const { isLoading, data: user } = useFetch(
+    "http://localhost:5000/accountUser"
+  );
   const [formValues, setFormValues] = useState(null);
-
-  const {
-    loading: isLoading,
-    error,
-    user,
-  } = useSelector((state) => state.accountUser);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAsyncAccountUser());
-    if (user) {
-      setFormValues(user);
-    }
-  }, []);
-
   const validationSchema = Yup.object({
     name: Yup.string("name should be string ")
       .required("name is required")
@@ -50,12 +34,22 @@ export default function ProfileSettings() {
 
   const onEdit = async (values) => {
     console.log(imageUrl);
-
-    if (imageUrl) {
-      dispatch(editAsyncAccountUser({ values: values, image: imageUrl }));
-    } else {
-      dispatch(editAsyncAccountUser({ values: values, image: values.image }));
-    }
+    try {
+      if (imageUrl) {
+        const { data } = axios.post("http://localhost:5000/accountUser", {
+          ...values,
+          image: imageUrl,
+        });
+        setFormValues(data);
+        toast.success(`user data successfully edited`);
+      } else {
+        const { data } = axios.post("http://localhost:5000/accountUser", {
+          ...values,
+        });
+        setFormValues(data);
+        toast.success(`user data successfully edited`);
+      }
+    } catch (error) {}
   };
   const formik = useFormik({
     initialValues: formValues || user,
@@ -71,78 +65,67 @@ export default function ProfileSettings() {
   ];
 
   return (
-    <>
-      {user && (
-        <div className="w-full mx-auto ">
-          <div className="px-1 py-2 flex flex-col items-center justify-center">
-            <EditAvatar
-              imageUrl={imageUrl}
-              setImageUrl={setImageUrl}
-              name="name"
-              formik={formik}
-              onEdit={onEdit}
-            />
-            <div className="dark:bg-slate-900 bg-white overflow-hidden shadow w-full md:w-5/6 rounded-lg ">
-              <div className="px-4 py-5 flex items-center justify-center md:justify-start ">
-                <h2 className="text-xl  font-bold text-slate-400">
-                  User Profile
-                </h2>
-              </div>
-              <div className=" px-4 md:py-5 sm:p-0">
-                <form
-                  onSubmit={formik.handleSubmit}
-                  className="divide-y dark:divide-gray-800 divide-slate-400 "
-                >
-                  <SettingItem
-                    label="Name"
-                    name="name"
-                    formik={formik}
-                    user={user}
-                  />
-                  <SettingItem
-                    label="LastName"
-                    name="lastName"
-                    formik={formik}
-                    user={user}
-                  />
+    <div className="w-full mx-auto ">
+      <div className="px-1 py-2 flex flex-col items-center justify-center">
+        <EditAvatar
+          imageUrl={imageUrl}
+          setImageUrl={setImageUrl}
+          name="name"
+          formik={formik}
+          onEdit={onEdit}
+        />
+        <div className="dark:bg-slate-900 bg-white overflow-hidden shadow w-full md:w-5/6 rounded-lg ">
+          <div className="px-4 py-5 flex items-center justify-center md:justify-start ">
+            <h2 className="text-xl  font-bold text-slate-400">User Profile</h2>
+          </div>
+          <div className=" px-4 md:py-5 sm:p-0">
+            <form
+              onSubmit={formik.handleSubmit}
+              className="divide-y dark:divide-gray-800 divide-slate-400 "
+            >
+              <SettingItem
+                label="Name"
+                name="name"
+                formik={formik}
+                user={user}
+              />
+              <SettingItem
+                label="LastName"
+                name="lastName"
+                formik={formik}
+                user={user}
+              />
 
-                  <SettingItem
-                    label="Email"
-                    name="email"
-                    formik={formik}
-                    user={user}
-                  />
-                  <SettingItem
-                    label="Bio"
-                    name="bio"
-                    formik={formik}
-                    user={user}
-                  />
-                  <SettingItem
-                    label="Link"
-                    name="link"
-                    formik={formik}
-                    user={user}
-                  />
-                  <SettingItem
-                    label="Phone"
-                    name="phone"
-                    formik={formik}
-                    user={user}
-                  />
+              <SettingItem
+                label="Email"
+                name="email"
+                formik={formik}
+                user={user}
+              />
+              <SettingItem label="Bio" name="bio" formik={formik} user={user} />
+              <SettingItem
+                label="Link"
+                name="link"
+                formik={formik}
+                user={user}
+              />
+              <SettingItem
+                label="Phone"
+                name="phone"
+                formik={formik}
+                user={user}
+              />
 
-                  <RadioInput
-                    radioOptions={radioOptions}
-                    formik={formik}
-                    name="gender"
-                  />
-                </form>
-              </div>
-            </div>
+              <RadioInput
+                radioOptions={radioOptions}
+                formik={formik}
+                name="gender"
+              />
+            </form>
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 }
 function EditAvatar({ formik, onEdit, imageUrl, setImageUrl }) {
@@ -150,6 +133,11 @@ function EditAvatar({ formik, onEdit, imageUrl, setImageUrl }) {
     [uploadPreset] = useState(import.meta.env.VITE_CLOUDINARY_CLOUD_PRESET),
     [uwConfig] = useState({ cloudName, uploadPreset }),
     [loaded, setLoaded] = useState(false);
+  // useEffect(() => {
+  //   if (imageUrl) {
+  //     onEdit(formik.values, imageUrl);
+  //   }
+  // }, [imageUrl]);
 
   return (
     <div className="flex w-5/6 items-center md:items-start justify-center flex-col gap-1 text-center md:py-5 my-4">
@@ -169,7 +157,7 @@ function EditAvatar({ formik, onEdit, imageUrl, setImageUrl }) {
             >
               <img
                 className=" rounded-full w-36 h-36 object-cover"
-                src={imageUrl || formik.values?.image}
+                src={imageUrl || formik.values.image}
                 alt=""
               />
               <span className="bottom-0 right-5 flex items-center cursor-pointer justify-center absolute  w-8 h-8 bg-blue-400  hover:bg-slate-400 rounded-full">
@@ -220,7 +208,7 @@ function SettingItem({ label, name, formik, type = "text", user }) {
         <div className=" p-1  flex  dark:text-gray-200 sm:mt-0 ">
           <button
             type="submit"
-            disabled={formik.values && formik.values[name] === user[name]}
+            disabled={formik.values[name] === user[name]}
             className="md:font-semibold flex font-medium text-blue-800 hover:text-blue-500 cursor-pointer lg:mr-12"
           >
             Done
@@ -248,7 +236,8 @@ export function RadioInput({ radioOptions, formik, name }) {
                 name={name}
                 value={item.value}
                 onChange={formik.handleChange}
-                checked={formik.values && formik.values[name] === item.value}
+                // {...formik.getFieldProps({ name })}
+                checked={formik.values[name] === item.value}
               />
               &nbsp;
               <label htmlFor={item.value}>{item.label}</label>

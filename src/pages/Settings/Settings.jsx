@@ -27,7 +27,7 @@ export default function Settings() {
         <InnerHeader
           setIsSettingOpen={setIsSettingOpen}
           item={item}
-          direction="settings"
+          direction="/profile"
         />
         <SearchComponent />
         <Menu menuItems={settingsMenuItems} isSidebar={false} />
