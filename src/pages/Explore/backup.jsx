@@ -20,16 +20,16 @@ function Explore({ isLoading }) {
     <div
       className={`${
         pathname.includes("explore")
-          ? " lg:w-5/6 dark:bg-slate-950 overflow-y-scroll xl:scrollbar-none "
+          ? " md:w-5/6 overflow-y-scroll xl:scrollbar-none "
           : ""
-      }w-full dark:bg-slate-900 overflow-y-scroll scrollbar-none  h-screen grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2   `}
+      }w-full   dark:bg-slate-800 overflow-y-scroll scrollbar-none  h-screen flex  gap-0 justify-center flex-wrap  `}
     >
       {posts &&
         posts.map((post) => (
           <Link
             to={`${post.id}`}
             key={post.id}
-            className="post self-center shrink-0 h-fit  aspect-square  dark:bg-slate-950 dark:text-white dark:border border-slate-800  xl:m-1 rounded-xl  "
+            className="post shrink-0 h-fit xl:max-w-[24%] md:max-w-[33%] sm:min-w-[130px] w-1/2 aspect-square  dark:bg-slate-950 dark:text-white dark:border border-slate-800  xl:m-1 rounded-xl  "
           >
             <SingleItem key={post.id} post={post} isLoading={isLoading} />
           </Link>
@@ -48,7 +48,7 @@ export function SingleItem({ post, isLoading }) {
   return (
     <>
       {isLoading ? (
-        <div className=" dark:bg-slate-700 bg-slate-200  animate-pulse post  aspect-square  xl:m-1 rounded-xl  ">
+        <div className=" dark:bg-slate-700 bg-slate-200  animate-pulse post lg:max-w-[24%]  md:max-w-[33%] sm:min-w-[130px] w-1/2 aspect-square  xl:m-1 rounded-xl  ">
           {/* <div className="postCenter w-full loading-page"></div> */}
         </div>
       ) : (

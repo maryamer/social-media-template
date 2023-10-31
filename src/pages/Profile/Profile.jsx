@@ -27,7 +27,7 @@ function Profile() {
     <div className=" w-full md:w-5/6 lg:w-4/6 mx-auto bg-slate-300 dark:bg-slate-900 dark:text-white overflow-y-scroll md:scrollbar-none h-screen">
       {user ? (
         <>
-          <div className="px-3 py-2">
+          <div className="">
             <InnerHeader
               user={user}
               setIsSettingOpen={setIsSettingOpen}
@@ -58,7 +58,7 @@ function ProfileBody({ user, isLoading }) {
 
   return (
     <>
-      <div className="flex flex-col gap-1 text-center md:p-5 mt-4">
+      <div className="flex flex-col gap-1 text-center  mt-4">
         {isLoading ? (
           <>
             <Link className=" dark:bg-slate-700 bg-slate-200  animate-pulse block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full bg-slate-800 "></Link>
@@ -67,7 +67,7 @@ function ProfileBody({ user, isLoading }) {
             <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-48 h-4"></span>
             <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-72 h-4"></span>
             <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg  h-10 flex justify-center w-1/2 items-center md:p-1 gap-2 my-3"></span>
-            <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-full  h-14 flex justify-around gap-2  my-5 md:p-5"></span>
+            <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-full  h-14 flex justify-around gap-2   md:p-5"></span>
           </>
         ) : (
           <>
