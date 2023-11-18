@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { MdOutlineModeEdit } from "react-icons/md";
-import useFetch from "../../hooks/useFetch";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {

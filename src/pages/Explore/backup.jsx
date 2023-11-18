@@ -48,11 +48,11 @@ export function SingleItem({ post, isLoading }) {
   return (
     <>
       {isLoading ? (
-        <div className=" dark:bg-slate-700 bg-slate-200  animate-pulse post lg:max-w-[24%]  md:max-w-[33%] sm:min-w-[130px] w-1/2 aspect-square  xl:m-1 rounded-xl  ">
+        <div className=" dark:bg-slate-700 bg-slate-200 animate-pulse post lg:max-w-[24%]  md:max-w-[33%] sm:min-w-[130px] w-1/2 aspect-square  xl:m-1 rounded-xl  ">
           {/* <div className="postCenter w-full loading-page"></div> */}
         </div>
       ) : (
-        <div className="postCenter w-full ">
+        <div className="postCenter w-full">
           <div className="overflow-hidden  cursor-pointer lg:rounded-xl relative group w-full">
             <div className="lg:rounded-xl z-40  hidden lg opacity-100 group-hover:opacity-100 transition duration-300 ease-in-out cursor-pointer absolute from-black/80 to-transparent bg-gradient-to-b inset-x-0 -top-1 pt-30 text-white lg:flex items-start w-full">
               <div className=" p-4 space-y-3 text-xl group-hover:opacity-100 group-hover:translate-y-0 translate-y-0 pb-10 transform transition duration-300 ease-in-out w-full">

@@ -9,6 +9,7 @@ import InnerHeader from "../../components/common/InnerHeader";
 import { getAsyncAccountUser } from "../../features/accountUser/accountUserSlice";
 import useFetch from "../../hooks/useFetch";
 import Explore from "../Explore/Explore";
+import Loader from "../../components/common/Loader/Loader";
 
 function Profile() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
@@ -60,15 +61,7 @@ function ProfileBody({ user, isLoading }) {
     <>
       <div className="flex flex-col gap-1 text-center  mt-4">
         {isLoading ? (
-          <>
-            <Link className=" dark:bg-slate-700 bg-slate-200  animate-pulse block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full bg-slate-800 "></Link>
-            <h2 className="dark:bg-slate-700   bg-slate-200 animate-pulse self-center rounded-lg w-36 h-4"></h2>
-            <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-28 h-4"></span>
-            <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-48 h-4"></span>
-            <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-72 h-4"></span>
-            <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg  h-10 flex justify-center w-1/2 items-center md:p-1 gap-2 my-3"></span>
-            <span className="dark:bg-slate-700 bg-slate-200 animate-pulse self-center rounded-lg w-full  h-14 flex justify-around gap-2   md:p-5"></span>
-          </>
+          <Loader />
         ) : (
           <>
             <Link className="block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full border border-gray-400 shadow-lg">
@@ -157,71 +150,4 @@ function ProfileBody({ user, isLoading }) {
       </div>
     </>
   );
-}
-{
-  /* <div className="grid grid-cols-3 gap-2 my-3">
-          <div className="postCenter w-full ">
-            <img
-              alt=""
-              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
-              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-            />
-          </div>
-          <div className="postCenter w-full ">
-            <img
-              alt=""
-              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
-              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-            />
-          </div>
-          <div className="postCenter w-full ">
-            <img
-              alt=""
-              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
-              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-            />
-          </div>
-          <div className="postCenter w-full ">
-            <img
-              alt=""
-              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
-              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-            />
-          </div>
-          <div className="postCenter w-full ">
-            <img
-              alt=""
-              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
-              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-            />
-          </div>
-          <div className="postCenter w-full ">
-            <img
-              alt=""
-              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
-              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-            />
-          </div>
-          <div className="postCenter w-full ">
-            <img
-              alt=""
-              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
-              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-            />
-          </div>
-          <div className="postCenter w-full ">
-            <img
-              alt=""
-              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
-              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-            />
-          </div>
-          <div className="postCenter w-full ">
-            <img
-              alt=""
-              className="aspect-square rounded-lg object-cover opacity-100 group-hover:opacity-80  "
-              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-            />
-          </div>
-        </div> */
 }
