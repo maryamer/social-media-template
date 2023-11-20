@@ -11,7 +11,7 @@ export default function Menu({
     <div
       className={`${
         isSidebar ? "flex-col" : "flex"
-      } h-14 md:h-3/5  cursor-pointer md:mx-2`}
+      } h-14 md:h-2/3  cursor-pointer md:mx-2`}
     >
       <div
         className={`overflow-hidden h-14 md:h-full flex  justify-around items-center  w-full  ${

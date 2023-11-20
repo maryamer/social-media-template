@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { TiArrowBackOutline } from "react-icons/ti";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAsyncUsers } from "../../features/users/usersSlice";
@@ -31,12 +33,13 @@ export default function UsersList({
           setIsSettingOpen(false);
           navigate("/");
         }}
-        className="flex w-full xl:ml-2.5"
+        className="flex w-full xl:ml-2.5 text-slate-500"
       >
-        <IoIosArrowRoundBack
-          className="hover:text-slate-600 cursor-pointers w-12 h-12
-           text-slate-400"
+        <TiArrowBackOutline
+          className="hover:text-slate-600 cursor-pointers p-1 w-8 h-8
+          "
         />
+        <span className="self-center font-bold">Back</span>
       </button>
       <SearchComponent title={title} />
       <div className="characters-list overflow-x-hidden flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll scrollbar-none ">

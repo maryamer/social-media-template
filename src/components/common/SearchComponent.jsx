@@ -4,7 +4,7 @@ export default function SearchComponent({ title }) {
   return (
     <div className={`searchComponent h-14 flex items-center relative w-full`}>
       <div className="absolute inset-y-0 left-0 flex items-center justify-center pl-3 pointer-events-none">
-        <AiOutlineSearch className="w-5 h-5 self-center dark:text-gray-500 text-gray-800" />
+        <AiOutlineSearch className="w-5 h-5 self-center dark:text-gray-500 text-slate-500" />
       </div>
       <input
         type="search"

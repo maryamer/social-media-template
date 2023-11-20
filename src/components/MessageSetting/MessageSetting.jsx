@@ -1,4 +1,5 @@
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { TiArrowBackOutline } from "react-icons/ti";
 
 export default function MessageSetting({ setIsSettingOpen }) {
   return (
@@ -8,10 +9,11 @@ export default function MessageSetting({ setIsSettingOpen }) {
           className="flex items-center"
           onClick={() => setIsSettingOpen((prev) => !prev)}
         >
-          <IoIosArrowRoundBack
-            className="hover:text-slate-600 cursor-pointer w-14 h-14
-           text-slate-400"
-          />
+          <TiArrowBackOutline
+            className="hover:text-slate-600 cursor-pointers p-1 w-8 h-8
+           text-slate-500"
+          />{" "}
+          <span>Back</span>
           <h2 className="font-bold">Message Setting</h2>
         </div>
         <div className="muteContainer text-lg flex justify-between items-center h-20 px-4">

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import {
+  BsBookmark,
+  BsBookmarkFill,
   BsChat,
   BsChatFill,
   BsHeart,
@@ -25,216 +27,71 @@ export default function SinglePost() {
   const dispatch = useDispatch();
   const { id: postId } = useParams();
   const [isOpen, setIsOpen] = useState(true);
+  const [isLike, setIsLike] = useState(false);
+  const [isBookmark, setIsBookmart] = useState(false);
   useEffect(() => {
     dispatch(getAsyncExploreSinglePost({ id: postId }));
     // }
   }, []);
   return (
-    <>
-      {" "}
-      <Modal
-        onOpen={setIsOpen}
-        imageURL={post.photo}
-        open={isOpen}
-        title="hello world"
-      >
-        {post && (
-          <div className="w-full h-screen md:h-full  flex items-center ">
-            <div className="w-full h-full flex flex-col md:flex-row max-h-screen overflow-y-auto  ">
-              {/* <div className=" "> */}
-              {/* <div className="  z-40  cursor-pointer absolute from-black/80 to-transparent bg-gradient-to-b inset-x-0 top-0 pt-30 text-white flex items-start">
-                    <div className=" p-4 space-y-3 text-xl group-hover:translate-y-0 translate-y-0 pb-10 transform transition duration-300 ease-in-out">
-                      <div className=" text-sm  ">
-                        <Link
-                          to="/profile"
-                          className="postTopLeft flex items-center hover:opacity-60 "
-                        >
-                          <img
-                            className="postProfileImg w-8 h-8 rounded-full max-h-full object-cover"
-                            src={
-                              users &&
-                              users.filter((u) => u.id == post.userId)[0]
-                                ?.profilePicture
-                            }
-                          />
-                          <span className="postUsername text-sm font-medium mx-2.5 ">
-                            {users &&
-                              users.filter((u) => u.id === post.userId)[0]
-                                ?.username}
-                          </span>
-                          <span className="postDate text-xs">{post.date}</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                  <div className=" z-40 w-full transition duration-300 ease-in-out cursor-pointer absolute from-black/80 to-transparent bg-gradient-to-t inset-x-0 bottom-0 pt-30 text-white flex items-start">
-                    <div>
-                      <div className="w-full  space-y-3 text-xl  group-hover:translate-y-0 translate-y-0  transform transition duration-300 ease-in-out">
-                        <div className="flex items-center p-5 justify-between w-[900px] w-full ">
-                          <div className="flex w-full">
-                            <BsHeart className="lg:w-8 lg:h-8 md:w-7 md:h-7 w-5 h-5  mx-1.5 lg:mx-2.5 hover:text-red-500 " />
-                            <BsChat className="lg:w-8 lg:h-8 md:w-7 md:h-7 w-5 h-5  mx-1.5 lg:mx-2.5 hover:text-gray-500" />
-                            <BsSend className="lg:w-8 lg:h-8 md:w-7 md:h-7 w-5 h-5  mx-1.5 lg:mx-2.5  hover:text-blue-500" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
+    <div className="w-full lg:w-5/6 min-w-5/6 h-full flex items-center justify-center fixed right-0 bottom-0 sm:static ">
+      <div className="flex flex-col lg:flex-row dark:bg-slate-950 bg-slate-200 h-5/6 md:h-11/12  w-11/12 md:w-5/6 xl:w-11/12 rounded-[30px] flex-col flex xl:flex-row border dark:border-slate-800 border-slate-500 xl:rounded-l-[24px] overflow-x-hidden">
+        <img
+          src={post.photo}
+          className=" w-full h-[350px] lg:h-full  lg:w-1/2 rounded-t-[30px] xl:rounded-l-[24px] xl:rounded-tr-none object-cover p-5 bg-dark-1"
+        />
+        <div className="post_details-info dark:bg-slate-900 bg-slate-400 flex flex-col gap-5 lg:gap-7 flex-1 items-start p-5 rounded-b-[30px] lg:rounded-r-[30px] lg:rounded-l-none">
+          <div className="flex-between w-full">
+            <div className=" flex items-center gap-4">
               <img
-                alt=""
-                className="object-contain md:rounded-l-lg w-full md:w-1/2
-                 "
                 src={post.photo}
+                alt="creator"
+                className=" w-12 h-12 lg:w-14 lg:h-14 rounded-full self-ccenter"
               />
-              {/* </div> */}
-              <div>
-                <div className=" comments md:absolute w-full md:w-1/2 md:right-0 md:top-0  max-h-full overflow-y-auto scrollbar-none text-white p-2  ">
-                  <div className="comment border-b border-slate-600 p-2">
-                    <span className="font-bold ">username :</span>
-                    <br />
-                    <p className="text-sm py-1">Lorem ipsum dolor sit amet/</p>
-                    <span className="text-blue-500 "> reply</span>
-                  </div>
-                  <div className="comment border-b border-slate-600 p-2">
-                    <span className="font-bold ">username :</span>
-                    <br />
-                    <p className="text-sm py-1">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Earum aperiam maiores
-                    </p>
-                    <span className="text-blue-500 "> reply</span>
-                  </div>
-                  <div className="comment border-b border-slate-600 p-2">
-                    <span className="font-bold ">username :</span>
-                    <br />
-                    <p className="text-sm py-1">
-                      , optio odit sapiente vel unde eveniet veritatis facilis
-                      enim rerum rem!
-                    </p>
-                    <span className="text-blue-500 "> reply</span>
-                  </div>
-                  <div className="comment border-b border-slate-600 p-2">
-                    <span className="font-bold ">username :</span>
-                    <br />
-                    <p className="text-sm py-1">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Earum aperiam maiores vitae sequi et aliquid obcaecati
-                      dolorem, placeat quia, optio odit sapiente vel unde
-                      eveniet veritatis facilis enim rerum rem!
-                    </p>
-                    <span className="text-blue-500 "> reply</span>
-                  </div>
-                  <div className="comment border-b border-slate-600 p-2">
-                    <span className="font-bold ">username :</span>
-                    <br />
-                    <p className="text-sm py-1">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Earum aperiam maiores vitae sequi et aliquid obcaecati
-                      dolorem, placeat quia,
-                    </p>
-                    <span className="text-blue-500 "> reply</span>
-                  </div>
-                  <div className="comment border-b border-slate-600 p-2">
-                    <span className="font-bold ">username :</span>
-                    <br />
-                    <p className="text-sm py-1">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. E
-                    </p>
-                    <span className="text-blue-500 "> reply</span>
-                  </div>
-                </div>
-              </div>
+              <p className="self-center text-white md:text-xl font-medium">
+                MaryamEbrahimi <br />
+                <span className="text-sm dark:text-gray-400 text-gray-500 font-medium">
+                  13 minutes ago
+                </span>
+              </p>
             </div>
           </div>
-        )}
-      </Modal>
-    </>
+          <hr className="border w-full border-dark-4/80" />
+
+          <div className="flex text-white flex-col font-medium flex-1 w-full small-medium lg:base-regular">
+            <p className="text-gray-200">
+              unlimited next.js course for begginers
+            </p>
+            <ul className="flex gap-1 mt-2">
+              <li className="dark:text-gray-400 text-gray-500">#Next.js</li>
+            </ul>
+          </div>
+          <div className="w-full flex justify-between items-center">
+            {!isLike ? (
+              <BsHeart
+                onClick={() => setIsLike(true)}
+                className="text-red-500 w-6 h-6 lg:w-7 lg:h-7 cursor-pointer"
+              />
+            ) : (
+              <BsHeartFill
+                onClick={() => setIsLike(false)}
+                className="text-red-500 w-6 h-6 lg:w-7 lg:h-7 cursor-pointer"
+              />
+            )}
+            {isBookmark ? (
+              <BsBookmarkFill
+                onClick={() => setIsBookmart(false)}
+                className="text-blue-500 w-6 h-6 lg:w-7 lg:h-7 cursor-pointer "
+              />
+            ) : (
+              <BsBookmark
+                onClick={() => setIsBookmart(true)}
+                className="text-blue-500 w-6 h-6 lg:w-7 lg:h-7 cursor-pointer "
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
-
-// backup
-
-// import { useState } from "react";
-// import { useEffect } from "react";
-// import {
-//   BsChat,
-//   BsChatFill,
-//   BsHeart,
-//   BsHeartFill,
-//   BsSend,
-// } from "react-icons/bs";
-// import { useDispatch, useSelector } from "react-redux";
-// import { Link, useParams } from "react-router-dom";
-// import { getAsyncExploreSinglePost } from "../../features/explore/exploreSlice";
-// import useFetch from "../../hooks/useFetch";
-
-// export default function SinglePost() {
-//   const {
-//     posts,
-//     loading: isLoading,
-//     error,
-//     post,
-//   } = useSelector((state) => state.explorePosts);
-//   const { data: users } = useFetch("http://localhost:5000/users");
-
-//   const dispatch = useDispatch();
-//   const { id: postId } = useParams();
-
-//   useEffect(() => {
-//     dispatch(getAsyncExploreSinglePost({ id: postId }));
-//     // }
-//   }, []);
-//   return (
-//     <>
-//       {post && (
-//         <div className="w-full lg:w-5/6 h-screen flex items-center ">
-//           <div className="aspect-square w-5/6 h-5/6 flex items-center justify-center  cursor-pointer lg:rounded-xl relative group w-fit">
-//             <div className="lg:rounded-xl  z-40  cursor-pointer absolute from-black/80 to-transparent bg-gradient-to-b inset-x-0 top-0 pt-30 text-white flex items-start">
-//               <div className=" p-4 space-y-3 text-xl group-hover:translate-y-0 translate-y-0 pb-10 transform transition duration-300 ease-in-out">
-//                 <div className=" text-sm  ">
-//                   <Link
-//                     to="/profile"
-//                     className="postTopLeft flex items-center hover:opacity-60 "
-//                   >
-//                     <img
-//                       className="postProfileImg w-8 h-8 rounded-full h-full object-cover"
-//                       src={
-//                         users &&
-//                         users.filter((u) => u.id == post.userId)[0]
-//                           ?.profilePicture
-//                       }
-//                     />
-//                     <span className="postUsername text-sm font-medium mx-2.5 ">
-//                       {users &&
-//                         users.filter((u) => u.id === post.userId)[0]?.username}
-//                     </span>
-//                     <span className="postDate text-xs">{post.date}</span>
-//                   </Link>
-//                 </div>
-//               </div>
-//             </div>
-//             <div className="lg:rounded-xl z-40 w-full transition duration-300 ease-in-out cursor-pointer absolute from-black/80 to-transparent bg-gradient-to-t inset-x-0 bottom-0 pt-30 text-white flex items-start">
-//               <div>
-//                 <div className="w-full  space-y-3 text-xl  group-hover:translate-y-0 translate-y-0  transform transition duration-300 ease-in-out">
-//                   <div className="flex items-center p-5 justify-between w-[900px] w-full ">
-//                     <div className="flex w-full">
-//                       <BsHeart className="lg:w-8 lg:h-8 md:w-7 md:h-7 w-5 h-5  mx-1.5 lg:mx-2.5 hover:text-red-500 " />
-//                       <BsChat className="lg:w-8 lg:h-8 md:w-7 md:h-7 w-5 h-5  mx-1.5 lg:mx-2.5 hover:text-gray-500" />
-//                       <BsSend className="lg:w-8 lg:h-8 md:w-7 md:h-7 w-5 h-5  mx-1.5 lg:mx-2.5  hover:text-blue-500" />
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//             <img
-//               alt=""
-//               className="object-contain w-full h-full
-//                   transition duration-300 ease-in-out rounded-xl"
-//               src={post.photo}
-//             />
-//           </div>
-//         </div>
-//       )}
-//     </>
-//   );
-// }
