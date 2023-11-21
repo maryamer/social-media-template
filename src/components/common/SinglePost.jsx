@@ -68,15 +68,25 @@ export default function SinglePost() {
           </div>
           <div className="w-full flex justify-between items-center">
             {!isLike ? (
-              <BsHeart
-                onClick={() => setIsLike(true)}
-                className="text-red-500 w-6 h-6 lg:w-7 lg:h-7 cursor-pointer"
-              />
+              <div className="relative">
+                <BsHeart
+                  onClick={() => setIsLike(true)}
+                  className="text-red-500 w-6 h-6 lg:w-7 lg:h-7 cursor-pointer"
+                />{" "}
+                <span className="font-bold absolute text-white -right-5 -top-1 text-xl">
+                  0
+                </span>
+              </div>
             ) : (
-              <BsHeartFill
-                onClick={() => setIsLike(false)}
-                className="text-red-500 w-6 h-6 lg:w-7 lg:h-7 cursor-pointer"
-              />
+              <div className="relative">
+                <BsHeartFill
+                  onClick={() => setIsLike(false)}
+                  className="text-red-500 w-6 h-6 lg:w-7 lg:h-7 cursor-pointer"
+                />
+                <span className="font-bold absolute text-white -right-5 -top-1 text-xl">
+                  1
+                </span>
+              </div>
             )}
             {isBookmark ? (
               <BsBookmarkFill

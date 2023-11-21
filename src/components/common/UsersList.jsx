@@ -27,13 +27,13 @@ export default function UsersList({
   }, []);
   const navigate = useNavigate();
   return (
-    <div className="UsersList  w-full md:w-4/6 h-screen  dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
+    <div className="UsersList absolute right-0 top-0  sm:static  w-full md:w-4/6 h-screen  dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
       <button
         onClick={() => {
           setIsSettingOpen(false);
           navigate("/");
         }}
-        className="flex w-full xl:ml-2.5 text-slate-500"
+        className="flex w-full ml-2.5 text-slate-400"
       >
         <TiArrowBackOutline
           className="hover:text-slate-600 cursor-pointers p-1 w-8 h-8
@@ -43,7 +43,7 @@ export default function UsersList({
       </button>
       <SearchComponent title={title} />
       <div className="characters-list overflow-x-hidden flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll scrollbar-none ">
-        {title && <HeaderTitle title={title} />}
+        {/* {title && <HeaderTitle title={title} />} */}
         <div className="w-full h-full lg:h-[95%] ">
           {users ? (
             users.map((item) => (

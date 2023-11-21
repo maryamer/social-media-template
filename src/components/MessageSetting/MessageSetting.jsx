@@ -3,19 +3,21 @@ import { TiArrowBackOutline } from "react-icons/ti";
 
 export default function MessageSetting({ setIsSettingOpen }) {
   return (
-    <div className=" flex flex-col justify-between w-full">
-      <div className="setting head  w-full border-b border-b-gray-500">
-        <div
-          className="flex items-center"
-          onClick={() => setIsSettingOpen((prev) => !prev)}
+    <div className=" flex flex-col justify-between w-full border-l dark:border-slate-800 border-slate-400 ">
+      <div className="setting head  w-full border-b dark:border-slate-800 border-slate-400">
+        <button
+          onClick={() => {
+            setIsSettingOpen((prev) => !prev);
+            navigate("/");
+          }}
+          className="flex w-full ml-2.5 text-slate-400 py-2"
         >
           <TiArrowBackOutline
             className="hover:text-slate-600 cursor-pointers p-1 w-8 h-8
-           text-slate-500"
-          />{" "}
-          <span>Back</span>
-          <h2 className="font-bold">Message Setting</h2>
-        </div>
+          "
+          />
+          <span className="self-center font-bold">Back</span>
+        </button>
         <div className="muteContainer text-lg flex justify-between items-center h-20 px-4">
           <span>mute messages</span>
           <span>
@@ -28,7 +30,7 @@ export default function MessageSetting({ setIsSettingOpen }) {
           </span>
         </div>
       </div>
-      <div className="text-red-700 border-t border-t-gray-500 text-lg">
+      <div className="text-red-700 border-t dark:border-slate-800 border-slate-400 text-lg">
         <div className="muteContainer flex justify-between items-center h-16 px-4 cursor-pointer">
           <span>Block </span>
         </div>

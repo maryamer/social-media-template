@@ -17,7 +17,7 @@ function Sidebar({ themeHandler }) {
     { title: "Explore", id: 3, direction: "/explore" },
     { title: "Messages", id: 4, direction: "/messages" },
     { title: "Notifications", id: 5, direction: "/notifications" },
-    { title: "Create", id: 6, direction: "/create" },
+    { title: "Create", id: 6, direction: "" },
     { title: "Profile", id: 7, direction: "/profile" },
     { title: "Dark/Light", id: 8, direction: null },
   ];
@@ -30,7 +30,7 @@ function Sidebar({ themeHandler }) {
     <>
       {!pathname.includes("messages") && (
         <div
-          className={`sidebar z-50   transition-all duration-150 w-full ease-in-out md:rounded-r-3xl  md:h-full lg:w-1/6 lg:max-w-none md:max-w-fit dark:bg-slate-900 bg-slate-300  dark:text-white text-gray-800  md:relative absoolute`}
+          className={`sidebar z-50 fixed bottom-0 right-0 left-0 transition-all duration-150 w-full ease-in-out rounded-3xl md:rounded-l-none md:rounded-tl-none md:rounded-r-3xl  md:h-full lg:w-1/6 lg:max-w-none md:max-w-fit dark:bg-slate-900 bg-slate-300  dark:text-white text-gray-800  md:relative absoolute`}
         >
           <SideBarHeader />
           <Menu menuItems={menuItems} themeHandler={themeHandler}>

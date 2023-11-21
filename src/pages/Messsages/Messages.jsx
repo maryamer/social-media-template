@@ -7,7 +7,7 @@ import MessageSetting from "../../components/MessageSetting/MessageSetting";
 export default function Messages({ isSettingOpen, setIsSettingOpen }) {
   const { id } = useParams();
   return (
-    <div className="dark:text-white w-full h-full flex dark:bg-slate-950">
+    <div className="dark:text-white fixed right-0 bottom-0 w-full h-full flex dark:bg-slate-950">
       <div
         className={`${
           isSettingOpen && id
@@ -17,17 +17,16 @@ export default function Messages({ isSettingOpen, setIsSettingOpen }) {
             : !isSettingOpen && id
             ? "hidden lg:flex"
             : "hidden lg:flex"
-        }  lg:w-1/4 lg:max-w-fit  mb-px border-r border-r-slate-400 dark:border-r-gray-500`}
+        }  lg:w-1/4 lg:max-w-fit  mb-px  border-r dark:border-slate-800 border-slate-400  `}
       >
         <UsersList
           setIsSettingOpen={setIsSettingOpen}
           title="Messages"
           locationParameter="1"
         >
-          <div className="flex items-center mr-2">
-            <BsBellSlash className="hover:text-slate-600 cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-5 xl:h-5 lg:w-4 lg:h-4   text-slate-400" />
+          <div className="flex justify-end">
+            <BsBellSlash className="hover:text-slate-600 cursor-pointer  xl:w-5 xl:h-5 lg:w-4 lg:h-4 text-slate-400" />
             &nbsp;
-            <span className="bg-blue-500 rounded-full w-3 h-3"></span>
           </div>
         </UsersList>
       </div>
@@ -38,7 +37,7 @@ export default function Messages({ isSettingOpen, setIsSettingOpen }) {
             : !isSettingOpen && id
             ? "flex w-screen"
             : "hidden lg:flex"
-        }  lg:w-full  h-full min-w-fit  border-r border-r-slate-400 dark:border-r-gray-500 `}
+        }  lg:w-full h-full min-w-fit border-none  lg:border-r lg:border-r-slate-400 lg:dark:border-r-gray-500 `}
       >
         <Outlet />
       </div>
