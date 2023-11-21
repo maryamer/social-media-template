@@ -73,20 +73,25 @@ function SideBarHeader() {
   return (
     <Link
       to="/profile"
-      className="userInfo hidden  lg:flex cursor-pointer hover:opacity-70 hover:text-gray-400 transition duration-150 ease-in-out"
+      className="userInfo hidden  xl:flex cursor-pointer hover:opacity-70 hover:text-gray-400 transition duration-150 ease-in-out"
     >
       <span className="sidebarListItem flex md:py-5 md:pl-5 xl:pr-1 font-bold ">
         <div className="flex items-center xl:justify-around lg:justify-start">
           <img
-            className="shareProfileImg cursor-pointer object-cover w-10 h-10 rounded-full shadow-2xl shadow-white "
+            className="shareProfileImg cursor-pointer object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full shadow-2xl "
             src={user.image}
             alt=""
           />
           &nbsp;&nbsp;
         </div>
-      </span>
-      <span className="sidebarListItemText  whitespace-nowrap items-center hidden lg:flex md:font-medium lg:font-normal text-sm xl:text-lg  xl:font-bold">
-        {user && user.username}
+        <span className="flex flex-col justify-center">
+          <span className="sidebarListItemText  whitespace-nowrap flex md:font-medium lg:font-normal text-sm lg:text-base  xl:font-semibold ">
+            Maryam Ebrahimi
+          </span>
+          <span className="sidebarListItemText  whitespace-nowrap flex md:font-medium lg:font-normal text-sm lg:text-base  text-gray-400">
+            {user && user.username}
+          </span>
+        </span>
       </span>
     </Link>
   );
