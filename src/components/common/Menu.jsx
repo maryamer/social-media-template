@@ -11,11 +11,11 @@ export default function Menu({
     <div
       className={`${
         isSidebar ? "flex-col" : "flex"
-      } h-14 md:h-2/3  cursor-pointer md:mx-2`}
+      }  md:h-2/3 w-full cursor-pointer `}
     >
       <div
-        className={`overflow-hidden h-14 md:h-full flex  justify-around items-center  w-full  ${
-          isSidebar ? "md:flex-col md:items-start" : ""
+        className={`overflow-hidden  md:h-full flex  justify-around items-center  w-full  ${
+          isSidebar ? "md:flex-col items-start" : ""
         } `}
       >
         {menuItems &&

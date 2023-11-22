@@ -30,8 +30,8 @@ export default function UsersList({
     <div className="UsersList absolute right-0 top-0  sm:static  w-full md:w-4/6 h-screen  dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
       <button
         onClick={() => {
-          setIsSettingOpen(false);
-          navigate("/");
+          setIsSettingOpen && setIsSettingOpen(false);
+          navigate(-1);
         }}
         className="flex w-full ml-2.5 text-slate-400"
       >
