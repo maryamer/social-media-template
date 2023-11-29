@@ -61,6 +61,78 @@
       "status": "boring boring boring.."
     }
   ],
+  "notifications": [
+    {
+      "id": 1,
+      "type": "like",
+      "userImage": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
+      "username": "Safak Kocaoglu",
+      "status": "boring boring boring.."
+    },
+    {
+      "id": 2,
+      "type": "like",
+      "userImage": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
+      "username": "Janell Shrum",
+      "status": "how's the wheater out there?"
+    },
+    {
+      "id": 3,
+      "type": "like",
+      "userImage": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
+      "username": "Alex Durden",
+      "status": "boring boring boring.."
+    },
+    {
+      "id": 4,
+      "type": "like",
+      "userImage": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
+      "username": "Dora Hawks",
+      "status": "boring boring boring.."
+    },
+    {
+      "id": 5,
+      "type": "like",
+      "userImage": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
+      "username": "Thomas Holden",
+      "status": "boring boring boring.."
+    },
+    {
+      "id": 6,
+      "type": "like",
+      "userImage": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
+      "username": "Shirley Beauchamp",
+      "status": "boring boring boring.."
+    },
+    {
+      "id": 7,
+      "type": "like",
+      "userImage": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
+      "username": "Travis Bennett",
+      "status": "boring boring boring.."
+    },
+    {
+      "id": 8,
+      "type": "like",
+      "userImage": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
+      "username": "Kristen Thomas",
+      "status": "boring boring boring.."
+    },
+    {
+      "id": 9,
+      "type": "like",
+      "userImage": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
+      "username": "Gary Duty",
+      "status": "boring boring boring.."
+    },
+    {
+      "id": 10,
+      "type": "like",
+      "userImage": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
+      "username": "Safak Kocaoglu",
+      "status": "boring boring boring.."
+    }
+  ],
   "posts": [
     {
       "id": 1,
@@ -164,7 +236,7 @@
     }
   ],
   "accountUser": {
-    "name": "Maryam",
+    "name": "maryam._eb_",
     "lastName": "Ebrahimi",
     "newPassword": "",
     "username": "maryam._eb_",

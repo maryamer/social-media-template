@@ -24,7 +24,6 @@ export const getAsyncExploreSinglePost = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const response = await api.get(`/posts/${payload.id}`);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);

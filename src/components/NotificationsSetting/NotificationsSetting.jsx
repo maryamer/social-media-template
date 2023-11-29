@@ -15,8 +15,6 @@ export default function NotificationsSetting() {
     { label: "Female", value: "female" },
   ];
   const onChangeHandler = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
   };
   return (

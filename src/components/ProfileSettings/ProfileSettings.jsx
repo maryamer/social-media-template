@@ -12,6 +12,7 @@ import {
 import CloudinaryUploadWidget, {
   initializeCloudinaryWidget,
 } from "../common/CloudinaryUploadWidget/CloudinaryUploadWidget";
+import { AccountUser } from "../../data/Data";
 
 export default function ProfileSettings() {
   const [formValues, setFormValues] = useState(null);
@@ -19,15 +20,20 @@ export default function ProfileSettings() {
   const {
     loading: isLoading,
     error,
-    user,
+    // user,
   } = useSelector((state) => state.accountUser);
-  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getAsyncAccountUser());
+  //   if (user) {
+  //     setFormValues(user);
+  //   }
+  // }, []);
+  const [user, setUser] = useState(null);
   useEffect(() => {
-    dispatch(getAsyncAccountUser());
-    if (user) {
-      setFormValues(user);
-    }
+    const user = AccountUser();
+    setUser(user);
   }, []);
+  const dispatch = useDispatch();
 
   const validationSchema = Yup.object({
     name: Yup.string("name should be string ")
@@ -46,8 +52,6 @@ export default function ProfileSettings() {
   const [imageUrl, setImageUrl] = useState("");
 
   const onEdit = async (values) => {
-    console.log(imageUrl);
-
     if (imageUrl) {
       dispatch(editAsyncAccountUser({ values: values, image: imageUrl }));
     } else {
@@ -72,19 +76,19 @@ export default function ProfileSettings() {
       {user && (
         <div className="w-full mx-auto ">
           <div className="px-1 py-2 flex flex-col items-center justify-center">
+            {/* <div className="px-4 py-5 flex items-center justify-center md:justify-start ">
+              <h2 className="text-xl  font-bold text-slate-400">
+                User Profile Settings
+              </h2>
+            </div> */}
             <EditAvatar
-              imageUrl={imageUrl}
+              imageUrl={imageUrl || user.profilePicture}
               setImageUrl={setImageUrl}
               name="name"
               formik={formik}
               onEdit={onEdit}
             />
-            <div className="dark:bg-slate-900 bg-white overflow-hidden shadow w-full md:w-5/6 rounded-lg ">
-              <div className="px-4 py-5 flex items-center justify-center md:justify-start ">
-                <h2 className="text-xl  font-bold text-slate-400">
-                  User Profile
-                </h2>
-              </div>
+            <div className="dark:bg-slate-950 bg-slate-300 overflow-hidden  w-full md:w-5/6 rounded-lg ">
               <div className=" px-4 md:py-5 sm:p-0">
                 <form
                   onSubmit={formik.handleSubmit}
@@ -150,7 +154,7 @@ function EditAvatar({ formik, onEdit, imageUrl, setImageUrl }) {
 
   return (
     <div className="flex w-5/6 items-center md:items-start justify-center flex-col gap-1 text-center md:py-5 my-4">
-      <div className="flex  bg-center bg-no-repeat bg-cover w-36 h-36 rounded-full  shadow-lg">
+      <div className="flex flex-col items-center md:items-end md:flex-row  bg-center bg-no-repeat bg-cover  rounded-full  ">
         <div className="relative cursor-pointer ">
           <CloudinaryUploadWidget loaded={loaded} setLoaded={setLoaded}>
             <button
@@ -174,16 +178,16 @@ function EditAvatar({ formik, onEdit, imageUrl, setImageUrl }) {
               </span>
             </button>
           </CloudinaryUploadWidget>
-          <div className=" p-1  flex  dark:text-gray-200 sm:mt-0 ">
-            <button
-              type="submit"
-              onClick={() => onEdit(formik.values, imageUrl)}
-              // disabled={formik.values.image === user.image}
-              className="md:font-semibold flex font-medium text-blue-800 hover:text-blue-500 cursor-pointer lg:mr-12"
-            >
-              Done
-            </button>
-          </div>
+        </div>
+        <div className=" p-1  flex items-end dark:text-gray-200 sm:mt-0 ">
+          <button
+            type="submit"
+            onClick={() => onEdit(formik.values, imageUrl)}
+            // disabled={formik.values.image === user.image}
+            className="md:font-semibold flex font-medium text-blue-800 hover:text-blue-500 cursor-pointer lg:mr-12"
+          >
+            Done
+          </button>
         </div>
       </div>
     </div>
@@ -205,7 +209,7 @@ function SettingItem({ label, name, formik, type = "text", user }) {
             type={type}
             name={name}
             value={formik.value}
-            className=" w-full  dark:bg-slate-950 bg-slate-300 dark:text-white text-gray-800 outline-none p-2 rounded-lg w-[80%]"
+            className=" w-full   cursor-pointer dark:bg-slate-900 bg-slate-200 dark:text-white text-gray-700 outline-none p-2 rounded-lg w-[80%]"
             {...formik.getFieldProps({ name })}
           />{" "}
           {formik.errors[name] && formik.touched[name] && (

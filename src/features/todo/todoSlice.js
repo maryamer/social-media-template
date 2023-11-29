@@ -21,7 +21,6 @@ export const getAsyncTodos = createAsyncThunk(
 export const addAsyncTodo = createAsyncThunk(
   "todos/addAsyncTodo",
   async (payload, { rejectWithValue }) => {
-    console.log(payload);
     try {
       const response = await api.post(`/todos`, {
         title: payload.title,

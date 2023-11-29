@@ -1,67 +1,121 @@
-import { useState } from "react";
-import { BsHeart, BsSend } from "react-icons/bs";
-import { BsChat } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
+import { useEffect, useState } from "react";
+import {
+  BsBookmark,
+  BsBookmarkFill,
+  BsHeart,
+  BsHeartFill,
+} from "react-icons/bs";
+import { Users } from "../../data/Data";
+import Loader from "../common/Loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 export default function Post({ post }) {
-  const { isLoading, data: users } = useFetch("http://localhost:5000/users");
+  // const { isLoading, data: users } = useFetch("http://localhost:5000/users");
+  const users = Users();
+  const [user, setUser] = useState();
+  useEffect(() => {
+    const selectedUser = users.find((item) => item.id == post.userId);
+    setUser(selectedUser);
+  }, []);
+  const navigate = useNavigate();
 
   const [like, setLike] = useState(post.like);
-  const [islLike, setIsLike] = useState(false);
+  const [isLike, setIsLike] = useState(false);
+  const [isBookmark, setIsBookmart] = useState(false);
 
   const likeHandler = () => {
-    setIsLike(!islLike);
-    setLike(islLike ? like - 1 : like + 1);
+    setIsLike(!isLike);
+    setLike(isLike ? like - 1 : like + 1);
   };
   return (
-    <div className="post xl:max-w-[75%]  dark:bg-slate-950 dark:text-white w-full lg:w-4/5 xl:m-1  ">
-      <div className="postCenter py-1 ">
-        <div className="overflow-hidden  cursor-pointer lg:rounded-xl relative group w-full">
-          <div className="lg:rounded-xl z-40   opacity-100 group-hover:opacity-100 transition duration-300 ease-in-out cursor-pointer absolute from-black/80 to-transparent bg-gradient-to-b inset-x-0 -top-1 pt-30 text-white flex items-start">
-            <div className="  p-4 space-y-3 text-xl group-hover:opacity-100 group-hover:translate-y-0 translate-y-0 pb-10 transform transition duration-300 ease-in-out">
-              <div className="opacity-100 text-sm  ">
-                <Link
-                  to="/profile"
-                  className="postTopLeft flex items-center hover:opacity-60"
-                >
-                  <img
-                    className="postProfileImg w-8 h-8 rounded-full object-cover"
-                    src={
-                      users &&
-                      users.filter((u) => u.id == post.userId)[0]
-                        ?.profilePicture
-                    }
-                  />
-                  <span className="postUsername text-sm font-medium mx-2.5 ">
-                    {users &&
-                      users.filter((u) => u.id === post.userId)[0]?.username}
+    <>
+      {user ? (
+        <div className="flex flex-col mb-2 md:mb-5 dark:bg-slate-950 bg-slate-300 bg-slate-200 h-fit w-11/12 rounded-[30px] border dark:border-slate-800 border-slate-400 xl:rounded-l-[24px] ">
+          <div className="px-5 pt-5">
+            <div className="flex-between w-full">
+              <div className=" flex items-center gap-4">
+                <img
+                  onClick={() => navigate(`user/${user.id}/posts`)}
+                  src={user?.profilePicture}
+                  alt="creator"
+                  className=" w-12 h-12 cursor-pointer object-cover  rounded-full self-ccenter"
+                />
+                <p className="self-center dark:text-white text-slate-600  font-medium">
+                  {user?.username}
+                  <br />
+                  <span className="text-sm dark:text-gray-400 text-gray-500 font-medium">
+                    13 minutes ago
                   </span>
-                  <span className="postDate text-xs">{post.date}</span>
-                </Link>
+                </p>
               </div>
             </div>
-          </div>
-          <div className="lg:rounded-xl z-40 w-full opacity-100 group-hover:opacity-100 transition duration-300 ease-in-out cursor-pointer absolute from-black/80 to-transparent bg-gradient-to-t inset-x-0 -bottom-6 pt-30 text-white flex items-start">
-            <div>
-              <div className="w-full  lg:p-4 lg:pb-10 space-y-3 text-xl lg:opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-0 pb-10 transform transition duration-300 ease-in-out">
-                <div className="flex items-center justify-between w-[900px] ">
-                  <div className="flex w-full">
-                    <BsHeart className="lg:w-8 lg:h-8 md:w-7 md:h-7 w-5 h-5  mx-1.5 lg:mx-2.5 hover:text-red-500 " />
-                    <BsChat className="lg:w-8 lg:h-8 md:w-7 md:h-7 w-5 h-5  mx-1.5 lg:mx-2.5 hover:text-gray-500" />
-                    <BsSend className="lg:w-8 lg:h-8 md:w-7 md:h-7 w-5 h-5  mx-1.5 lg:mx-2.5  hover:text-blue-500" />
-                  </div>
-                </div>
-              </div>
+
+            <div className="flex text-white flex-col  flex-1 w-full small-medium ">
+              <p className=" text-slate-600 dark:text-gray-200 mt-4 ">
+                unlimited next.js course for begginers
+              </p>
+              <ul className="flex gap-1 mt-2">
+                {post?.tags.map((item) => (
+                  <li
+                    key={item.id}
+                    className="dark:text-gray-400 text-gray-500"
+                  >
+                    #{item.tagname}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
           <img
-            alt=""
-            className="object-contain w-full group-hover:scale-100 transition duration-300 ease-in-out"
             src={post.photo}
+            className=" w-full h-[350px] lg:h-[400px]  rounded-[30px]  object-cover p-5 bg-dark-1"
           />
+          <div className="post_details-info  flex flex-col gap-5 flex-1 items-start p-5 rounded-b-[30px] ">
+            <div className="w-full flex justify-between items-center">
+              {!isLike ? (
+                <div className="relative flex justify-between w-10">
+                  <span>
+                    <BsHeart
+                      onClick={() => setIsLike(true)}
+                      className="text-red-500 w-6 h-6  cursor-pointer "
+                    />
+                  </span>
+                  &nbsp;&nbsp;
+                  <span className="font-bold flex items-start dark:text-white text-slate-500 -right-5 -top-1 text-xl ">
+                    {like}
+                  </span>
+                </div>
+              ) : (
+                <div className="relative flex justify-between w-10">
+                  <span>
+                    <BsHeartFill
+                      onClick={() => setIsLike(false)}
+                      className="text-red-500 w-6 h-6 cursor-pointer  "
+                    />
+                  </span>
+                  &nbsp;&nbsp;
+                  <span className="font-bold flex items-start  dark:text-white text-slate-500  text-xl ">
+                    {like}
+                  </span>
+                </div>
+              )}
+              {isBookmark ? (
+                <BsBookmarkFill
+                  onClick={() => setIsBookmart(false)}
+                  className="text-blue-500 w-6 h-6  cursor-pointer "
+                />
+              ) : (
+                <BsBookmark
+                  onClick={() => setIsBookmart(true)}
+                  className="text-blue-500 w-6 h-6  cursor-pointer "
+                />
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <Loader />
+      )}
+    </>
   );
 }

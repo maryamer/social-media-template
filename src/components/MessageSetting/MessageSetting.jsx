@@ -1,7 +1,10 @@
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { TiArrowBackOutline } from "react-icons/ti";
+import { useSetting } from "../../context/OpenSettingContext";
 
-export default function MessageSetting({ setIsSettingOpen }) {
+export default function MessageSetting() {
+  const { setIsSettingOpen } = useSetting();
+
   return (
     <div className=" flex flex-col justify-between w-full border-l dark:border-slate-800 border-slate-400 ">
       <div className="setting head  w-full border-b dark:border-slate-800 border-slate-400">

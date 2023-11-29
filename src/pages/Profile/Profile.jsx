@@ -1,49 +1,68 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
-import { IoMdSettings } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineAppstore } from "react-icons/ai";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import InnerHeader from "../../components/common/InnerHeader";
-import { getAsyncAccountUser } from "../../features/accountUser/accountUserSlice";
-import useFetch from "../../hooks/useFetch";
-import Explore from "../Explore/Explore";
 import Loader from "../../components/common/Loader/Loader";
+import { BsBookmarkFill } from "react-icons/bs";
+import { AccountUser, Users } from "../../data/Data";
+import Modal from "../../components/common/Modal/Modal";
 
 function Profile() {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
-  // const [item, setItem] = useState({});
-  const {
-    user,
-    loading: isLoading,
-    error,
-  } = useSelector((state) => state.accountUser);
-  const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const { userId } = useParams();
+
+  const accountUser = AccountUser();
+  const users = Users();
+  const [user, setUser] = useState();
+  const navigate = useNavigate();
   useEffect(() => {
-    dispatch(getAsyncAccountUser());
+    if (pathname.includes("user")) {
+      const selectedUser = users.find((item) => item.id == userId);
+      setUser(selectedUser);
+    } else {
+      setUser(accountUser);
+    }
+  }, [pathname]);
+  useEffect(() => {
+    navigate("posts", { replace: true });
   }, []);
+  // const [item, setItem] = useState({});
+  // const {
+  //   user,
+  //   loading: isLoading,
+  //   error,
+  // } = useSelector((state) => state.accountUser);
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   navigate("posts");
+  //   dispatch(getAsyncAccountUser());
+  // }, []);
 
   return (
-    <div className=" w-full md:w-5/6 lg:w-4/6 mx-auto bg-slate-300 dark:bg-slate-900 dark:text-white overflow-y-scroll md:scrollbar-none h-screen">
+    <div className=" w-full md:w-5/6 lg:w-4/6 mx-auto bg-slate-300 dark:bg-slate-950 dark:text-white overflow-y-scroll scrollbar-none h-screen">
       {user ? (
         <>
-          <div className="">
+          <div className=" ">
             <InnerHeader
               user={user}
               setIsSettingOpen={setIsSettingOpen}
-              direction
-            >
-              <Link to="/profile/settings">
-                <IoMdSettings
-                  onClick={() => setIsSettingOpen((prev) => !prev)}
-                  className="hover:text-slate-600 hover:cursor-pointer xl:mr-2.5 lg:mr-1.5 xl:w-10 xl:h-10 w-8 h-8   text-slate-400"
-                />
-              </Link>
-            </InnerHeader>
-            <ProfileBody user={user} isLoading={isLoading} />
+              direction="/profile/settings"
+              title={user.username}
+            />
+            <ProfileBody user={user} pathname={pathname} />
           </div>
-          <Explore isLoading={isLoading} />
+          {/* <Explore isLoading={isLoading} /> */}
+          <Outlet />
         </>
       ) : (
         <div>loading</div>
@@ -54,100 +73,140 @@ function Profile() {
 
 export default Profile;
 
-function ProfileBody({ user, isLoading }) {
+function ProfileBody({ user, isLoading, pathname }) {
   const navigate = useNavigate();
-
+  const [isFollow, setIsFollow] = useState(false);
+  const [followerNumber, setFollowerNumber] = useState(100);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   return (
     <>
-      <div className="flex flex-col gap-1 text-center  mt-4">
+      <div className="flex flex-col items-center text-center mt-4">
         {isLoading ? (
           <Loader />
         ) : (
           <>
-            <Link className="block mx-auto bg-center bg-no-repeat bg-cover w-20 h-20 md:h-36 md:w-36 rounded-full border border-gray-400 shadow-lg">
-              <img
-                src={`${user?.image}`}
-                alt=""
-                className="rounded-full object-cover "
-              />
-            </Link>
-            <h2 className="font-bold">
-              {user?.name}&nbsp;
-              {user?.lastName}
-            </h2>
-            <span className="text-sm text-gray-600">{user.bio}</span>
-            <span className="text-sm text-gray-400">{user.location}</span>
-            <Link to={user.link} className="text-sm text-gray-400">
-              {user.link}
-            </Link>
-            <div className="flex justify-center w-full items-center md:p-1 gap-2 my-3 text-gray-700">
-              <div className="font-semibold text-center mx-4 ">
-                <p className="dark:text-white">102</p>
-                <span className="text-gray-400">Posts</span>
+            <div className="flex flex-row w-11/12 md:items-center ">
+              <Link className="flex justify-center w-2/6 md:w-[20%]  bg-center bg-no-repeat bg-cover   rounded-full">
+                <img
+                  src={`${user?.profilePicture}`}
+                  alt=""
+                  className="rounded-full object-cover w-20 h-20 md:h-32 md:w-32 "
+                />
+              </Link>
+              <div className="flex flex-col md:items-start justify-center items-center w-4/6 md:w-[80%] items-start p-1">
+                <h2 className="font-semibold text-lg hidden md:flex">
+                  {user?.username}&nbsp;
+                </h2>
+                <span className="text-sm text-gray-600 hidden md:flex">
+                  {user.name}&nbsp;{user.lastname}
+                </span>
+                <span className="text-sm text-gray-400 mt-2 hidden md:flex">
+                  {user.bio}
+                </span>
+
+                <div className="flex md:justify-start justify-around w-full font-semibold text-sm gap-2 my-2 text-gray-700">
+                  <div className="flex flex-col   md:flex-row  text-center md:mr-2">
+                    <p className="dark:text-blue-400 md:mr-1  ">12</p>
+                    <span className="text-gray-400">Posts</span>
+                  </div>
+                  <Link
+                    to="/followers"
+                    className="flex flex-col  md:flex-row  text-center md:mr-2 cursor-pointer"
+                  >
+                    <p className="dark:text-blue-400 md:mr-1  ">
+                      {followerNumber}
+                    </p>
+                    <span className="text-gray-400">Followers</span>
+                  </Link>
+                  <Link
+                    to="/following"
+                    className="flex flex-col  md:flex-row text-center md:mr-2 cursor-pointer"
+                  >
+                    <p className="dark:text-blue-400 md:mr-1  ">102</p>
+                    <span className="text-gray-400">Folowing</span>
+                  </Link>
+                </div>
               </div>
-              <Link
-                to="followers"
-                className="font-semibold text-center mx-4 cursor-pointer"
-              >
-                <p className="dark:text-white">102</p>
-                <span className="text-gray-400">Followers</span>
-              </Link>
-              <Link
-                to="followings"
-                className="font-semibold text-center mx-4 cursor-pointer"
-              >
-                <p className="dark:text-white">102</p>
-                <span className="text-gray-400">Folowing</span>
-              </Link>
             </div>
-            <div className="flex justify-around gap-2 w-full my-5 md:p-5">
-              <button className="bg-slate-500 hover:bg-slate-600 w-3/6 px-10 py-2 rounded-2xl text-white shadow-lg">
-                Follow
-              </button>
-              <button
-                onClick={() => navigate("/messages/1")}
-                className="bg-slate-800 hover:bg-slate-900 border w-3/6  border-gray-500 px-10 py-2 text-white rounded-2xl shadow-lg"
-              >
-                Message
-              </button>
+            <div className="flex md:hidden flex-col items-start w-5/6  sm:px-10 ">
+              <h2 className="md:font-semibold md:text-lg ">
+                {user?.name}&nbsp;
+                {user?.lastName}
+              </h2>
+              <span className="text-sm text-gray-400 mt-1">{user.bio}</span>
             </div>
-            <div className="flex justify-between md:p-5 items-center">
-              <button className="w-full py-2 border-b-2 border-blue-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mx-auto h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+            {pathname.includes("user") && (
+              <div className="flex items-start  w-11/12 my-5 md:p-5 rounded">
+                <button
+                  onClick={() => {
+                    isFollow
+                      ? setIsOpenModal(true)
+                      : (setFollowerNumber((prev) => prev + 1),
+                        setIsFollow(true));
+                  }}
+                  className={[
+                    "hover:opacity-80 w-1/3 py-2 rounded-l-lg text-white ",
+                    isFollow
+                      ? "dark:bg-slate-800 dark:bg-slate-500"
+                      : "dark:bg-slate-500 bg-slate-400 ",
+                  ].join(" ")}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                  />
-                </svg>
-              </button>
-              <button className="w-full py-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mx-auto h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                  {isFollow ? "Unfollow" : "Follow"}
+                </button>
+                <button
+                  onClick={() => navigate("/messages/1")}
+                  className="dark:bg-slate-800 bg-slate-500 hover:opacity-80  rounded-r-lg w-1/3   py-2 text-white  "
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-                  />
-                </svg>
-              </button>
+                  Message
+                </button>
+              </div>
+            )}
+            <div className="flex justify-between w-full text-slate-800 dark:text-slate-400 items-center">
+              <NavLink
+                to="posts"
+                className="w-full opacity-80 hover:opacity-100 py-2 "
+              >
+                {({ isActive }) => (
+                  <div
+                    className={
+                      isActive
+                        ? "w-full py-2 border-b-2 border-blue-400 "
+                        : "w-full py-2"
+                    }
+                  >
+                    <AiOutlineAppstore className="m-auto font-bold w-5 h-auto py-2" />
+                  </div>
+                )}
+              </NavLink>
+              <NavLink
+                to="bookmarks"
+                className="w-full opacity-70 hover:opacity-100 py-2 "
+              >
+                {({ isActive }) => (
+                  <div
+                    className={
+                      isActive
+                        ? "w-full py-2 border-b-2 border-blue-400 "
+                        : "w-full py-2"
+                    }
+                  >
+                    <BsBookmarkFill className="m-auto w-5 h-auto py-2 " />
+                  </div>
+                )}
+              </NavLink>
             </div>
           </>
         )}
       </div>
+      <Modal
+        onOpen={setIsOpenModal}
+        open={isOpenModal}
+        message={`unfollow ${user.name}`}
+        toastSuccessMessage="Successfully unfolowed"
+        cb={() => {
+          setIsFollow((prev) => !prev), setFollowerNumber((prev) => prev - 1);
+        }}
+      />
     </>
   );
 }

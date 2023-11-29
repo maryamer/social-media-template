@@ -1,16 +1,11 @@
 import React from "react";
 import MenuItem from "./MenuItem";
 
-export default function Menu({
-  children,
-  menuItems,
-  isSidebar = true,
-  themeHandler,
-}) {
+export default function Menu({ children, menuItems, isSidebar = true }) {
   return (
     <div
       className={`${
-        isSidebar ? "flex-col" : "flex"
+        isSidebar ? "flex flex-col" : "flex"
       }  md:h-2/3 w-full cursor-pointer `}
     >
       <div
@@ -25,7 +20,6 @@ export default function Menu({
               direction={item.direction}
               key={item.id}
               isSidebar={isSidebar}
-              themeHandler={item.title === "Dark/Light" && themeHandler}
             />
           ))}
       </div>

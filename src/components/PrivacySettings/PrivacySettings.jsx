@@ -4,15 +4,17 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import * as Yup from "yup";
 import useFetch from "../../hooks/useFetch";
+import { AccountUser } from "../../data/Data";
 const initialValues = {
   password: "",
   passwordConfirm: "",
   newPassword: "",
 };
 export default function PrivacySettings() {
-  const { isLoading, data: user } = useFetch(
-    "http://localhost:5000/accountUser"
-  );
+  // const { isLoading, data: user } = useFetch(
+  //   "http://localhost:5000/accountUser"
+  // );
+  const [user, setUser] = useState(AccountUser());
   const onSubmit = async (values) => {
     if (values.password === user.password) {
       const newData = { ...user, password: values.newPassword };
@@ -23,7 +25,7 @@ export default function PrivacySettings() {
         setFormValues(data);
         toast.success(`user data successfully edited`);
       } catch (error) {
-        console.log(error.message);
+        toast.error(error.message);
       }
     }
   };
@@ -60,7 +62,7 @@ export default function PrivacySettings() {
   return (
     <div className="w-full mx-auto ">
       <div className="px-1 py-2 flex flex-col w-full items-center justify-center">
-        <div className="bg-gray-50 dark:bg-gray-900 w-full overflow-hidden shadow  md:w-11/12 rounded-lg ">
+        <div className=" w-full overflow-hidden md:w-11/12 rounded-lg ">
           <div className="flex flex-col items-center w-full  justify-center px-6 py-8 mx-auto  lg:py-0">
             <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0  dark:bg-gray-800 dark:border-gray-700 sm:p-8">
               <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

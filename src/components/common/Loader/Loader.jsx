@@ -10,7 +10,7 @@ function Loader() {
         gap: "1rem",
       }}
     >
-      <p> Loading Data...</p>
+      {/* <p> Loading Data...</p> */}
       <LoaderIcon style={{ width: "1.3rem", height: "1.3rem" }} />
     </div>
   );

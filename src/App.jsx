@@ -20,45 +20,65 @@ import AppLayout from "./layout/AppLayout";
 import { Provider } from "react-redux";
 import { store } from "./features/store";
 import SinglePost from "./components/common/SinglePost";
-import useLocalStorage from "./hooks/useLocalStorage";
+import ExplorePosts from "./components/ExplorePosts/ExplorePosts";
+import { useTheme } from "./context/ThemeContext";
+import { useSetting } from "./context/OpenSettingContext";
 
 function App() {
-  const [isSettingOpen, setIsSettingOpen] = useState(false);
-  const [theme, setTheme] = useLocalStorage("theme", "dark");
-  const themeHandler = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-    localStorage.setItem(
-      "theme",
-      JSON.stringify(theme === "dark" ? "light" : "dark")
-    );
-  };
+  // const [isSettingOpen, setIsSettingOpen] = useState(false);
+  // const [theme, setTheme] = useLocalStorage("theme", "dark");
+  // const themeHandler = () => {
+  //   setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  //   localStorage.setItem(
+  //     "theme",
+  //     JSON.stringify(theme === "dark" ? "light" : "dark")
+  //   );
+  // };
+  const { theme } = useTheme();
 
   return (
     <Provider store={store}>
       <div className={`${theme}  h-screen w-screen`}>
         <Routes>
-          <Route path="/" element={<AppLayout themeHandler={themeHandler} />}>
+          <Route path="/" element={<AppLayout />}>
             <Route index element={<Home />} />
             <Route path="/explore" element={<Explore />} />
-            <Route path="/explore/:id" element={<SinglePost />} />
-            <Route path="/profile" element={<Profile />}></Route>
             <Route
-              path="/profile/followers"
-              element={<UsersList locationParameter="/profile" />}
+              path="/explore/:userId/posts/:postId"
+              element={<SinglePost />}
             />
+            <Route path="/profile" element={<Profile />}>
+              <Route path="bookmarks" element={<ExplorePosts />} />
+              <Route path="posts" index element={<ExplorePosts />} />
+            </Route>
+            <Route path="/user/:userId" element={<Profile />}>
+              <Route path="bookmarks" element={<ExplorePosts />} />
+              <Route path="posts" element={<ExplorePosts />} />
+            </Route>
             <Route
-              path="/profile/followings"
-              element={<UsersList locationParameter="/profile" />}
+              path="/user/:userId/posts/:postId"
+              element={<SinglePost />}
             />
+            <Route path="/profile/posts/:postId" element={<SinglePost />} />
             <Route
-              path="/messages"
+              path="/followers"
               element={
-                <Messages
-                  isSettingOpen={isSettingOpen}
-                  setIsSettingOpen={setIsSettingOpen}
-                />
+                <UsersList title={"Followers"} locationParameter="/profile" />
               }
-            >
+            />
+            <Route
+              path="/following"
+              element={
+                <UsersList title={"Following"} locationParameter="/profile" />
+              }
+            />
+            <Route path="/profile/settings" element={<Settings />}>
+              <Route index element={<Navigate to="profile" />} />
+              <Route path="profile" element={<ProfileSettings />} />
+              <Route path="notifications" element={<NotificationsSetting />} />
+              <Route path="privacy" element={<PrivacySettings />} />
+            </Route>
+            <Route path="/messages" element={<Messages />}>
               <Route
                 index
                 element={
@@ -68,19 +88,10 @@ function App() {
                   </div>
                 }
               />
-              <Route
-                path=":id"
-                element={<InnerMessage setIsSettingOpen={setIsSettingOpen} />}
-              />
+              <Route path=":id" element={<InnerMessage />} />
             </Route>
             <Route path="/search" element={<Search />} />
             <Route path="/notifications" element={<Notifications />} />
-            <Route path="profile/settings" element={<Settings />}>
-              <Route index element={<Navigate to="profile" />} />
-              <Route path="profile" element={<ProfileSettings />} />
-              <Route path="notifications" element={<NotificationsSetting />} />
-              <Route path="privacy" element={<PrivacySettings />} />
-            </Route>
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
