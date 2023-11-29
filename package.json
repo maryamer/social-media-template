@@ -1,6 +1,6 @@
 {
-  "homepage": "https://maryamer.github.io/social-media-template/",
-  "name": "blog-project",
+  "homepage": "https://maryamer.github.io/social-media-template",
+  "name": "social-media-template",
   "private": true,
   "version": "0.0.0",
   "type": "module",
