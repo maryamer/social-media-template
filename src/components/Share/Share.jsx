@@ -30,7 +30,7 @@ function ShareNoteImg() {
   return (
     <img
       className="shareProfileImg  object-cover lg:w-12 lg:h-12 h-9 w-9 rounded-full lg:mr-2"
-      src="/assets/person/1.jpeg"
+      src="https://www.befunky.com/images/wp/wp-2021-01-linkedin-profile-picture-consider-format.jpg?auto=avif,webp&format=jpg&width=950"
       alt=""
     />
   );
