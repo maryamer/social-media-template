@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoMdSettings } from "react-icons/io";
 import { CiFaceSmile } from "react-icons/ci";
 import { LuSendHorizonal } from "react-icons/lu";
@@ -34,11 +34,20 @@ export default function InnerMessage() {
 
 function InnerMessages({ user }) {
   const navigate = useNavigate();
-
+  const messagesEndRef = useRef(null);
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+      console.log("jgjcfh");
+    }
+  }, [messagesEndRef, user]);
   return (
     <>
       {user ? (
-        <div className="h-[93%] overflow-y-auto scrollbar-none bg-slate-400 dark:bg-slate-900 p-2">
+        <div
+          ref={messagesEndRef}
+          className="h-[93%] overflow-y-auto scrollbar-none bg-slate-400 dark:bg-slate-900 p-2"
+        >
           <div id="messages" className="flex flex-col  space-y-4  ">
             <div className="chat-message">
               <div className="flex items-end">
