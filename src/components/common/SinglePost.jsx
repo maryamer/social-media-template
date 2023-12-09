@@ -62,7 +62,7 @@ export default function SinglePost() {
             className="w-full self-center min-w-5/6 h-full md:h-5/6
            flex flex-col items-center justify-start pt-10  right-0 bottom-0 sm:static "
           >
-            <div className="flex flex-col lg:flex-row dark:bg-slate-950 bg-slate-200  h-11/12 md:h-full  w-11/12  rounded-[30px] flex-col flex xl:flex-row border dark:border-slate-800 border-slate-500 xl:rounded-l-[24px] ">
+            <div className="flex flex-col lg:flex-row dark:bg-slate-950 bg-slate-400  h-11/12 md:h-full  w-11/12  rounded-[30px] flex-col flex xl:flex-row border dark:border-slate-800 border-slate-500 xl:rounded-l-[24px] ">
               <img
                 src={post && post?.photo}
                 className=" w-full h-[350px] lg:h-full  lg:w-1/2 rounded-t-[30px] xl:rounded-l-[24px] xl:rounded-tr-none object-cover p-5 bg-dark-1"
