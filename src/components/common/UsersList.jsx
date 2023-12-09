@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAsyncUsers } from "../../features/users/usersSlice";
@@ -18,12 +18,19 @@ export default function UsersList({ children, title, locationParameter }) {
   //   dispatch(getAsyncUsers());
   // }, []);
   const navigate = useNavigate();
-  const users = Users();
+  const allUsers = Users();
+  const [users, setUsers] = useState(allUsers);
+  const searchHandler = (text) => {
+    const selectedUsers = allUsers.filter((item) =>
+      item.username.includes(text)
+    );
+    setUsers(selectedUsers);
+  };
   return (
     <div className="UsersList absolute right-0 top-0  sm:static  w-full md:w-4/6 h-screen  dark:text-white  flex flex-col h-screen justify-center items-center min-w-fit">
       <InnerHeader direction title={title} />
 
-      <SearchComponent title={title} />
+      <SearchComponent title={title} searchHandler={searchHandler} />
       <div className="characters-list overflow-x-hidden flex flex-col justify-center items-center w-full h-screen   overflow-y-scroll scrollbar-none ">
         {/* {title && <HeaderTitle title={title} />} */}
         <div className="w-full h-full lg:h-[95%] ">
