@@ -42,6 +42,7 @@ export default function InnerHeader({ direction, title, user }) {
         pathname.includes("explore") ||
         pathname.includes("followers") ||
         pathname.includes("following") ||
+        pathname.includes("profile/posts/") ||
         pathname.includes("notifications") ||
         title === "Messages" ||
         pathname.includes("search") ? (

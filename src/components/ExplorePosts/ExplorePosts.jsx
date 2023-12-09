@@ -22,7 +22,12 @@ export default function ExplorePosts() {
   const { userId } = useParams();
   console.log(userId);
   return (
-    <ul className=" grid grid-cols-2 xl:grid-cols-3 gap-6 p-4">
+    <ul
+      className={`grid grid-cols-2 ${
+        pathname.includes(`profile`) &&
+        "bg-white md:bg-slate-300 dark:bg-slate-950"
+      } xl:grid-cols-3 gap-6 p-4`}
+    >
       {posts.map((post) => (
         <React.Fragment key={post.id}>
           <ExploreImage post={post} pathname={pathname} userId={userId} />
