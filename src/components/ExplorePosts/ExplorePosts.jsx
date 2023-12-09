@@ -25,7 +25,7 @@ export default function ExplorePosts() {
     <ul
       className={`grid grid-cols-2 ${
         pathname.includes(`profile`) &&
-        "bg-white md:bg-slate-300 dark:bg-slate-950"
+        "bg-slate-300 bg-slate-300 dark:bg-slate-950"
       } xl:grid-cols-3 gap-6 p-4`}
     >
       {posts.map((post) => (

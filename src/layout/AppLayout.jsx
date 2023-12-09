@@ -9,7 +9,7 @@ export default function AppLayout() {
 
   return (
     <div
-      className={`${theme}   flex justify-start flex-col-reverse md:flex-row h-screen  dark:bg-slate-950 w-screen`}
+      className={`${theme}   flex justify-start flex-col-reverse md:flex-row h-screen bg-slate-300   dark:bg-slate-950 w-screen`}
     >
       <Toaster />
       <Sidebar />

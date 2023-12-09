@@ -24,7 +24,7 @@ function Sidebar() {
         !pathname.includes("search") &&
         !pathname.includes("followers") &&
         !pathname.includes("following") && (
-          <div className="h-fit md:h-screen lg:w-1/6 md:w-fit flex flex-col justify-between rounded-3xl md:rounded-l-none md:rounded-tl-none md:rounded-r-3xl  dark:bg-slate-900 bg-slate-300  ">
+          <div className="h-fit md:h-screen lg:w-1/6 md:w-fit flex flex-col justify-between rounded-3xl md:rounded-l-none md:rounded-tl-none md:rounded-r-3xl  dark:bg-slate-900 bg-slate-400  ">
             <div
               className={`sidebar p-2 z-50 flex flex-col items-start bottom-0 right-0 left-0 transition-all duration-150 w-full ease-in-out md:h-full  lg:max-w-none md:max-w-fit dark:text-white text-gray-800  md:relative absoolute`}
             >
