@@ -4,7 +4,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 export default function SearchComponent({ title, searchHandler }) {
   const [searchText, setSearchText] = useState("");
   useEffect(() => {
-    searchHandler(searchText);
+    searchHandler && searchHandler(searchText);
   }, [searchText]);
   return (
     <div
