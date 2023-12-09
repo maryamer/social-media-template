@@ -9,11 +9,11 @@ import { OpenSettingProvider } from "./context/OpenSettingContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <OpenSettingProvider>
     <ThemeProvider>
-      <BrowserRouter>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </BrowserRouter>
+      {/* <BrowserRouter> */}
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+      {/* </BrowserRouter> */}
     </ThemeProvider>
   </OpenSettingProvider>
 );
