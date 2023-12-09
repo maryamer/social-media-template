@@ -26,11 +26,27 @@ export default function Post({ post }) {
   const likeHandler = () => {
     setIsLike(!isLike);
     setLike(isLike ? like - 1 : like + 1);
+    if (!isLike) {
+      setIsClicked(true);
+      setTimeout(() => {
+        setIsClicked(false);
+      }, 100);
+    }
   };
+  const [isClicked, setIsClicked] = useState(false);
+
   return (
     <>
       {user ? (
-        <div className="flex flex-col mb-2 md:mb-5 dark:bg-slate-950 bg-slate-300 bg-slate-200 h-fit w-11/12 rounded-[30px] border dark:border-slate-800 border-slate-400 xl:rounded-l-[24px] ">
+        <div
+          onDoubleClick={() => {
+            setIsLike((prev) => !prev),
+              isLike
+                ? setLike((prev) => prev - 1)
+                : setLike((prev) => prev + 1);
+          }}
+          className="flex flex-col mb-2 md:mb-5 dark:bg-slate-950 bg-slate-300 bg-slate-200 h-fit w-11/12 rounded-[30px] border dark:border-slate-800 border-slate-400 xl:rounded-l-[24px] "
+        >
           <div className="px-5 pt-5">
             <div className="flex-between w-full">
               <div className=" flex items-center gap-4">
@@ -38,6 +54,7 @@ export default function Post({ post }) {
                   onClick={() => navigate(`user/${user.id}/posts`)}
                   src={user?.profilePicture}
                   alt="creator"
+                  onDoubleClick={likeHandler}
                   className=" w-12 h-12 cursor-pointer object-cover  rounded-full self-ccenter"
                 />
                 <p className="self-center dark:text-white text-slate-600  font-medium">
@@ -76,10 +93,10 @@ export default function Post({ post }) {
                 <div className="relative flex justify-between w-10">
                   <span>
                     <BsHeart
-                      onClick={() => {
-                        setIsLike(true), setLike((prev) => prev + 1);
-                      }}
-                      className="text-red-500 w-6 h-6  cursor-pointer "
+                      onClick={likeHandler}
+                      className={`text-red-500 w-6 h-6  cursor-pointer  ${
+                        isClicked && "animate-ping  "
+                      }`}
                     />
                   </span>
                   &nbsp;&nbsp;
@@ -91,10 +108,10 @@ export default function Post({ post }) {
                 <div className="relative flex justify-between w-10">
                   <span>
                     <BsHeartFill
-                      onClick={() => {
-                        setIsLike(false), setLike((prev) => prev - 1);
-                      }}
-                      className="text-red-500 w-6 h-6 cursor-pointer  "
+                      onClick={likeHandler}
+                      className={`text-red-500 w-6 h-6 cursor-pointer  ${
+                        isClicked && "animate-ping   "
+                      }  `}
                     />
                   </span>
                   &nbsp;&nbsp;

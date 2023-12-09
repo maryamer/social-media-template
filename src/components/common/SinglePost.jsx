@@ -64,6 +64,10 @@ export default function SinglePost() {
           >
             <div className="flex flex-col lg:flex-row dark:bg-slate-950 bg-slate-400  h-11/12 md:h-full  w-11/12  rounded-[30px] flex-col flex xl:flex-row border dark:border-slate-800 border-slate-500 xl:rounded-l-[24px] ">
               <img
+                onDoubleClick={() => {
+                  setIsLike((prev) => !prev),
+                    isLike ? setLikeNumber(prev - 1) : setLikeNumber(prev + 1);
+                }}
                 src={post && post?.photo}
                 className=" w-full h-[350px] lg:h-full  lg:w-1/2 rounded-t-[30px] xl:rounded-l-[24px] xl:rounded-tr-none object-cover p-5 bg-dark-1"
               />
