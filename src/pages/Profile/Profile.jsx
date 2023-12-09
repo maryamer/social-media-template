@@ -128,12 +128,12 @@ function ProfileBody({ user, isLoading, pathname }) {
                 </div>
               </div>
             </div>
-            <div className="flex md:hidden flex-col items-start w-5/6  sm:px-10 ">
+            <div className="flex md:hidden flex-col items-start w-5/6 mt-2 sm:px-10 ">
               <h2 className="md:font-semibold md:text-lg ">
                 {user?.name}&nbsp;
-                {user?.lastName}
+                {user?.lastname}
               </h2>
-              <span className="text-sm text-gray-400 mt-1">{user.bio}</span>
+              <span className="text-sm text-gray-400 mt-1">{user.status}</span>
             </div>
             {pathname.includes("user") && (
               <div className="flex items-start  w-11/12 my-5 md:p-5 rounded">
