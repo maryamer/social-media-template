@@ -76,7 +76,9 @@ export default function Post({ post }) {
                 <div className="relative flex justify-between w-10">
                   <span>
                     <BsHeart
-                      onClick={() => setIsLike(true)}
+                      onClick={() => {
+                        setIsLike(true), setLike((prev) => prev + 1);
+                      }}
                       className="text-red-500 w-6 h-6  cursor-pointer "
                     />
                   </span>
@@ -89,7 +91,9 @@ export default function Post({ post }) {
                 <div className="relative flex justify-between w-10">
                   <span>
                     <BsHeartFill
-                      onClick={() => setIsLike(false)}
+                      onClick={() => {
+                        setIsLike(false), setLike((prev) => prev - 1);
+                      }}
                       className="text-red-500 w-6 h-6 cursor-pointer  "
                     />
                   </span>
