@@ -22,7 +22,10 @@ export default function UsersList({ children, title, locationParameter }) {
   const [users, setUsers] = useState(allUsers);
   const searchHandler = (text) => {
     const selectedUsers = allUsers.filter((item) =>
-      item.username.includes(text)
+      item.username
+        .toLocaleLowerCase()
+        .trim()
+        .includes(text.toLocaleLowerCase().trim())
     );
     setUsers(selectedUsers);
   };
