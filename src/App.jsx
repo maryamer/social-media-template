@@ -34,69 +34,63 @@ function App() {
   //     JSON.stringify(theme === "dark" ? "light" : "dark")
   //   );
   // };
-  const { theme } = useTheme();
 
   return (
     <Provider store={store}>
-      <div className={`${theme}  h-screen w-screen`}>
-        <Routes>
-          <Route path="/" element={<AppLayout />}>
-            <Route index element={<Home />} />
-            <Route path="/explore" element={<Explore />} />
-            <Route
-              path="/explore/:userId/posts/:postId"
-              element={<SinglePost />}
-            />
-            <Route path="/profile" element={<Profile />}>
-              <Route path="bookmarks" element={<ExplorePosts />} />
-              <Route path="posts" index element={<ExplorePosts />} />
-            </Route>
-            <Route path="/user/:userId" element={<Profile />}>
-              <Route path="bookmarks" element={<ExplorePosts />} />
-              <Route path="posts" element={<ExplorePosts />} />
-            </Route>
-            <Route
-              path="/user/:userId/posts/:postId"
-              element={<SinglePost />}
-            />
-            <Route path="/profile/posts/:postId" element={<SinglePost />} />
-            <Route
-              path="/followers"
-              element={
-                <UsersList title={"Followers"} locationParameter="/profile" />
-              }
-            />
-            <Route
-              path="/following"
-              element={
-                <UsersList title={"Following"} locationParameter="/profile" />
-              }
-            />
-            <Route path="/profile/settings" element={<Settings />}>
-              <Route index element={<Navigate to="profile" />} />
-              <Route path="profile" element={<ProfileSettings />} />
-              <Route path="notifications" element={<NotificationsSetting />} />
-              <Route path="privacy" element={<PrivacySettings />} />
-            </Route>
-            <Route path="/messages" element={<Messages />}>
-              <Route
-                index
-                element={
-                  <div className="flex flex-col w-full items-center dark:text-white text-slate-500 justify-center font-bold">
-                    <BsFillChatDotsFill className="w-16 h-16 p-3 " />
-                    Your Messages
-                  </div>
-                }
-              />
-              <Route path=":id" element={<InnerMessage />} />
-            </Route>
-            <Route path="/search" element={<Search />} />
-            <Route path="/notifications" element={<Notifications />} />
+      <Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route
+            path="/explore/:userId/posts/:postId"
+            element={<SinglePost />}
+          />
+          <Route path="/profile" element={<Profile />}>
+            <Route path="bookmarks" element={<ExplorePosts />} />
+            <Route path="posts" index element={<ExplorePosts />} />
           </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </div>
+          <Route path="/user/:userId" element={<Profile />}>
+            <Route path="bookmarks" element={<ExplorePosts />} />
+            <Route path="posts" element={<ExplorePosts />} />
+          </Route>
+          <Route path="/user/:userId/posts/:postId" element={<SinglePost />} />
+          <Route path="/profile/posts/:postId" element={<SinglePost />} />
+          <Route
+            path="/followers"
+            element={
+              <UsersList title={"Followers"} locationParameter="/profile" />
+            }
+          />
+          <Route
+            path="/following"
+            element={
+              <UsersList title={"Following"} locationParameter="/profile" />
+            }
+          />
+          <Route path="/profile/settings" element={<Settings />}>
+            <Route index element={<Navigate to="profile" />} />
+            <Route path="profile" element={<ProfileSettings />} />
+            <Route path="notifications" element={<NotificationsSetting />} />
+            <Route path="privacy" element={<PrivacySettings />} />
+          </Route>
+          <Route path="/messages" element={<Messages />}>
+            <Route
+              index
+              element={
+                <div className="flex flex-col w-full items-center dark:text-white text-slate-500 justify-center font-bold">
+                  <BsFillChatDotsFill className="w-16 h-16 p-3 " />
+                  Your Messages
+                </div>
+              }
+            />
+            <Route path=":id" element={<InnerMessage />} />
+          </Route>
+          <Route path="/search" element={<Search />} />
+          <Route path="/notifications" element={<Notifications />} />
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </Provider>
   );
 }
