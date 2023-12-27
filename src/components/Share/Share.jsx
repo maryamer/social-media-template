@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
+
 export default function Share() {
   return (
     <div className=" p-2 border dark:border-slate-800 border-slate-400 border-px rounded-3xl  z-10 fixed top-0 flex items-center justify-around bg-slate-300  dark:bg-slate-950 lg:py-3 max-w-xl w-screen lg:w-4/5">
-      <ShareNoteImg />
+      <Link to="profile">
+        <ShareNoteImg />
+      </Link>
       &nbsp;
       <ShareNoteInput />
       <ShareNoteBtn />
